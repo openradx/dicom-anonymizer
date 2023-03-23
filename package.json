@@ -10,7 +10,8 @@
     "tsc": "tsc",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "lint": "eslint ./src --ext .js,.ts"
+    "lint": "eslint ./src --ext .js,.ts",
+    "ci": "npm run lint && npm run build && npm run tsc && npm run test"
   },
   "repository": {
     "type": "git",
