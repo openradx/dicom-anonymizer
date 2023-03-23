@@ -4,6 +4,10 @@
   "description": "A DICOM pseudonymization library in JavaScript.",
   "main": "index.js",
   "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "clean": "rm -rf ./dist ./.tsbuildinfo",
+    "tsc": "tsc",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "lint": "eslint ./src --ext .js,.ts"

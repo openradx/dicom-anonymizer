@@ -44,3 +44,6 @@ test/*.js
 /packages/*/.next/
 /packages/*/dist/
 /docs/
+
+# Build stuff
+dist
