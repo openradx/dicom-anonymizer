@@ -3,6 +3,7 @@
   "editor.tabSize": 2,
   "cSpell.diagnosticLevel": "Hint",
   "cSpell.language": "en",
+  "vitest.enable": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
