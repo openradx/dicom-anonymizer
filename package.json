@@ -1,0 +1,25 @@
+{
+  "name": "dicom-anonymizer",
+  "version": "0.0.1",
+  "description": "A DICOM pseudonymization library in JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radexperts/dicom-anonymizer.git"
+  },
+  "keywords": [
+    "DICOM",
+    "De-identification",
+    "Pseudonymization",
+    "Radiology"
+  ],
+  "author": "Luca Dulz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radexperts/dicom-anonymizer/issues"
+  },
+  "homepage": "https://github.com/radexperts/dicom-anonymizer#readme"
+}
