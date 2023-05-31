@@ -38,12 +38,14 @@ typings/
 lib/*.js
 test/*.js
 *.map
+src/loader.ts
 
 # Misc
 .tsbuildinfo
 /packages/*/.next/
 /packages/*/dist/
 /docs/
+
 
 # Build stuff
 dist

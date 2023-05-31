@@ -1,0 +1,4850 @@
+{
+    "(0008,0050)": {
+        "Tag": "(0008,0050)",
+        "Name": "Accession Number",
+        "BasicProf": "Z",
+        "Keyword": "AccessionNumber",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0018,4000)": {
+        "Tag": "(0018,4000)",
+        "Name": "Acquisition Comments",
+        "BasicProf": "X",
+        "Keyword": "AcquisitionComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,0555)": {
+        "Tag": "(0040,0555)",
+        "Name": "Acquisition Context Sequence",
+        "BasicProf": "X/Z",
+        "Keyword": "AcquisitionContextSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,0022)": {
+        "Tag": "(0008,0022)",
+        "Name": "Acquisition Date",
+        "BasicProf": "X/Z",
+        "Keyword": "AcquisitionDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,002A)": {
+        "Tag": "(0008,002A)",
+        "Name": "Acquisition DateTime",
+        "BasicProf": "X/Z/D",
+        "Keyword": "AcquisitionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1400)": {
+        "Tag": "(0018,1400)",
+        "Name": "Acquisition Device Processing Description",
+        "BasicProf": "X/D",
+        "Keyword": "AcquisitionDeviceProcessingDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,11BB)": {
+        "Tag": "(0018,11BB)",
+        "Name": "Acquisition Field of View Label",
+        "BasicProf": "D",
+        "Keyword": "AcquisitionFieldOfViewLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9424)": {
+        "Tag": "(0018,9424)",
+        "Name": "Acquisition Protocol Description",
+        "BasicProf": "X",
+        "Keyword": "AcquisitionProtocolDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0008,0032)": {
+        "Tag": "(0008,0032)",
+        "Name": "Acquisition Time",
+        "BasicProf": "X/Z",
+        "Keyword": "AcquisitionTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0017)": {
+        "Tag": "(0008,0017)",
+        "Name": "Acquisition UID",
+        "BasicProf": "U",
+        "Keyword": "AcquisitionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,4035)": {
+        "Tag": "(0040,4035)",
+        "Name": "Actual Human Performers Sequence",
+        "BasicProf": "X",
+        "Keyword": "ActualHumanPerformersSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,21B0)": {
+        "Tag": "(0010,21B0)",
+        "Name": "Additional Patient History",
+        "BasicProf": "X",
+        "Keyword": "AdditionalPatientHistory",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,A353)": {
+        "Tag": "(0040,A353)",
+        "Name": "Address (Trial)",
+        "BasicProf": "X",
+        "Keyword": "AddressTrial",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0038,0010)": {
+        "Tag": "(0038,0010)",
+        "Name": "Admission ID",
+        "BasicProf": "X",
+        "Keyword": "AdmissionID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0020)": {
+        "Tag": "(0038,0020)",
+        "Name": "Admitting Date",
+        "BasicProf": "X",
+        "Keyword": "AdmittingDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,1084)": {
+        "Tag": "(0008,1084)",
+        "Name": "Admitting Diagnoses Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "AdmittingDiagnosesCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1080)": {
+        "Tag": "(0008,1080)",
+        "Name": "Admitting Diagnoses Description",
+        "BasicProf": "X",
+        "Keyword": "AdmittingDiagnosesDescription",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(0038,0021)": {
+        "Tag": "(0038,0021)",
+        "Name": "Admitting Time",
+        "BasicProf": "X",
+        "Keyword": "AdmittingTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0000,1000)": {
+        "Tag": "(0000,1000)",
+        "Name": "Affected SOP Instance UID",
+        "BasicProf": "X",
+        "Keyword": "AffectedSOPInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0010,2110)": {
+        "Tag": "(0010,2110)",
+        "Name": "Allergies",
+        "BasicProf": "X",
+        "Keyword": "Allergies",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(006A,0006)": {
+        "Tag": "(006A,0006)",
+        "Name": "Annotation Group Description",
+        "BasicProf": "X",
+        "Keyword": "AnnotationGroupDescription",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(006A,0005)": {
+        "Tag": "(006A,0005)",
+        "Name": "Annotation Group Label",
+        "BasicProf": "D",
+        "Keyword": "AnnotationGroupLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(006A,0003)": {
+        "Tag": "(006A,0003)",
+        "Name": "Annotation Group UID",
+        "BasicProf": "D",
+        "Keyword": "AnnotationGroupUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0044,0004)": {
+        "Tag": "(0044,0004)",
+        "Name": "Approval Status DateTime",
+        "BasicProf": "X",
+        "Keyword": "ApprovalStatusDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(4000,0010)": {
+        "Tag": "(4000,0010)",
+        "Name": "Arbitrary",
+        "BasicProf": "X",
+        "Keyword": "Arbitrary",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0044,0104)": {
+        "Tag": "(0044,0104)",
+        "Name": "Assertion DateTime",
+        "BasicProf": "D",
+        "Keyword": "AssertionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0044,0105)": {
+        "Tag": "(0044,0105)",
+        "Name": "Assertion Expiration DateTime",
+        "BasicProf": "X",
+        "Keyword": "AssertionExpirationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0400,0562)": {
+        "Tag": "(0400,0562)",
+        "Name": "Attribute Modification DateTime",
+        "BasicProf": "D",
+        "Keyword": "AttributeModificationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,A078)": {
+        "Tag": "(0040,A078)",
+        "Name": "Author Observer Sequence",
+        "BasicProf": "X",
+        "Keyword": "AuthorObserverSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(2200,0005)": {
+        "Tag": "(2200,0005)",
+        "Name": "Barcode Value",
+        "BasicProf": "X/Z",
+        "Keyword": "BarcodeValue",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(300A,00C3)": {
+        "Tag": "(300A,00C3)",
+        "Name": "Beam Description",
+        "BasicProf": "X",
+        "Keyword": "BeamDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300C,0127)": {
+        "Tag": "(300C,0127)",
+        "Name": "Beam Hold Transition DateTime",
+        "BasicProf": "D",
+        "Keyword": "BeamHoldTransitionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(300A,00DD)": {
+        "Tag": "(300A,00DD)",
+        "Name": "Bolus Description",
+        "BasicProf": "X",
+        "Keyword": "BolusDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0010,1081)": {
+        "Tag": "(0010,1081)",
+        "Name": "Branch of Service",
+        "BasicProf": "X",
+        "Keyword": "BranchOfService",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0014,407E)": {
+        "Tag": "(0014,407E)",
+        "Name": "Calibration Date",
+        "BasicProf": "X",
+        "Keyword": "CalibrationDate",
+        "VR": "DA",
+        "VM": "1-n"
+    },
+    "(0018,1203)": {
+        "Tag": "(0018,1203)",
+        "Name": "Calibration DateTime",
+        "BasicProf": "Z",
+        "Keyword": "CalibrationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0014,407C)": {
+        "Tag": "(0014,407C)",
+        "Name": "Calibration Time",
+        "BasicProf": "X",
+        "Keyword": "CalibrationTime",
+        "VR": "TM",
+        "VM": "1-n"
+    },
+    "(0016,004D)": {
+        "Tag": "(0016,004D)",
+        "Name": "Camera Owner Name",
+        "BasicProf": "X",
+        "Keyword": "CameraOwnerName",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0018,1007)": {
+        "Tag": "(0018,1007)",
+        "Name": "Cassette ID",
+        "BasicProf": "X",
+        "Keyword": "CassetteID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0400,0115)": {
+        "Tag": "(0400,0115)",
+        "Name": "Certificate of Signer",
+        "BasicProf": "D",
+        "Keyword": "CertificateOfSigner",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0400,0310)": {
+        "Tag": "(0400,0310)",
+        "Name": "Certified Timestamp",
+        "BasicProf": "X",
+        "Keyword": "CertifiedTimestamp",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0012,0060)": {
+        "Tag": "(0012,0060)",
+        "Name": "Clinical Trial Coordinating Center Name",
+        "BasicProf": "Z",
+        "Keyword": "ClinicalTrialCoordinatingCenterName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0082)": {
+        "Tag": "(0012,0082)",
+        "Name": "Clinical Trial Protocol Ethics Committee Approval Number",
+        "BasicProf": "X",
+        "Keyword": "ClinicalTrialProtocolEthicsCommitteeApprovalNumber",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0081)": {
+        "Tag": "(0012,0081)",
+        "Name": "Clinical Trial Protocol Ethics Committee Name",
+        "BasicProf": "D",
+        "Keyword": "ClinicalTrialProtocolEthicsCommitteeName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0020)": {
+        "Tag": "(0012,0020)",
+        "Name": "Clinical Trial Protocol ID",
+        "BasicProf": "D",
+        "Keyword": "ClinicalTrialProtocolID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0021)": {
+        "Tag": "(0012,0021)",
+        "Name": "Clinical Trial Protocol Name",
+        "BasicProf": "Z",
+        "Keyword": "ClinicalTrialProtocolName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0072)": {
+        "Tag": "(0012,0072)",
+        "Name": "Clinical Trial Series Description",
+        "BasicProf": "X",
+        "Keyword": "ClinicalTrialSeriesDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0071)": {
+        "Tag": "(0012,0071)",
+        "Name": "Clinical Trial Series ID",
+        "BasicProf": "X",
+        "Keyword": "ClinicalTrialSeriesID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0030)": {
+        "Tag": "(0012,0030)",
+        "Name": "Clinical Trial Site ID",
+        "BasicProf": "Z",
+        "Keyword": "ClinicalTrialSiteID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0031)": {
+        "Tag": "(0012,0031)",
+        "Name": "Clinical Trial Site Name",
+        "BasicProf": "Z",
+        "Keyword": "ClinicalTrialSiteName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0010)": {
+        "Tag": "(0012,0010)",
+        "Name": "Clinical Trial Sponsor Name",
+        "BasicProf": "D",
+        "Keyword": "ClinicalTrialSponsorName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0040)": {
+        "Tag": "(0012,0040)",
+        "Name": "Clinical Trial Subject ID",
+        "BasicProf": "D",
+        "Keyword": "ClinicalTrialSubjectID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0042)": {
+        "Tag": "(0012,0042)",
+        "Name": "Clinical Trial Subject Reading ID",
+        "BasicProf": "D",
+        "Keyword": "ClinicalTrialSubjectReadingID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0012,0051)": {
+        "Tag": "(0012,0051)",
+        "Name": "Clinical Trial Time Point Description",
+        "BasicProf": "X",
+        "Keyword": "ClinicalTrialTimePointDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0012,0050)": {
+        "Tag": "(0012,0050)",
+        "Name": "Clinical Trial Time Point ID",
+        "BasicProf": "Z",
+        "Keyword": "ClinicalTrialTimePointID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0310)": {
+        "Tag": "(0040,0310)",
+        "Name": "Comments on Radiation Dose",
+        "BasicProf": "X",
+        "Keyword": "CommentsOnRadiationDose",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0040,0280)": {
+        "Tag": "(0040,0280)",
+        "Name": "Comments on the Performed Procedure Step",
+        "BasicProf": "X",
+        "Keyword": "CommentsOnThePerformedProcedureStep",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300A,02EB)": {
+        "Tag": "(300A,02EB)",
+        "Name": "Compensator Description",
+        "BasicProf": "X",
+        "Keyword": "CompensatorDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0020,9161)": {
+        "Tag": "(0020,9161)",
+        "Name": "Concatenation UID",
+        "BasicProf": "U",
+        "Keyword": "ConcatenationUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,000F)": {
+        "Tag": "(3010,000F)",
+        "Name": "Conceptual Volume Combination Description",
+        "BasicProf": "Z",
+        "Keyword": "ConceptualVolumeCombinationDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3010,0017)": {
+        "Tag": "(3010,0017)",
+        "Name": "Conceptual Volume Description",
+        "BasicProf": "Z",
+        "Keyword": "ConceptualVolumeDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3010,0006)": {
+        "Tag": "(3010,0006)",
+        "Name": "Conceptual Volume UID",
+        "BasicProf": "U",
+        "Keyword": "ConceptualVolumeUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,3001)": {
+        "Tag": "(0040,3001)",
+        "Name": "Confidentiality Constraint on Patient Data Description",
+        "BasicProf": "X",
+        "Keyword": "ConfidentialityConstraintOnPatientDataDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,0013)": {
+        "Tag": "(3010,0013)",
+        "Name": "Constituent Conceptual Volume UID",
+        "BasicProf": "U",
+        "Keyword": "ConstituentConceptualVolumeUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,009C)": {
+        "Tag": "(0008,009C)",
+        "Name": "Consulting Physician's Name",
+        "BasicProf": "Z",
+        "Keyword": "ConsultingPhysicianName",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0008,009D)": {
+        "Tag": "(0008,009D)",
+        "Name": "Consulting Physician Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "ConsultingPhysicianIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0050,001B)": {
+        "Tag": "(0050,001B)",
+        "Name": "Container Component ID",
+        "BasicProf": "X",
+        "Keyword": "ContainerComponentID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,051A)": {
+        "Tag": "(0040,051A)",
+        "Name": "Container Description",
+        "BasicProf": "X",
+        "Keyword": "ContainerDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0512)": {
+        "Tag": "(0040,0512)",
+        "Name": "Container Identifier",
+        "BasicProf": "D",
+        "Keyword": "ContainerIdentifier",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0070,0086)": {
+        "Tag": "(0070,0086)",
+        "Name": "Content Creator's Identification Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "ContentCreatorIdentificationCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0070,0084)": {
+        "Tag": "(0070,0084)",
+        "Name": "Content Creator's Name",
+        "BasicProf": "Z/D",
+        "Keyword": "ContentCreatorName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0008,0023)": {
+        "Tag": "(0008,0023)",
+        "Name": "Content Date",
+        "BasicProf": "Z/D",
+        "Keyword": "ContentDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,A730)": {
+        "Tag": "(0040,A730)",
+        "Name": "Content Sequence",
+        "BasicProf": "D",
+        "Keyword": "ContentSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,0033)": {
+        "Tag": "(0008,0033)",
+        "Name": "Content Time",
+        "BasicProf": "Z/D",
+        "Keyword": "ContentTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0107)": {
+        "Tag": "(0008,0107)",
+        "Name": "Context Group Local Version",
+        "BasicProf": "D",
+        "Keyword": "ContextGroupLocalVersion",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0106)": {
+        "Tag": "(0008,0106)",
+        "Name": "Context Group Version",
+        "BasicProf": "D",
+        "Keyword": "ContextGroupVersion",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,0010)": {
+        "Tag": "(0018,0010)",
+        "Name": "Contrast/Bolus Agent",
+        "BasicProf": "Z/D",
+        "Keyword": "ContrastBolusAgent",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,1042)": {
+        "Tag": "(0018,1042)",
+        "Name": "Contrast/Bolus Start Time",
+        "BasicProf": "X",
+        "Keyword": "ContrastBolusStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,1043)": {
+        "Tag": "(0018,1043)",
+        "Name": "Contrast/Bolus Stop Time",
+        "BasicProf": "X",
+        "Keyword": "ContrastBolusStopTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,A002)": {
+        "Tag": "(0018,A002)",
+        "Name": "Contribution DateTime",
+        "BasicProf": "X",
+        "Keyword": "ContributionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,A003)": {
+        "Tag": "(0018,A003)",
+        "Name": "Contribution Description",
+        "BasicProf": "X",
+        "Keyword": "ContributionDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0010,2150)": {
+        "Tag": "(0010,2150)",
+        "Name": "Country of Residence",
+        "BasicProf": "X",
+        "Keyword": "CountryOfResidence",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(2100,0040)": {
+        "Tag": "(2100,0040)",
+        "Name": "Creation Date",
+        "BasicProf": "X",
+        "Keyword": "CreationDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(2100,0050)": {
+        "Tag": "(2100,0050)",
+        "Name": "Creation Time",
+        "BasicProf": "X",
+        "Keyword": "CreationTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,A307)": {
+        "Tag": "(0040,A307)",
+        "Name": "Current Observer (Trial)",
+        "BasicProf": "X",
+        "Keyword": "CurrentObserverTrial",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0038,0300)": {
+        "Tag": "(0038,0300)",
+        "Name": "Current Patient Location",
+        "BasicProf": "X",
+        "Keyword": "CurrentPatientLocation",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0008,0025)": {
+        "Tag": "(0008,0025)",
+        "Name": "Curve Date",
+        "BasicProf": "X",
+        "Keyword": "CurveDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,0035)": {
+        "Tag": "(0008,0035)",
+        "Name": "Curve Time",
+        "BasicProf": "X",
+        "Keyword": "CurveTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,A07C)": {
+        "Tag": "(0040,A07C)",
+        "Name": "Custodial Organization Sequence",
+        "BasicProf": "X",
+        "Keyword": "CustodialOrganizationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(FFFC,FFFC)": {
+        "Tag": "(FFFC,FFFC)",
+        "Name": "Data Set Trailing Padding",
+        "BasicProf": "X",
+        "Keyword": "DataSetTrailingPadding",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0040,A121)": {
+        "Tag": "(0040,A121)",
+        "Name": "Date",
+        "BasicProf": "D",
+        "Keyword": "Date",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,A110)": {
+        "Tag": "(0040,A110)",
+        "Name": "Date of Document or Verbal Transaction (Trial)",
+        "BasicProf": "X",
+        "Keyword": "DateOfDocumentOrVerbalTransactionTrial",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0018,1200)": {
+        "Tag": "(0018,1200)",
+        "Name": "Date of Last Calibration",
+        "BasicProf": "X",
+        "Keyword": "DateOfLastCalibration",
+        "VR": "DA",
+        "VM": "1-n"
+    },
+    "(0018,700C)": {
+        "Tag": "(0018,700C)",
+        "Name": "Date of Last Detector Calibration",
+        "BasicProf": "X/D",
+        "Keyword": "DateOfLastDetectorCalibration",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0018,1012)": {
+        "Tag": "(0018,1012)",
+        "Name": "Date of Secondary Capture",
+        "BasicProf": "X",
+        "Keyword": "DateOfSecondaryCapture",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,A120)": {
+        "Tag": "(0040,A120)",
+        "Name": "DateTime",
+        "BasicProf": "D",
+        "Keyword": "DateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1202)": {
+        "Tag": "(0018,1202)",
+        "Name": "DateTime of Last Calibration",
+        "BasicProf": "X",
+        "Keyword": "DateTimeOfLastCalibration",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,9701)": {
+        "Tag": "(0018,9701)",
+        "Name": "Decay Correction DateTime",
+        "BasicProf": "D",
+        "Keyword": "DecayCorrectionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,937F)": {
+        "Tag": "(0018,937F)",
+        "Name": "Decomposition Description",
+        "BasicProf": "X",
+        "Keyword": "DecompositionDescription",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0008,2111)": {
+        "Tag": "(0008,2111)",
+        "Name": "Derivation Description",
+        "BasicProf": "X",
+        "Keyword": "DerivationDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(2100,0140)": {
+        "Tag": "(2100,0140)",
+        "Name": "Destination AE",
+        "BasicProf": "D",
+        "Keyword": "DestinationAE",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0018,700A)": {
+        "Tag": "(0018,700A)",
+        "Name": "Detector ID",
+        "BasicProf": "X/D",
+        "Keyword": "DetectorID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(3010,001B)": {
+        "Tag": "(3010,001B)",
+        "Name": "Device Alternate Identifier",
+        "BasicProf": "Z",
+        "Keyword": "DeviceAlternateIdentifier",
+        "VR": "UC",
+        "VM": "1"
+    },
+    "(0050,0020)": {
+        "Tag": "(0050,0020)",
+        "Name": "Device Description",
+        "BasicProf": "X",
+        "Keyword": "DeviceDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,002D)": {
+        "Tag": "(3010,002D)",
+        "Name": "Device Label",
+        "BasicProf": "D",
+        "Keyword": "DeviceLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,1000)": {
+        "Tag": "(0018,1000)",
+        "Name": "Device Serial Number",
+        "BasicProf": "X/Z/D",
+        "Keyword": "DeviceSerialNumber",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0016,004B)": {
+        "Tag": "(0016,004B)",
+        "Name": "Device Setting Description",
+        "BasicProf": "X",
+        "Keyword": "DeviceSettingDescription",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0018,1002)": {
+        "Tag": "(0018,1002)",
+        "Name": "Device UID",
+        "BasicProf": "U",
+        "Keyword": "DeviceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0400,0105)": {
+        "Tag": "(0400,0105)",
+        "Name": "Digital Signature DateTime",
+        "BasicProf": "D",
+        "Keyword": "DigitalSignatureDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(FFFA,FFFA)": {
+        "Tag": "(FFFA,FFFA)",
+        "Name": "Digital Signatures Sequence",
+        "BasicProf": "X",
+        "Keyword": "DigitalSignaturesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0400,0100)": {
+        "Tag": "(0400,0100)",
+        "Name": "Digital Signature UID",
+        "BasicProf": "U",
+        "Keyword": "DigitalSignatureUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0020,9164)": {
+        "Tag": "(0020,9164)",
+        "Name": "Dimension Organization UID",
+        "BasicProf": "U",
+        "Keyword": "DimensionOrganizationUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0038,0030)": {
+        "Tag": "(0038,0030)",
+        "Name": "Discharge Date",
+        "BasicProf": "X",
+        "Keyword": "DischargeDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0038,0040)": {
+        "Tag": "(0038,0040)",
+        "Name": "Discharge Diagnosis Description",
+        "BasicProf": "X",
+        "Keyword": "DischargeDiagnosisDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0032)": {
+        "Tag": "(0038,0032)",
+        "Name": "Discharge Time",
+        "BasicProf": "X",
+        "Keyword": "DischargeTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(300A,079A)": {
+        "Tag": "(300A,079A)",
+        "Name": "Displacement Reference Label",
+        "BasicProf": "X",
+        "Keyword": "DisplacementReferenceLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(4008,011A)": {
+        "Tag": "(4008,011A)",
+        "Name": "Distribution Address",
+        "BasicProf": "X",
+        "Keyword": "DistributionAddress",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(4008,0119)": {
+        "Tag": "(4008,0119)",
+        "Name": "Distribution Name",
+        "BasicProf": "X",
+        "Keyword": "DistributionName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(300A,0016)": {
+        "Tag": "(300A,0016)",
+        "Name": "Dose Reference Description",
+        "BasicProf": "X",
+        "Keyword": "DoseReferenceDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0013)": {
+        "Tag": "(300A,0013)",
+        "Name": "Dose Reference UID",
+        "BasicProf": "U",
+        "Keyword": "DoseReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,006E)": {
+        "Tag": "(3010,006E)",
+        "Name": "Dosimetric Objective UID",
+        "BasicProf": "U",
+        "Keyword": "DosimetricObjectiveUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0068,6226)": {
+        "Tag": "(0068,6226)",
+        "Name": "Effective DateTime",
+        "BasicProf": "D",
+        "Keyword": "EffectiveDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0042,0011)": {
+        "Tag": "(0042,0011)",
+        "Name": "Encapsulated Document",
+        "BasicProf": "D",
+        "Keyword": "EncapsulatedDocument",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0018,9517)": {
+        "Tag": "(0018,9517)",
+        "Name": "End Acquisition DateTime",
+        "BasicProf": "X/D",
+        "Keyword": "EndAcquisitionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(3010,0037)": {
+        "Tag": "(3010,0037)",
+        "Name": "Entity Description",
+        "BasicProf": "X",
+        "Keyword": "EntityDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3010,0035)": {
+        "Tag": "(3010,0035)",
+        "Name": "Entity Label",
+        "BasicProf": "D",
+        "Keyword": "EntityLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(3010,0038)": {
+        "Tag": "(3010,0038)",
+        "Name": "Entity Long Label",
+        "BasicProf": "D",
+        "Keyword": "EntityLongLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,0036)": {
+        "Tag": "(3010,0036)",
+        "Name": "Entity Name",
+        "BasicProf": "X",
+        "Keyword": "EntityName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0676)": {
+        "Tag": "(300A,0676)",
+        "Name": "Equipment Frame of Reference Description",
+        "BasicProf": "X",
+        "Keyword": "EquipmentFrameOfReferenceDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0012,0087)": {
+        "Tag": "(0012,0087)",
+        "Name": "Ethics Committee Approval Effectiveness End Date",
+        "BasicProf": "X",
+        "Keyword": "EthicsCommitteeApprovalEffectivenessEndDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0012,0086)": {
+        "Tag": "(0012,0086)",
+        "Name": "Ethics Committee Approval Effectiveness Start Date",
+        "BasicProf": "X",
+        "Keyword": "EthicsCommitteeApprovalEffectivenessStartDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0010,2160)": {
+        "Tag": "(0010,2160)",
+        "Name": "Ethnic Group",
+        "BasicProf": "X",
+        "Keyword": "EthnicGroup",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0018,9804)": {
+        "Tag": "(0018,9804)",
+        "Name": "Exclusion Start DateTime",
+        "BasicProf": "D",
+        "Keyword": "ExclusionStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,4011)": {
+        "Tag": "(0040,4011)",
+        "Name": "Expected Completion DateTime",
+        "BasicProf": "X",
+        "Keyword": "ExpectedCompletionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0058)": {
+        "Tag": "(0008,0058)",
+        "Name": "Failed SOP Instance UID List",
+        "BasicProf": "U",
+        "Keyword": "FailedSOPInstanceUIDList",
+        "VR": "UI",
+        "VM": "1-n"
+    },
+    "(0070,031A)": {
+        "Tag": "(0070,031A)",
+        "Name": "Fiducial UID",
+        "BasicProf": "U",
+        "Keyword": "FiducialUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,2017)": {
+        "Tag": "(0040,2017)",
+        "Name": "Filler Order Number / Imaging Service Request",
+        "BasicProf": "Z",
+        "Keyword": "FillerOrderNumberImagingServiceRequest",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(003A,032B)": {
+        "Tag": "(003A,032B)",
+        "Name": "Filter Lookup Table Description",
+        "BasicProf": "X",
+        "Keyword": "FilterLookupTableDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0040,A023)": {
+        "Tag": "(0040,A023)",
+        "Name": "Findings Group Recording Date (Trial)",
+        "BasicProf": "X",
+        "Keyword": "FindingsGroupRecordingDateTrial",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,A024)": {
+        "Tag": "(0040,A024)",
+        "Name": "Findings Group Recording Time (Trial)",
+        "BasicProf": "X",
+        "Keyword": "FindingsGroupRecordingTimeTrial",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(3008,0054)": {
+        "Tag": "(3008,0054)",
+        "Name": "First Treatment Date",
+        "BasicProf": "X/D",
+        "Keyword": "FirstTreatmentDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(300A,0196)": {
+        "Tag": "(300A,0196)",
+        "Name": "Fixation Device Description",
+        "BasicProf": "X",
+        "Keyword": "FixationDeviceDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0034,0002)": {
+        "Tag": "(0034,0002)",
+        "Name": "Flow Identifier",
+        "BasicProf": "D",
+        "Keyword": "FlowIdentifier",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0034,0001)": {
+        "Tag": "(0034,0001)",
+        "Name": "Flow Identifier Sequence",
+        "BasicProf": "D",
+        "Keyword": "FlowIdentifierSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(3010,007F)": {
+        "Tag": "(3010,007F)",
+        "Name": "Fractionation Notes",
+        "BasicProf": "Z",
+        "Keyword": "FractionationNotes",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(300A,0072)": {
+        "Tag": "(300A,0072)",
+        "Name": "Fraction Group Description",
+        "BasicProf": "X",
+        "Keyword": "FractionGroupDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9074)": {
+        "Tag": "(0018,9074)",
+        "Name": "Frame Acquisition DateTime",
+        "BasicProf": "D",
+        "Keyword": "FrameAcquisitionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0020,9158)": {
+        "Tag": "(0020,9158)",
+        "Name": "Frame Comments",
+        "BasicProf": "X",
+        "Keyword": "FrameComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0020,0052)": {
+        "Tag": "(0020,0052)",
+        "Name": "Frame of Reference UID",
+        "BasicProf": "U",
+        "Keyword": "FrameOfReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0034,0007)": {
+        "Tag": "(0034,0007)",
+        "Name": "Frame Origin Timestamp",
+        "BasicProf": "D",
+        "Keyword": "FrameOriginTimestamp",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0018,9151)": {
+        "Tag": "(0018,9151)",
+        "Name": "Frame Reference DateTime",
+        "BasicProf": "D",
+        "Keyword": "FrameReferenceDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,9623)": {
+        "Tag": "(0018,9623)",
+        "Name": "Functional Sync Pulse",
+        "BasicProf": "D",
+        "Keyword": "FunctionalSyncPulse",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1008)": {
+        "Tag": "(0018,1008)",
+        "Name": "Gantry ID",
+        "BasicProf": "X",
+        "Keyword": "GantryID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,1005)": {
+        "Tag": "(0018,1005)",
+        "Name": "Generator ID",
+        "BasicProf": "X",
+        "Keyword": "GeneratorID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0016,0076)": {
+        "Tag": "(0016,0076)",
+        "Name": "GPS Altitude ",
+        "BasicProf": "X",
+        "Keyword": "GPSAltitude",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,0075)": {
+        "Tag": "(0016,0075)",
+        "Name": "GPS Altitude  Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSAltitudeRef",
+        "VR": "US",
+        "VM": "1"
+    },
+    "(0016,008C)": {
+        "Tag": "(0016,008C)",
+        "Name": "GPS Area  Information",
+        "BasicProf": "X",
+        "Keyword": "GPSAreaInformation",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0016,008D)": {
+        "Tag": "(0016,008D)",
+        "Name": "GPS Date  Stamp",
+        "BasicProf": "X",
+        "Keyword": "GPSDateStamp",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0016,0088)": {
+        "Tag": "(0016,0088)",
+        "Name": "GPS Dest  Bearing",
+        "BasicProf": "X",
+        "Keyword": "GPSDestBearing",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,0087)": {
+        "Tag": "(0016,0087)",
+        "Name": "GPS Dest  Bearing Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSDestBearingRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,008A)": {
+        "Tag": "(0016,008A)",
+        "Name": "GPS Dest  Distance",
+        "BasicProf": "X",
+        "Keyword": "GPSDestDistance",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,0089)": {
+        "Tag": "(0016,0089)",
+        "Name": "GPS Dest  Distance Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSDestDistanceRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0084)": {
+        "Tag": "(0016,0084)",
+        "Name": "GPS Dest  Latitude",
+        "BasicProf": "X",
+        "Keyword": "GPSDestLatitude",
+        "VR": "DS",
+        "VM": "3"
+    },
+    "(0016,0083)": {
+        "Tag": "(0016,0083)",
+        "Name": "GPS Dest  Latitude Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSDestLatitudeRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0086)": {
+        "Tag": "(0016,0086)",
+        "Name": "GPS Dest  Longitude",
+        "BasicProf": "X",
+        "Keyword": "GPSDestLongitude",
+        "VR": "DS",
+        "VM": "3"
+    },
+    "(0016,0085)": {
+        "Tag": "(0016,0085)",
+        "Name": "GPS Dest  Longitude Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSDestLongitudeRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,008E)": {
+        "Tag": "(0016,008E)",
+        "Name": "GPS Differential",
+        "BasicProf": "X",
+        "Keyword": "GPSDifferential",
+        "VR": "IS",
+        "VM": "1"
+    },
+    "(0016,007B)": {
+        "Tag": "(0016,007B)",
+        "Name": "GPS DOP",
+        "BasicProf": "X",
+        "Keyword": "GPSDOP",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,0081)": {
+        "Tag": "(0016,0081)",
+        "Name": "GPS Img  Direction",
+        "BasicProf": "X",
+        "Keyword": "GPSImgDirection",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,0080)": {
+        "Tag": "(0016,0080)",
+        "Name": "GPS Img  Direction Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSImgDirectionRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0072)": {
+        "Tag": "(0016,0072)",
+        "Name": "GPS Latitude ",
+        "BasicProf": "X",
+        "Keyword": "GPSLatitude",
+        "VR": "DS",
+        "VM": "3"
+    },
+    "(0016,0071)": {
+        "Tag": "(0016,0071)",
+        "Name": "GPS Latitude  Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSLatitudeRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0074)": {
+        "Tag": "(0016,0074)",
+        "Name": "GPS Longitude",
+        "BasicProf": "X",
+        "Keyword": "GPSLongitude",
+        "VR": "DS",
+        "VM": "3"
+    },
+    "(0016,0073)": {
+        "Tag": "(0016,0073)",
+        "Name": "GPS Longitude Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSLongitudeRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0082)": {
+        "Tag": "(0016,0082)",
+        "Name": "GPS Map  Datum",
+        "BasicProf": "X",
+        "Keyword": "GPSMapDatum",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0016,007A)": {
+        "Tag": "(0016,007A)",
+        "Name": "GPS Measure  Mode",
+        "BasicProf": "X",
+        "Keyword": "GPSMeasureMode",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,008B)": {
+        "Tag": "(0016,008B)",
+        "Name": "GPS Processing  Method",
+        "BasicProf": "X",
+        "Keyword": "GPSProcessingMethod",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0016,0078)": {
+        "Tag": "(0016,0078)",
+        "Name": "GPS Satellites",
+        "BasicProf": "X",
+        "Keyword": "GPSSatellites",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0016,007D)": {
+        "Tag": "(0016,007D)",
+        "Name": "GPS Speed ",
+        "BasicProf": "X",
+        "Keyword": "GPSSpeed",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,007C)": {
+        "Tag": "(0016,007C)",
+        "Name": "GPS Speed  Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSSpeedRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0079)": {
+        "Tag": "(0016,0079)",
+        "Name": "GPS Status",
+        "BasicProf": "X",
+        "Keyword": "GPSStatus",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0077)": {
+        "Tag": "(0016,0077)",
+        "Name": "GPS Time  Stamp",
+        "BasicProf": "X",
+        "Keyword": "GPSTimeStamp",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0016,007F)": {
+        "Tag": "(0016,007F)",
+        "Name": "GPS Track",
+        "BasicProf": "X",
+        "Keyword": "GPSTrack",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0016,007E)": {
+        "Tag": "(0016,007E)",
+        "Name": "GPS Track  Ref",
+        "BasicProf": "X",
+        "Keyword": "GPSTrackRef",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0016,0070)": {
+        "Tag": "(0016,0070)",
+        "Name": "GPS Version ID",
+        "BasicProf": "X",
+        "Keyword": "GPSVersionID",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0070,0001)": {
+        "Tag": "(0070,0001)",
+        "Name": "Graphic Annotation Sequence",
+        "BasicProf": "D",
+        "Keyword": "GraphicAnnotationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0072,000A)": {
+        "Tag": "(0072,000A)",
+        "Name": "Hanging Protocol Creation Date Time",
+        "BasicProf": "D",
+        "Keyword": "HangingProtocolCreationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,E004)": {
+        "Tag": "(0040,E004)",
+        "Name": "HL7 Document Effective Time",
+        "BasicProf": "X",
+        "Keyword": "HL7DocumentEffectiveTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,4037)": {
+        "Tag": "(0040,4037)",
+        "Name": "Human Performer's Name",
+        "BasicProf": "X",
+        "Keyword": "HumanPerformerName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,4036)": {
+        "Tag": "(0040,4036)",
+        "Name": "Human Performer's Organization",
+        "BasicProf": "X",
+        "Keyword": "HumanPerformerOrganization",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0088,0200)": {
+        "Tag": "(0088,0200)",
+        "Name": "Icon Image Sequence",
+        "BasicProf": "X",
+        "Keyword": "IconImageSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,4000)": {
+        "Tag": "(0008,4000)",
+        "Name": "Identifying Comments",
+        "BasicProf": "X",
+        "Keyword": "IdentifyingComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0020,4000)": {
+        "Tag": "(0020,4000)",
+        "Name": "Image Comments",
+        "BasicProf": "X",
+        "Keyword": "ImageComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0028,4000)": {
+        "Tag": "(0028,4000)",
+        "Name": "Image Presentation Comments",
+        "BasicProf": "X",
+        "Keyword": "ImagePresentationComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,2400)": {
+        "Tag": "(0040,2400)",
+        "Name": "Imaging Service Request Comments",
+        "BasicProf": "X",
+        "Keyword": "ImagingServiceRequestComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(003A,0314)": {
+        "Tag": "(003A,0314)",
+        "Name": "Impedance Measurement DateTime",
+        "BasicProf": "D",
+        "Keyword": "ImpedanceMeasurementDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(4008,0300)": {
+        "Tag": "(4008,0300)",
+        "Name": "Impressions",
+        "BasicProf": "X",
+        "Keyword": "Impressions",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0068,6270)": {
+        "Tag": "(0068,6270)",
+        "Name": "Information Issue DateTime",
+        "BasicProf": "D",
+        "Keyword": "InformationIssueDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0015)": {
+        "Tag": "(0008,0015)",
+        "Name": "Instance Coercion DateTime",
+        "BasicProf": "X",
+        "Keyword": "InstanceCoercionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0012)": {
+        "Tag": "(0008,0012)",
+        "Name": "Instance Creation Date",
+        "BasicProf": "X/D",
+        "Keyword": "InstanceCreationDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,0013)": {
+        "Tag": "(0008,0013)",
+        "Name": "Instance Creation Time",
+        "BasicProf": "X/Z/D",
+        "Keyword": "InstanceCreationTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0014)": {
+        "Tag": "(0008,0014)",
+        "Name": "Instance Creator UID",
+        "BasicProf": "U",
+        "Keyword": "InstanceCreatorUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0400,0600)": {
+        "Tag": "(0400,0600)",
+        "Name": "Instance Origin Status",
+        "BasicProf": "X",
+        "Keyword": "InstanceOriginStatus",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0008,0081)": {
+        "Tag": "(0008,0081)",
+        "Name": "Institution Address",
+        "BasicProf": "X",
+        "Keyword": "InstitutionAddress",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0008,1040)": {
+        "Tag": "(0008,1040)",
+        "Name": "Institutional Department Name",
+        "BasicProf": "X",
+        "Keyword": "InstitutionalDepartmentName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0008,1041)": {
+        "Tag": "(0008,1041)",
+        "Name": "Institutional Department Type Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "InstitutionalDepartmentTypeCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,0082)": {
+        "Tag": "(0008,0082)",
+        "Name": "Institution Code Sequence",
+        "BasicProf": "X/Z/D",
+        "Keyword": "InstitutionCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,0080)": {
+        "Tag": "(0008,0080)",
+        "Name": "Institution Name",
+        "BasicProf": "X/Z/D",
+        "Keyword": "InstitutionName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9919)": {
+        "Tag": "(0018,9919)",
+        "Name": "Instruction Performed DateTime",
+        "BasicProf": "Z/D",
+        "Keyword": "InstructionPerformedDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0010,1050)": {
+        "Tag": "(0010,1050)",
+        "Name": "Insurance Plan Identification",
+        "BasicProf": "X",
+        "Keyword": "InsurancePlanIdentification",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(3010,0085)": {
+        "Tag": "(3010,0085)",
+        "Name": "Intended Fraction Start Time",
+        "BasicProf": "X",
+        "Keyword": "IntendedFractionStartTime",
+        "VR": "TM",
+        "VM": "1-n"
+    },
+    "(3010,004D)": {
+        "Tag": "(3010,004D)",
+        "Name": "Intended Phase End Date",
+        "BasicProf": "X/D",
+        "Keyword": "IntendedPhaseEndDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(3010,004C)": {
+        "Tag": "(3010,004C)",
+        "Name": "Intended Phase Start Date",
+        "BasicProf": "X/D",
+        "Keyword": "IntendedPhaseStartDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,1011)": {
+        "Tag": "(0040,1011)",
+        "Name": "Intended Recipients of Results Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "IntendedRecipientsOfResultsIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(300A,0741)": {
+        "Tag": "(300A,0741)",
+        "Name": "Interlock DateTime",
+        "BasicProf": "D",
+        "Keyword": "InterlockDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(300A,0742)": {
+        "Tag": "(300A,0742)",
+        "Name": "Interlock Description",
+        "BasicProf": "D",
+        "Keyword": "InterlockDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300A,0783)": {
+        "Tag": "(300A,0783)",
+        "Name": "Interlock Origin Description",
+        "BasicProf": "D",
+        "Keyword": "InterlockOriginDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(4008,0112)": {
+        "Tag": "(4008,0112)",
+        "Name": "Interpretation Approval Date",
+        "BasicProf": "X",
+        "Keyword": "InterpretationApprovalDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(4008,0113)": {
+        "Tag": "(4008,0113)",
+        "Name": "Interpretation Approval Time",
+        "BasicProf": "X",
+        "Keyword": "InterpretationApprovalTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(4008,0111)": {
+        "Tag": "(4008,0111)",
+        "Name": "Interpretation Approver Sequence",
+        "BasicProf": "X",
+        "Keyword": "InterpretationApproverSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(4008,010C)": {
+        "Tag": "(4008,010C)",
+        "Name": "Interpretation Author",
+        "BasicProf": "X",
+        "Keyword": "InterpretationAuthor",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(4008,0115)": {
+        "Tag": "(4008,0115)",
+        "Name": "Interpretation Diagnosis Description",
+        "BasicProf": "X",
+        "Keyword": "InterpretationDiagnosisDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(4008,0200)": {
+        "Tag": "(4008,0200)",
+        "Name": "Interpretation ID",
+        "BasicProf": "X",
+        "Keyword": "InterpretationID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(4008,0202)": {
+        "Tag": "(4008,0202)",
+        "Name": "Interpretation ID Issuer",
+        "BasicProf": "X",
+        "Keyword": "InterpretationIDIssuer",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(4008,0100)": {
+        "Tag": "(4008,0100)",
+        "Name": "Interpretation Recorded Date",
+        "BasicProf": "X",
+        "Keyword": "InterpretationRecordedDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(4008,0101)": {
+        "Tag": "(4008,0101)",
+        "Name": "Interpretation Recorded Time",
+        "BasicProf": "X",
+        "Keyword": "InterpretationRecordedTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(4008,0102)": {
+        "Tag": "(4008,0102)",
+        "Name": "Interpretation Recorder",
+        "BasicProf": "X",
+        "Keyword": "InterpretationRecorder",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(4008,010B)": {
+        "Tag": "(4008,010B)",
+        "Name": "Interpretation Text",
+        "BasicProf": "X",
+        "Keyword": "InterpretationText",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(4008,010A)": {
+        "Tag": "(4008,010A)",
+        "Name": "Interpretation Transcriber",
+        "BasicProf": "X",
+        "Keyword": "InterpretationTranscriber",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(4008,0108)": {
+        "Tag": "(4008,0108)",
+        "Name": "Interpretation Transcription Date",
+        "BasicProf": "X",
+        "Keyword": "InterpretationTranscriptionDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(4008,0109)": {
+        "Tag": "(4008,0109)",
+        "Name": "Interpretation Transcription Time",
+        "BasicProf": "X",
+        "Keyword": "InterpretationTranscriptionTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,0035)": {
+        "Tag": "(0018,0035)",
+        "Name": "Intervention Drug Start Time",
+        "BasicProf": "X",
+        "Keyword": "InterventionDrugStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,0027)": {
+        "Tag": "(0018,0027)",
+        "Name": "Intervention Drug Stop Time",
+        "BasicProf": "X",
+        "Keyword": "InterventionDrugStopTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,3010)": {
+        "Tag": "(0008,3010)",
+        "Name": "Irradiation Event UID",
+        "BasicProf": "U",
+        "Keyword": "IrradiationEventUID",
+        "VR": "UI",
+        "VM": "1-n"
+    },
+    "(0040,2004)": {
+        "Tag": "(0040,2004)",
+        "Name": "Issue Date of Imaging Service Request",
+        "BasicProf": "X",
+        "Keyword": "IssueDateOfImagingServiceRequest",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0038,0011)": {
+        "Tag": "(0038,0011)",
+        "Name": "Issuer of Admission ID",
+        "BasicProf": "X",
+        "Keyword": "IssuerOfAdmissionID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0014)": {
+        "Tag": "(0038,0014)",
+        "Name": "Issuer of Admission ID Sequence",
+        "BasicProf": "X",
+        "Keyword": "IssuerOfAdmissionIDSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,0021)": {
+        "Tag": "(0010,0021)",
+        "Name": "Issuer of Patient ID",
+        "BasicProf": "X",
+        "Keyword": "IssuerOfPatientID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0061)": {
+        "Tag": "(0038,0061)",
+        "Name": "Issuer of Service Episode ID",
+        "BasicProf": "X",
+        "Keyword": "IssuerOfServiceEpisodeID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0064)": {
+        "Tag": "(0038,0064)",
+        "Name": "Issuer of Service Episode ID Sequence",
+        "BasicProf": "X",
+        "Keyword": "IssuerOfServiceEpisodeIDSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0513)": {
+        "Tag": "(0040,0513)",
+        "Name": "Issuer of the Container Identifier Sequence",
+        "BasicProf": "Z",
+        "Keyword": "IssuerOfTheContainerIdentifierSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0562)": {
+        "Tag": "(0040,0562)",
+        "Name": "Issuer of the Specimen Identifier Sequence",
+        "BasicProf": "Z",
+        "Keyword": "IssuerOfTheSpecimenIdentifierSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,2005)": {
+        "Tag": "(0040,2005)",
+        "Name": "Issue Time of Imaging Service Request",
+        "BasicProf": "X",
+        "Keyword": "IssueTimeOfImagingServiceRequest",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(2200,0002)": {
+        "Tag": "(2200,0002)",
+        "Name": "Label Text",
+        "BasicProf": "X/Z",
+        "Keyword": "LabelText",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0028,1214)": {
+        "Tag": "(0028,1214)",
+        "Name": "Large Palette Color Lookup Table UID",
+        "BasicProf": "U",
+        "Keyword": "LargePaletteColorLookupTableUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0010,21D0)": {
+        "Tag": "(0010,21D0)",
+        "Name": "Last Menstrual Date",
+        "BasicProf": "X",
+        "Keyword": "LastMenstrualDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0016,004F)": {
+        "Tag": "(0016,004F)",
+        "Name": "Lens Make",
+        "BasicProf": "X",
+        "Keyword": "LensMake",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0016,0050)": {
+        "Tag": "(0016,0050)",
+        "Name": "Lens Model",
+        "BasicProf": "X",
+        "Keyword": "LensModel",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0016,0051)": {
+        "Tag": "(0016,0051)",
+        "Name": "Lens Serial Number",
+        "BasicProf": "X",
+        "Keyword": "LensSerialNumber",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0016,004E)": {
+        "Tag": "(0016,004E)",
+        "Name": "Lens Specification",
+        "BasicProf": "X",
+        "Keyword": "LensSpecification",
+        "VR": "DS",
+        "VM": "4"
+    },
+    "(0050,0021)": {
+        "Tag": "(0050,0021)",
+        "Name": "Long Device Description",
+        "BasicProf": "X",
+        "Keyword": "LongDeviceDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0400,0404)": {
+        "Tag": "(0400,0404)",
+        "Name": "MAC",
+        "BasicProf": "X",
+        "Keyword": "MAC",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0016,002B)": {
+        "Tag": "(0016,002B)",
+        "Name": "Maker Note",
+        "BasicProf": "X",
+        "Keyword": "MakerNote",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0018,100B)": {
+        "Tag": "(0018,100B)",
+        "Name": "Manufacturer's Device Class UID",
+        "BasicProf": "U",
+        "Keyword": "ManufacturerDeviceClassUID",
+        "VR": "UI",
+        "VM": "1-n"
+    },
+    "(3010,0043)": {
+        "Tag": "(3010,0043)",
+        "Name": "Manufacturer's Device Identifier",
+        "BasicProf": "Z",
+        "Keyword": "ManufacturerDeviceIdentifier",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0002,0003)": {
+        "Tag": "(0002,0003)",
+        "Name": "Media Storage SOP Instance UID",
+        "BasicProf": "U",
+        "Keyword": "MediaStorageSOPInstanceUID",
+        "VR": "UI",
+        "VM": 1
+    },
+    "(0010,2000)": {
+        "Tag": "(0010,2000)",
+        "Name": "Medical Alerts",
+        "BasicProf": "X",
+        "Keyword": "MedicalAlerts",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(0010,1090)": {
+        "Tag": "(0010,1090)",
+        "Name": "Medical Record Locator",
+        "BasicProf": "X",
+        "Keyword": "MedicalRecordLocator",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,1080)": {
+        "Tag": "(0010,1080)",
+        "Name": "Military Rank",
+        "BasicProf": "X",
+        "Keyword": "MilitaryRank",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0400,0550)": {
+        "Tag": "(0400,0550)",
+        "Name": "Modified Attributes Sequence",
+        "BasicProf": "X",
+        "Keyword": "ModifiedAttributesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0020,3403)": {
+        "Tag": "(0020,3403)",
+        "Name": "Modified Image Date",
+        "BasicProf": "X",
+        "Keyword": "ModifiedImageDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0020,3406)": {
+        "Tag": "(0020,3406)",
+        "Name": "Modified Image Description",
+        "BasicProf": "X",
+        "Keyword": "ModifiedImageDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0020,3405)": {
+        "Tag": "(0020,3405)",
+        "Name": "Modified Image Time",
+        "BasicProf": "X",
+        "Keyword": "ModifiedImageTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0020,3401)": {
+        "Tag": "(0020,3401)",
+        "Name": "Modifying Device ID",
+        "BasicProf": "X",
+        "Keyword": "ModifyingDeviceID",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0400,0563)": {
+        "Tag": "(0400,0563)",
+        "Name": "Modifying System",
+        "BasicProf": "D",
+        "Keyword": "ModifyingSystem",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3008,0056)": {
+        "Tag": "(3008,0056)",
+        "Name": "Most Recent Treatment Date",
+        "BasicProf": "X/D",
+        "Keyword": "MostRecentTreatmentDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0018,937B)": {
+        "Tag": "(0018,937B)",
+        "Name": "Multi-energy Acquisition Description",
+        "BasicProf": "X",
+        "Keyword": "MultienergyAcquisitionDescription",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(003A,0310)": {
+        "Tag": "(003A,0310)",
+        "Name": "Multiplex Group UID",
+        "BasicProf": "U",
+        "Keyword": "MultiplexGroupUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,1060)": {
+        "Tag": "(0008,1060)",
+        "Name": "Name of Physician(s) Reading Study",
+        "BasicProf": "X",
+        "Keyword": "NameOfPhysiciansReadingStudy",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0040,1010)": {
+        "Tag": "(0040,1010)",
+        "Name": "Names of Intended Recipients of Results",
+        "BasicProf": "X",
+        "Keyword": "NamesOfIntendedRecipientsOfResults",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0008,1000)": {
+        "Tag": "(0008,1000)",
+        "Name": "Network ID",
+        "BasicProf": "X",
+        "Keyword": "NetworkID",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0400,0552)": {
+        "Tag": "(0400,0552)",
+        "Name": "Nonconforming Data Element Value",
+        "BasicProf": "X",
+        "Keyword": "NonconformingDataElementValue",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0400,0551)": {
+        "Tag": "(0400,0551)",
+        "Name": "Nonconforming Modified Attributes Sequence",
+        "BasicProf": "X",
+        "Keyword": "NonconformingModifiedAttributesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A192)": {
+        "Tag": "(0040,A192)",
+        "Name": "Observation Date (Trial)",
+        "BasicProf": "X",
+        "Keyword": "ObservationDateTrial",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,A032)": {
+        "Tag": "(0040,A032)",
+        "Name": "Observation DateTime",
+        "BasicProf": "X/D",
+        "Keyword": "ObservationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,A033)": {
+        "Tag": "(0040,A033)",
+        "Name": "Observation Start DateTime",
+        "BasicProf": "X",
+        "Keyword": "ObservationStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,A402)": {
+        "Tag": "(0040,A402)",
+        "Name": "Observation Subject UID (Trial)",
+        "BasicProf": "U",
+        "Keyword": "ObservationSubjectUIDTrial",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,A193)": {
+        "Tag": "(0040,A193)",
+        "Name": "Observation Time (Trial)",
+        "BasicProf": "X",
+        "Keyword": "ObservationTimeTrial",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,A171)": {
+        "Tag": "(0040,A171)",
+        "Name": "Observation UID",
+        "BasicProf": "U",
+        "Keyword": "ObservationUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0010,2180)": {
+        "Tag": "(0010,2180)",
+        "Name": "Occupation",
+        "BasicProf": "X",
+        "Keyword": "Occupation",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0008,1072)": {
+        "Tag": "(0008,1072)",
+        "Name": "Operator Identification Sequence",
+        "BasicProf": "X/D",
+        "Keyword": "OperatorIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1070)": {
+        "Tag": "(0008,1070)",
+        "Name": "Operators' Name",
+        "BasicProf": "X/Z/D",
+        "Keyword": "OperatorsName",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0040,2010)": {
+        "Tag": "(0040,2010)",
+        "Name": "Order Callback Phone Number",
+        "BasicProf": "X",
+        "Keyword": "OrderCallbackPhoneNumber",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,2011)": {
+        "Tag": "(0040,2011)",
+        "Name": "Order Callback Telecom Information",
+        "BasicProf": "X",
+        "Keyword": "OrderCallbackTelecomInformation",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,2008)": {
+        "Tag": "(0040,2008)",
+        "Name": "Order Entered By",
+        "BasicProf": "X",
+        "Keyword": "OrderEnteredBy",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,2009)": {
+        "Tag": "(0040,2009)",
+        "Name": "Order Enterer's Location",
+        "BasicProf": "X",
+        "Keyword": "OrderEntererLocation",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0400,0561)": {
+        "Tag": "(0400,0561)",
+        "Name": "Original Attributes Sequence",
+        "BasicProf": "X",
+        "Keyword": "OriginalAttributesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(2100,0070)": {
+        "Tag": "(2100,0070)",
+        "Name": "Originator",
+        "BasicProf": "X",
+        "Keyword": "Originator",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0010,1000)": {
+        "Tag": "(0010,1000)",
+        "Name": "Other Patient IDs",
+        "BasicProf": "X",
+        "Keyword": "OtherPatientIDs",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(0010,1002)": {
+        "Tag": "(0010,1002)",
+        "Name": "Other Patient IDs Sequence",
+        "BasicProf": "X",
+        "Keyword": "OtherPatientIDsSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,1001)": {
+        "Tag": "(0010,1001)",
+        "Name": "Other Patient Names",
+        "BasicProf": "X",
+        "Keyword": "OtherPatientNames",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(60xx,4000)": {
+        "Tag": "(60xx,4000)",
+        "Name": "Overlay Comments",
+        "BasicProf": "X",
+        "Keyword": "OverlayComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(60xx,3000)": {
+        "Tag": "(60xx,3000)",
+        "Name": "Overlay Data",
+        "BasicProf": "X",
+        "Keyword": "OverlayData",
+        "VR": "OB or OW",
+        "VM": "1"
+    },
+    "(0008,0024)": {
+        "Tag": "(0008,0024)",
+        "Name": "Overlay Date",
+        "BasicProf": "X",
+        "Keyword": "OverlayDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,0034)": {
+        "Tag": "(0008,0034)",
+        "Name": "Overlay Time",
+        "BasicProf": "X",
+        "Keyword": "OverlayTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(300A,0760)": {
+        "Tag": "(300A,0760)",
+        "Name": "Override DateTime",
+        "BasicProf": "D",
+        "Keyword": "OverrideDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0028,1199)": {
+        "Tag": "(0028,1199)",
+        "Name": "Palette Color Lookup Table UID",
+        "BasicProf": "U",
+        "Keyword": "PaletteColorLookupTableUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,A07A)": {
+        "Tag": "(0040,A07A)",
+        "Name": "Participant Sequence",
+        "BasicProf": "X",
+        "Keyword": "ParticipantSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A082)": {
+        "Tag": "(0040,A082)",
+        "Name": "Participation DateTime",
+        "BasicProf": "Z",
+        "Keyword": "ParticipationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0010,1040)": {
+        "Tag": "(0010,1040)",
+        "Name": "Patient's Address",
+        "BasicProf": "X",
+        "Keyword": "PatientAddress",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,1010)": {
+        "Tag": "(0010,1010)",
+        "Name": "Patient's Age",
+        "BasicProf": "X",
+        "Keyword": "PatientAge",
+        "VR": "AS",
+        "VM": "1"
+    },
+    "(0010,0030)": {
+        "Tag": "(0010,0030)",
+        "Name": "Patient's Birth Date",
+        "BasicProf": "Z",
+        "Keyword": "PatientBirthDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0010,1005)": {
+        "Tag": "(0010,1005)",
+        "Name": "Patient's Birth Name",
+        "BasicProf": "X",
+        "Keyword": "PatientBirthName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0010,0032)": {
+        "Tag": "(0010,0032)",
+        "Name": "Patient's Birth Time",
+        "BasicProf": "X",
+        "Keyword": "PatientBirthTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0038,0400)": {
+        "Tag": "(0038,0400)",
+        "Name": "Patient's Institution Residence",
+        "BasicProf": "X",
+        "Keyword": "PatientInstitutionResidence",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,0050)": {
+        "Tag": "(0010,0050)",
+        "Name": "Patient's Insurance Plan Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "PatientInsurancePlanCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,1060)": {
+        "Tag": "(0010,1060)",
+        "Name": "Patient's Mother's Birth Name",
+        "BasicProf": "X",
+        "Keyword": "PatientMotherBirthName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0010,0010)": {
+        "Tag": "(0010,0010)",
+        "Name": "Patient's Name",
+        "BasicProf": "Z",
+        "Keyword": "PatientName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0010,0101)": {
+        "Tag": "(0010,0101)",
+        "Name": "Patient's Primary Language Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "PatientPrimaryLanguageCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,0102)": {
+        "Tag": "(0010,0102)",
+        "Name": "Patient's Primary Language Modifier Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "PatientPrimaryLanguageModifierCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,21F0)": {
+        "Tag": "(0010,21F0)",
+        "Name": "Patient's Religious Preference",
+        "BasicProf": "X",
+        "Keyword": "PatientReligiousPreference",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,0040)": {
+        "Tag": "(0010,0040)",
+        "Name": "Patient's Sex",
+        "BasicProf": "Z",
+        "Keyword": "PatientSex",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0010,2203)": {
+        "Tag": "(0010,2203)",
+        "Name": "Patient's Sex Neutered",
+        "BasicProf": "X/Z",
+        "Keyword": "PatientSexNeutered",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0010,1020)": {
+        "Tag": "(0010,1020)",
+        "Name": "Patient's Size",
+        "BasicProf": "X",
+        "Keyword": "PatientSize",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0010,2155)": {
+        "Tag": "(0010,2155)",
+        "Name": "Patient's Telecom Information",
+        "BasicProf": "X",
+        "Keyword": "PatientTelecomInformation",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0010,2154)": {
+        "Tag": "(0010,2154)",
+        "Name": "Patient's Telephone Numbers",
+        "BasicProf": "X",
+        "Keyword": "PatientTelephoneNumbers",
+        "VR": "SH",
+        "VM": "1-n"
+    },
+    "(0010,1030)": {
+        "Tag": "(0010,1030)",
+        "Name": "Patient's Weight",
+        "BasicProf": "X",
+        "Keyword": "PatientWeight",
+        "VR": "DS",
+        "VM": "1"
+    },
+    "(0010,4000)": {
+        "Tag": "(0010,4000)",
+        "Name": "Patient Comments",
+        "BasicProf": "X",
+        "Keyword": "PatientComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0010,0020)": {
+        "Tag": "(0010,0020)",
+        "Name": "Patient ID",
+        "BasicProf": "Z",
+        "Keyword": "PatientID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0794)": {
+        "Tag": "(300A,0794)",
+        "Name": "Patient Setup Photo Description",
+        "BasicProf": "X",
+        "Keyword": "PatientSetupPhotoDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(300A,0650)": {
+        "Tag": "(300A,0650)",
+        "Name": "Patient Setup UID",
+        "BasicProf": "U",
+        "Keyword": "PatientSetupUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0038,0500)": {
+        "Tag": "(0038,0500)",
+        "Name": "Patient State",
+        "BasicProf": "X",
+        "Keyword": "PatientState",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,1004)": {
+        "Tag": "(0040,1004)",
+        "Name": "Patient Transport Arrangements",
+        "BasicProf": "X",
+        "Keyword": "PatientTransportArrangements",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0792)": {
+        "Tag": "(300A,0792)",
+        "Name": "Patient Treatment Preparation Method Description",
+        "BasicProf": "X",
+        "Keyword": "PatientTreatmentPreparationMethodDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(300A,078E)": {
+        "Tag": "(300A,078E)",
+        "Name": "Patient Treatment Preparation Procedure Parameter Description",
+        "BasicProf": "X",
+        "Keyword": "PatientTreatmentPreparationProcedureParameterDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,0243)": {
+        "Tag": "(0040,0243)",
+        "Name": "Performed Location",
+        "BasicProf": "X",
+        "Keyword": "PerformedLocation",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,0254)": {
+        "Tag": "(0040,0254)",
+        "Name": "Performed Procedure Step Description",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0250)": {
+        "Tag": "(0040,0250)",
+        "Name": "Performed Procedure Step End Date",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepEndDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,4051)": {
+        "Tag": "(0040,4051)",
+        "Name": "Performed Procedure Step End DateTime",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepEndDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,0251)": {
+        "Tag": "(0040,0251)",
+        "Name": "Performed Procedure Step End Time",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepEndTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,0253)": {
+        "Tag": "(0040,0253)",
+        "Name": "Performed Procedure Step ID",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,0244)": {
+        "Tag": "(0040,0244)",
+        "Name": "Performed Procedure Step Start Date",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepStartDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,4050)": {
+        "Tag": "(0040,4050)",
+        "Name": "Performed Procedure Step Start DateTime",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,0245)": {
+        "Tag": "(0040,0245)",
+        "Name": "Performed Procedure Step Start Time",
+        "BasicProf": "X",
+        "Keyword": "PerformedProcedureStepStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,0241)": {
+        "Tag": "(0040,0241)",
+        "Name": "Performed Station AE Title",
+        "BasicProf": "X",
+        "Keyword": "PerformedStationAETitle",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0040,4030)": {
+        "Tag": "(0040,4030)",
+        "Name": "Performed Station Geographic Location Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "PerformedStationGeographicLocationCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0242)": {
+        "Tag": "(0040,0242)",
+        "Name": "Performed Station Name",
+        "BasicProf": "X",
+        "Keyword": "PerformedStationName",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,4028)": {
+        "Tag": "(0040,4028)",
+        "Name": "Performed Station Name Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "PerformedStationNameCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1050)": {
+        "Tag": "(0008,1050)",
+        "Name": "Performing Physician's Name",
+        "BasicProf": "X",
+        "Keyword": "PerformingPhysicianName",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0008,1052)": {
+        "Tag": "(0008,1052)",
+        "Name": "Performing Physician Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "PerformingPhysicianIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,1102)": {
+        "Tag": "(0040,1102)",
+        "Name": "Person's Address",
+        "BasicProf": "X",
+        "Keyword": "PersonAddress",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0040,1104)": {
+        "Tag": "(0040,1104)",
+        "Name": "Person's Telecom Information",
+        "BasicProf": "X",
+        "Keyword": "PersonTelecomInformation",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0040,1103)": {
+        "Tag": "(0040,1103)",
+        "Name": "Person's Telephone Numbers",
+        "BasicProf": "X",
+        "Keyword": "PersonTelephoneNumbers",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(0040,1101)": {
+        "Tag": "(0040,1101)",
+        "Name": "Person Identification Code Sequence",
+        "BasicProf": "D",
+        "Keyword": "PersonIdentificationCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A123)": {
+        "Tag": "(0040,A123)",
+        "Name": "Person Name",
+        "BasicProf": "D",
+        "Keyword": "PersonName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0008,1048)": {
+        "Tag": "(0008,1048)",
+        "Name": "Physician(s) of Record",
+        "BasicProf": "X",
+        "Keyword": "PhysiciansOfRecord",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0008,1049)": {
+        "Tag": "(0008,1049)",
+        "Name": "Physician(s) of Record Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "PhysiciansOfRecordIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1062)": {
+        "Tag": "(0008,1062)",
+        "Name": "Physician(s) Reading Study Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "PhysiciansReadingStudyIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(4008,0114)": {
+        "Tag": "(4008,0114)",
+        "Name": "Physician Approving Interpretation",
+        "BasicProf": "X",
+        "Keyword": "PhysicianApprovingInterpretation",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,2016)": {
+        "Tag": "(0040,2016)",
+        "Name": "Placer Order Number / Imaging Service Request",
+        "BasicProf": "Z",
+        "Keyword": "PlacerOrderNumberImagingServiceRequest",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,1004)": {
+        "Tag": "(0018,1004)",
+        "Name": "Plate ID",
+        "BasicProf": "X",
+        "Keyword": "PlateID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3002,0123)": {
+        "Tag": "(3002,0123)",
+        "Name": "Position Acquisition Template Description",
+        "BasicProf": "X",
+        "Keyword": "PositionAcquisitionTemplateDescription",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(3002,0121)": {
+        "Tag": "(3002,0121)",
+        "Name": "Position Acquisition Template Name",
+        "BasicProf": "X",
+        "Keyword": "PositionAcquisitionTemplateName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,21C0)": {
+        "Tag": "(0010,21C0)",
+        "Name": "Pregnancy Status",
+        "BasicProf": "X",
+        "Keyword": "PregnancyStatus",
+        "VR": "US",
+        "VM": "1"
+    },
+    "(0040,0012)": {
+        "Tag": "(0040,0012)",
+        "Name": "Pre-Medication",
+        "BasicProf": "X",
+        "Keyword": "PreMedication",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,000E)": {
+        "Tag": "(300A,000E)",
+        "Name": "Prescription Description",
+        "BasicProf": "X",
+        "Keyword": "PrescriptionDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3010,007B)": {
+        "Tag": "(3010,007B)",
+        "Name": "Prescription Notes",
+        "BasicProf": "Z",
+        "Keyword": "PrescriptionNotes",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(3010,0081)": {
+        "Tag": "(3010,0081)",
+        "Name": "Prescription Notes Sequence",
+        "BasicProf": "Z",
+        "Keyword": "PrescriptionNotesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0070,0082)": {
+        "Tag": "(0070,0082)",
+        "Name": "Presentation Creation Date",
+        "BasicProf": "X",
+        "Keyword": "PresentationCreationDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0070,0083)": {
+        "Tag": "(0070,0083)",
+        "Name": "Presentation Creation Time",
+        "BasicProf": "X",
+        "Keyword": "PresentationCreationTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0070,1101)": {
+        "Tag": "(0070,1101)",
+        "Name": "Presentation Display Collection UID",
+        "BasicProf": "U",
+        "Keyword": "PresentationDisplayCollectionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0070,1102)": {
+        "Tag": "(0070,1102)",
+        "Name": "Presentation Sequence Collection UID",
+        "BasicProf": "U",
+        "Keyword": "PresentationSequenceCollectionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,0061)": {
+        "Tag": "(3010,0061)",
+        "Name": "Prior Treatment Dose Description",
+        "BasicProf": "X",
+        "Keyword": "PriorTreatmentDoseDescription",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0040,4052)": {
+        "Tag": "(0040,4052)",
+        "Name": "Procedure Step Cancellation DateTime",
+        "BasicProf": "X",
+        "Keyword": "ProcedureStepCancellationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0044,000B)": {
+        "Tag": "(0044,000B)",
+        "Name": "Product Expiration DateTime",
+        "BasicProf": "X",
+        "Keyword": "ProductExpirationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1030)": {
+        "Tag": "(0018,1030)",
+        "Name": "Protocol Name",
+        "BasicProf": "X/D",
+        "Keyword": "ProtocolName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0008,1088)": {
+        "Tag": "(0008,1088)",
+        "Name": "Pyramid Description",
+        "BasicProf": "X",
+        "Keyword": "PyramidDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0020,0027)": {
+        "Tag": "(0020,0027)",
+        "Name": "Pyramid Label",
+        "BasicProf": "X",
+        "Keyword": "PyramidLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0008,0019)": {
+        "Tag": "(0008,0019)",
+        "Name": "Pyramid UID",
+        "BasicProf": "U",
+        "Keyword": "PyramidUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(300A,0619)": {
+        "Tag": "(300A,0619)",
+        "Name": "Radiation Dose Identification Label",
+        "BasicProf": "D",
+        "Keyword": "RadiationDoseIdentificationLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0623)": {
+        "Tag": "(300A,0623)",
+        "Name": "Radiation Dose In-Vivo Measurement Label",
+        "BasicProf": "D",
+        "Keyword": "RadiationDoseInVivoMeasurementLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,067D)": {
+        "Tag": "(300A,067D)",
+        "Name": "Radiation Generation Mode Description",
+        "BasicProf": "Z",
+        "Keyword": "RadiationGenerationModeDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300A,067C)": {
+        "Tag": "(300A,067C)",
+        "Name": "Radiation Generation Mode Label",
+        "BasicProf": "D",
+        "Keyword": "RadiationGenerationModeLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0018,1078)": {
+        "Tag": "(0018,1078)",
+        "Name": "Radiopharmaceutical Start DateTime",
+        "BasicProf": "X",
+        "Keyword": "RadiopharmaceuticalStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1072)": {
+        "Tag": "(0018,1072)",
+        "Name": "Radiopharmaceutical Start Time",
+        "BasicProf": "X",
+        "Keyword": "RadiopharmaceuticalStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,1079)": {
+        "Tag": "(0018,1079)",
+        "Name": "Radiopharmaceutical Stop DateTime",
+        "BasicProf": "X",
+        "Keyword": "RadiopharmaceuticalStopDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0018,1073)": {
+        "Tag": "(0018,1073)",
+        "Name": "Radiopharmaceutical Stop Time",
+        "BasicProf": "X",
+        "Keyword": "RadiopharmaceuticalStopTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(300C,0113)": {
+        "Tag": "(300C,0113)",
+        "Name": "Reason for Omission Description",
+        "BasicProf": "X",
+        "Keyword": "ReasonForOmissionDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,100A)": {
+        "Tag": "(0040,100A)",
+        "Name": "Reason for Requested Procedure Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReasonForRequestedProcedureCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0032,1030)": {
+        "Tag": "(0032,1030)",
+        "Name": "Reason for Study",
+        "BasicProf": "X",
+        "Keyword": "ReasonForStudy",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,005C)": {
+        "Tag": "(3010,005C)",
+        "Name": "Reason for Superseding",
+        "BasicProf": "Z",
+        "Keyword": "ReasonForSuperseding",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0400,0565)": {
+        "Tag": "(0400,0565)",
+        "Name": "Reason for the Attribute Modification",
+        "BasicProf": "D",
+        "Keyword": "ReasonForTheAttributeModification",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0040,2001)": {
+        "Tag": "(0040,2001)",
+        "Name": "Reason for the Imaging Service Request",
+        "BasicProf": "X",
+        "Keyword": "ReasonForTheImagingServiceRequest",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,1002)": {
+        "Tag": "(0040,1002)",
+        "Name": "Reason for the Requested Procedure",
+        "BasicProf": "X",
+        "Keyword": "ReasonForTheRequestedProcedure",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0032,1066)": {
+        "Tag": "(0032,1066)",
+        "Name": "Reason for Visit",
+        "BasicProf": "X",
+        "Keyword": "ReasonForVisit",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0032,1067)": {
+        "Tag": "(0032,1067)",
+        "Name": "Reason for Visit Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReasonForVisitCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0074,1234)": {
+        "Tag": "(0074,1234)",
+        "Name": "Receiving AE",
+        "BasicProf": "X",
+        "Keyword": "ReceivingAE",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(300A,073A)": {
+        "Tag": "(300A,073A)",
+        "Name": "Recorded RT Control Point DateTime",
+        "BasicProf": "D",
+        "Keyword": "RecordedRTControlPointDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(3010,000B)": {
+        "Tag": "(3010,000B)",
+        "Name": "Referenced Conceptual Volume UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedConceptualVolumeUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,A13A)": {
+        "Tag": "(0040,A13A)",
+        "Name": "Referenced DateTime",
+        "BasicProf": "D",
+        "Keyword": "ReferencedDateTime",
+        "VR": "DT",
+        "VM": "1-n"
+    },
+    "(0400,0402)": {
+        "Tag": "(0400,0402)",
+        "Name": "Referenced Digital Signature Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferencedDigitalSignatureSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(300A,0083)": {
+        "Tag": "(300A,0083)",
+        "Name": "Referenced Dose Reference UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedDoseReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,006F)": {
+        "Tag": "(3010,006F)",
+        "Name": "Referenced Dosimetric Objective UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedDosimetricObjectiveUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,0031)": {
+        "Tag": "(3010,0031)",
+        "Name": "Referenced Fiducials UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedFiducialsUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3006,0024)": {
+        "Tag": "(3006,0024)",
+        "Name": "Referenced Frame of Reference UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedFrameOfReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,4023)": {
+        "Tag": "(0040,4023)",
+        "Name": "Referenced General Purpose Scheduled Procedure Step Transaction UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedGeneralPurposeScheduledProcedureStepTransactionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,1140)": {
+        "Tag": "(0008,1140)",
+        "Name": "Referenced Image Sequence",
+        "BasicProf": "X/Z/U*",
+        "Keyword": "ReferencedImageSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A172)": {
+        "Tag": "(0040,A172)",
+        "Name": "Referenced Observation UID (Trial)",
+        "BasicProf": "U",
+        "Keyword": "ReferencedObservationUIDTrial",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0038,0004)": {
+        "Tag": "(0038,0004)",
+        "Name": "Referenced Patient Alias Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferencedPatientAliasSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,1100)": {
+        "Tag": "(0010,1100)",
+        "Name": "Referenced Patient Photo Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferencedPatientPhotoSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1120)": {
+        "Tag": "(0008,1120)",
+        "Name": "Referenced Patient Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferencedPatientSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1111)": {
+        "Tag": "(0008,1111)",
+        "Name": "Referenced Performed Procedure Step Sequence",
+        "BasicProf": "X/Z/D",
+        "Keyword": "ReferencedPerformedProcedureStepSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0400,0403)": {
+        "Tag": "(0400,0403)",
+        "Name": "Referenced SOP Instance MAC Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferencedSOPInstanceMACSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0008,1155)": {
+        "Tag": "(0008,1155)",
+        "Name": "Referenced SOP Instance UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedSOPInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0004,1511)": {
+        "Tag": "(0004,1511)",
+        "Name": "Referenced SOP Instance UID in File",
+        "BasicProf": "U",
+        "Keyword": "ReferencedSOPInstanceUIDInFile",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,1110)": {
+        "Tag": "(0008,1110)",
+        "Name": "Referenced Study Sequence",
+        "BasicProf": "X/Z",
+        "Keyword": "ReferencedStudySequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(300A,0785)": {
+        "Tag": "(300A,0785)",
+        "Name": "Referenced Treatment Position Group UID",
+        "BasicProf": "U",
+        "Keyword": "ReferencedTreatmentPositionGroupUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,0092)": {
+        "Tag": "(0008,0092)",
+        "Name": "Referring Physician's Address",
+        "BasicProf": "X",
+        "Keyword": "ReferringPhysicianAddress",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0008,0090)": {
+        "Tag": "(0008,0090)",
+        "Name": "Referring Physician's Name",
+        "BasicProf": "Z",
+        "Keyword": "ReferringPhysicianName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0008,0094)": {
+        "Tag": "(0008,0094)",
+        "Name": "Referring Physician's Telephone Numbers",
+        "BasicProf": "X",
+        "Keyword": "ReferringPhysicianTelephoneNumbers",
+        "VR": "SH",
+        "VM": "1-n"
+    },
+    "(0008,0096)": {
+        "Tag": "(0008,0096)",
+        "Name": "Referring Physician Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "ReferringPhysicianIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0010,2152)": {
+        "Tag": "(0010,2152)",
+        "Name": "Region of Residence",
+        "BasicProf": "X",
+        "Keyword": "RegionOfResidence",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3006,00C2)": {
+        "Tag": "(3006,00C2)",
+        "Name": "Related Frame of Reference UID",
+        "BasicProf": "U",
+        "Keyword": "RelatedFrameOfReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,0275)": {
+        "Tag": "(0040,0275)",
+        "Name": "Request Attributes Sequence",
+        "BasicProf": "X",
+        "Keyword": "RequestAttributesSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0032,1070)": {
+        "Tag": "(0032,1070)",
+        "Name": "Requested Contrast Agent",
+        "BasicProf": "X",
+        "Keyword": "RequestedContrastAgent",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,1400)": {
+        "Tag": "(0040,1400)",
+        "Name": "Requested Procedure Comments",
+        "BasicProf": "X",
+        "Keyword": "RequestedProcedureComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0032,1060)": {
+        "Tag": "(0032,1060)",
+        "Name": "Requested Procedure Description",
+        "BasicProf": "X/Z",
+        "Keyword": "RequestedProcedureDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,1001)": {
+        "Tag": "(0040,1001)",
+        "Name": "Requested Procedure ID",
+        "BasicProf": "X",
+        "Keyword": "RequestedProcedureID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,1005)": {
+        "Tag": "(0040,1005)",
+        "Name": "Requested Procedure Location",
+        "BasicProf": "X",
+        "Keyword": "RequestedProcedureLocation",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9937)": {
+        "Tag": "(0018,9937)",
+        "Name": "Requested Series Description",
+        "BasicProf": "X",
+        "Keyword": "RequestedSeriesDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0000,1001)": {
+        "Tag": "(0000,1001)",
+        "Name": "Requested SOP Instance UID",
+        "BasicProf": "U",
+        "Keyword": "RequestedSOPInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0074,1236)": {
+        "Tag": "(0074,1236)",
+        "Name": "Requesting AE",
+        "BasicProf": "X",
+        "Keyword": "RequestingAE",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0032,1032)": {
+        "Tag": "(0032,1032)",
+        "Name": "Requesting Physician",
+        "BasicProf": "X",
+        "Keyword": "RequestingPhysician",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0032,1033)": {
+        "Tag": "(0032,1033)",
+        "Name": "Requesting Service",
+        "BasicProf": "X",
+        "Keyword": "RequestingService",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9185)": {
+        "Tag": "(0018,9185)",
+        "Name": "Respiratory Motion Compensation Technique Description",
+        "BasicProf": "X",
+        "Keyword": "RespiratoryMotionCompensationTechniqueDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0010,2299)": {
+        "Tag": "(0010,2299)",
+        "Name": "Responsible Organization",
+        "BasicProf": "X",
+        "Keyword": "ResponsibleOrganization",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,2297)": {
+        "Tag": "(0010,2297)",
+        "Name": "Responsible Person",
+        "BasicProf": "X",
+        "Keyword": "ResponsiblePerson",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(4008,4000)": {
+        "Tag": "(4008,4000)",
+        "Name": "Results Comments",
+        "BasicProf": "X",
+        "Keyword": "ResultsComments",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(4008,0118)": {
+        "Tag": "(4008,0118)",
+        "Name": "Results Distribution List Sequence",
+        "BasicProf": "X",
+        "Keyword": "ResultsDistributionListSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(4008,0040)": {
+        "Tag": "(4008,0040)",
+        "Name": "Results ID",
+        "BasicProf": "X",
+        "Keyword": "ResultsID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(4008,0042)": {
+        "Tag": "(4008,0042)",
+        "Name": "Results ID Issuer",
+        "BasicProf": "X",
+        "Keyword": "ResultsIDIssuer",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0008,0054)": {
+        "Tag": "(0008,0054)",
+        "Name": "Retrieve AE Title",
+        "BasicProf": "X",
+        "Keyword": "RetrieveAETitle",
+        "VR": "AE",
+        "VM": "1-n"
+    },
+    "(300E,0004)": {
+        "Tag": "(300E,0004)",
+        "Name": "Review Date",
+        "BasicProf": "Z",
+        "Keyword": "ReviewDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(300E,0008)": {
+        "Tag": "(300E,0008)",
+        "Name": "Reviewer Name",
+        "BasicProf": "X/Z",
+        "Keyword": "ReviewerName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(300E,0005)": {
+        "Tag": "(300E,0005)",
+        "Name": "Review Time",
+        "BasicProf": "Z",
+        "Keyword": "ReviewTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(3006,0028)": {
+        "Tag": "(3006,0028)",
+        "Name": "ROI Description",
+        "BasicProf": "X",
+        "Keyword": "ROIDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3006,0038)": {
+        "Tag": "(3006,0038)",
+        "Name": "ROI Generation Description",
+        "BasicProf": "X",
+        "Keyword": "ROIGenerationDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3006,00A6)": {
+        "Tag": "(3006,00A6)",
+        "Name": "ROI Interpreter",
+        "BasicProf": "Z",
+        "Keyword": "ROIInterpreter",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(3006,0026)": {
+        "Tag": "(3006,0026)",
+        "Name": "ROI Name",
+        "BasicProf": "Z",
+        "Keyword": "ROIName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3006,0088)": {
+        "Tag": "(3006,0088)",
+        "Name": "ROI Observation Description",
+        "BasicProf": "X",
+        "Keyword": "ROIObservationDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3006,0085)": {
+        "Tag": "(3006,0085)",
+        "Name": "ROI Observation Label",
+        "BasicProf": "X",
+        "Keyword": "ROIObservationLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(300A,0615)": {
+        "Tag": "(300A,0615)",
+        "Name": "RT Accessory Device Slot ID",
+        "BasicProf": "Z",
+        "Keyword": "RTAccessoryDeviceSlotID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0611)": {
+        "Tag": "(300A,0611)",
+        "Name": "RT Accessory Holder Slot ID",
+        "BasicProf": "Z",
+        "Keyword": "RTAccessoryHolderSlotID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,005A)": {
+        "Tag": "(3010,005A)",
+        "Name": "RT Physician Intent Narrative",
+        "BasicProf": "Z",
+        "Keyword": "RTPhysicianIntentNarrative",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(300A,0006)": {
+        "Tag": "(300A,0006)",
+        "Name": "RT Plan Date",
+        "BasicProf": "X/D",
+        "Keyword": "RTPlanDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(300A,0004)": {
+        "Tag": "(300A,0004)",
+        "Name": "RT Plan Description",
+        "BasicProf": "X",
+        "Keyword": "RTPlanDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300A,0002)": {
+        "Tag": "(300A,0002)",
+        "Name": "RT Plan Label",
+        "BasicProf": "D",
+        "Keyword": "RTPlanLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(300A,0003)": {
+        "Tag": "(300A,0003)",
+        "Name": "RT Plan Name",
+        "BasicProf": "X",
+        "Keyword": "RTPlanName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0007)": {
+        "Tag": "(300A,0007)",
+        "Name": "RT Plan Time",
+        "BasicProf": "X/D",
+        "Keyword": "RTPlanTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(3010,0054)": {
+        "Tag": "(3010,0054)",
+        "Name": "RT Prescription Label",
+        "BasicProf": "D",
+        "Keyword": "RTPrescriptionLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,062A)": {
+        "Tag": "(300A,062A)",
+        "Name": "RT Tolerance Set Label",
+        "BasicProf": "D",
+        "Keyword": "RTToleranceSetLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,0056)": {
+        "Tag": "(3010,0056)",
+        "Name": "RT Treatment Approach Label",
+        "BasicProf": "X/D",
+        "Keyword": "RTTreatmentApproachLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3010,003B)": {
+        "Tag": "(3010,003B)",
+        "Name": "RT Treatment Phase UID",
+        "BasicProf": "U",
+        "Keyword": "RTTreatmentPhaseUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3008,0162)": {
+        "Tag": "(3008,0162)",
+        "Name": "Safe Position Exit Date",
+        "BasicProf": "D",
+        "Keyword": "SafePositionExitDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(3008,0164)": {
+        "Tag": "(3008,0164)",
+        "Name": "Safe Position Exit Time",
+        "BasicProf": "D",
+        "Keyword": "SafePositionExitTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(3008,0166)": {
+        "Tag": "(3008,0166)",
+        "Name": "Safe Position Return Date",
+        "BasicProf": "D",
+        "Keyword": "SafePositionReturnDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(3008,0168)": {
+        "Tag": "(3008,0168)",
+        "Name": "Safe Position Return Time",
+        "BasicProf": "D",
+        "Keyword": "SafePositionReturnTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0038,001A)": {
+        "Tag": "(0038,001A)",
+        "Name": "Scheduled Admission Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledAdmissionDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0038,001B)": {
+        "Tag": "(0038,001B)",
+        "Name": "Scheduled Admission Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledAdmissionTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0038,001C)": {
+        "Tag": "(0038,001C)",
+        "Name": "Scheduled Discharge Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledDischargeDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0038,001D)": {
+        "Tag": "(0038,001D)",
+        "Name": "Scheduled Discharge Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledDischargeTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,4034)": {
+        "Tag": "(0040,4034)",
+        "Name": "Scheduled Human Performers Sequence",
+        "BasicProf": "X",
+        "Keyword": "ScheduledHumanPerformersSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0038,001E)": {
+        "Tag": "(0038,001E)",
+        "Name": "Scheduled Patient Institution Residence",
+        "BasicProf": "X",
+        "Keyword": "ScheduledPatientInstitutionResidence",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0006)": {
+        "Tag": "(0040,0006)",
+        "Name": "Scheduled Performing Physician's Name",
+        "BasicProf": "X",
+        "Keyword": "ScheduledPerformingPhysicianName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,000B)": {
+        "Tag": "(0040,000B)",
+        "Name": "Scheduled Performing Physician Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "ScheduledPerformingPhysicianIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0007)": {
+        "Tag": "(0040,0007)",
+        "Name": "Scheduled Procedure Step Description",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0004)": {
+        "Tag": "(0040,0004)",
+        "Name": "Scheduled Procedure Step End Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepEndDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,0005)": {
+        "Tag": "(0040,0005)",
+        "Name": "Scheduled Procedure Step End Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepEndTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,4008)": {
+        "Tag": "(0040,4008)",
+        "Name": "Scheduled Procedure Step Expiration DateTime",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepExpirationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,0009)": {
+        "Tag": "(0040,0009)",
+        "Name": "Scheduled Procedure Step ID",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,0011)": {
+        "Tag": "(0040,0011)",
+        "Name": "Scheduled Procedure Step Location",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepLocation",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0040,4010)": {
+        "Tag": "(0040,4010)",
+        "Name": "Scheduled Procedure Step Modification DateTime",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepModificationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,0002)": {
+        "Tag": "(0040,0002)",
+        "Name": "Scheduled Procedure Step Start Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepStartDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0040,4005)": {
+        "Tag": "(0040,4005)",
+        "Name": "Scheduled Procedure Step Start DateTime",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,0003)": {
+        "Tag": "(0040,0003)",
+        "Name": "Scheduled Procedure Step Start Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledProcedureStepStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,0001)": {
+        "Tag": "(0040,0001)",
+        "Name": "Scheduled Station AE Title",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStationAETitle",
+        "VR": "AE",
+        "VM": "1-n"
+    },
+    "(0040,4027)": {
+        "Tag": "(0040,4027)",
+        "Name": "Scheduled Station Geographic Location Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStationGeographicLocationCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0010)": {
+        "Tag": "(0040,0010)",
+        "Name": "Scheduled Station Name",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStationName",
+        "VR": "SH",
+        "VM": "1-n"
+    },
+    "(0040,4025)": {
+        "Tag": "(0040,4025)",
+        "Name": "Scheduled Station Name Code Sequence",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStationNameCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0032,1020)": {
+        "Tag": "(0032,1020)",
+        "Name": "Scheduled Study Location",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyLocation",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0032,1021)": {
+        "Tag": "(0032,1021)",
+        "Name": "Scheduled Study Location AE Title",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyLocationAETitle",
+        "VR": "AE",
+        "VM": "1-n"
+    },
+    "(0032,1000)": {
+        "Tag": "(0032,1000)",
+        "Name": "Scheduled Study Start Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyStartDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,1001)": {
+        "Tag": "(0032,1001)",
+        "Name": "Scheduled Study Start Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyStartTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0032,1010)": {
+        "Tag": "(0032,1010)",
+        "Name": "Scheduled Study Stop Date",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyStopDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,1011)": {
+        "Tag": "(0032,1011)",
+        "Name": "Scheduled Study Stop Time",
+        "BasicProf": "X",
+        "Keyword": "ScheduledStudyStopTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0072,005E)": {
+        "Tag": "(0072,005E)",
+        "Name": "Selector AE Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorAEValue",
+        "VR": "AE",
+        "VM": "1-n"
+    },
+    "(0072,005F)": {
+        "Tag": "(0072,005F)",
+        "Name": "Selector AS Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorASValue",
+        "VR": "AS",
+        "VM": "1-n"
+    },
+    "(0072,0061)": {
+        "Tag": "(0072,0061)",
+        "Name": "Selector DA Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorDAValue",
+        "VR": "DA",
+        "VM": "1-n"
+    },
+    "(0072,0063)": {
+        "Tag": "(0072,0063)",
+        "Name": "Selector DT Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorDTValue",
+        "VR": "DT",
+        "VM": "1-n"
+    },
+    "(0072,0066)": {
+        "Tag": "(0072,0066)",
+        "Name": "Selector LO Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorLOValue",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(0072,0068)": {
+        "Tag": "(0072,0068)",
+        "Name": "Selector LT Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorLTValue",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0072,0065)": {
+        "Tag": "(0072,0065)",
+        "Name": "Selector OB Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorOBValue",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0072,006A)": {
+        "Tag": "(0072,006A)",
+        "Name": "Selector PN Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorPNValue",
+        "VR": "PN",
+        "VM": "1-n"
+    },
+    "(0072,006C)": {
+        "Tag": "(0072,006C)",
+        "Name": "Selector SH Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorSHValue",
+        "VR": "SH",
+        "VM": "1-n"
+    },
+    "(0072,006E)": {
+        "Tag": "(0072,006E)",
+        "Name": "Selector ST Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorSTValue",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0072,006B)": {
+        "Tag": "(0072,006B)",
+        "Name": "Selector TM Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorTMValue",
+        "VR": "TM",
+        "VM": "1-n"
+    },
+    "(0072,006D)": {
+        "Tag": "(0072,006D)",
+        "Name": "Selector UN Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorUNValue",
+        "VR": "UN",
+        "VM": "1"
+    },
+    "(0072,0071)": {
+        "Tag": "(0072,0071)",
+        "Name": "Selector UR Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorURValue",
+        "VR": "UR",
+        "VM": "1"
+    },
+    "(0072,0070)": {
+        "Tag": "(0072,0070)",
+        "Name": "Selector UT Value",
+        "BasicProf": "D",
+        "Keyword": "SelectorUTValue",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0008,0021)": {
+        "Tag": "(0008,0021)",
+        "Name": "Series Date",
+        "BasicProf": "X/D",
+        "Keyword": "SeriesDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,103E)": {
+        "Tag": "(0008,103E)",
+        "Name": "Series Description",
+        "BasicProf": "X",
+        "Keyword": "SeriesDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0020,000E)": {
+        "Tag": "(0020,000E)",
+        "Name": "Series Instance UID",
+        "BasicProf": "U",
+        "Keyword": "SeriesInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,0031)": {
+        "Tag": "(0008,0031)",
+        "Name": "Series Time",
+        "BasicProf": "X/D",
+        "Keyword": "SeriesTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0038,0062)": {
+        "Tag": "(0038,0062)",
+        "Name": "Service Episode Description",
+        "BasicProf": "X",
+        "Keyword": "ServiceEpisodeDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,0060)": {
+        "Tag": "(0038,0060)",
+        "Name": "Service Episode ID",
+        "BasicProf": "X",
+        "Keyword": "ServiceEpisodeID",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,01B2)": {
+        "Tag": "(300A,01B2)",
+        "Name": "Setup Technique Description",
+        "BasicProf": "X",
+        "Keyword": "SetupTechniqueDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(300A,01A6)": {
+        "Tag": "(300A,01A6)",
+        "Name": "Shielding Device Description",
+        "BasicProf": "X",
+        "Keyword": "ShieldingDeviceDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0040,06FA)": {
+        "Tag": "(0040,06FA)",
+        "Name": "Slide Identifier",
+        "BasicProf": "X",
+        "Keyword": "SlideIdentifier",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0010,21A0)": {
+        "Tag": "(0010,21A0)",
+        "Name": "Smoking Status",
+        "BasicProf": "X",
+        "Keyword": "SmokingStatus",
+        "VR": "CS",
+        "VM": "1"
+    },
+    "(0100,0420)": {
+        "Tag": "(0100,0420)",
+        "Name": "SOP Authorization DateTime",
+        "BasicProf": "X",
+        "Keyword": "SOPAuthorizationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0018)": {
+        "Tag": "(0008,0018)",
+        "Name": "SOP Instance UID",
+        "BasicProf": "U",
+        "Keyword": "SOPInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,0015)": {
+        "Tag": "(3010,0015)",
+        "Name": "Source Conceptual Volume UID",
+        "BasicProf": "U",
+        "Keyword": "SourceConceptualVolumeUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0018,936A)": {
+        "Tag": "(0018,936A)",
+        "Name": "Source End DateTime",
+        "BasicProf": "D",
+        "Keyword": "SourceEndDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0064,0003)": {
+        "Tag": "(0064,0003)",
+        "Name": "Source Frame of Reference UID",
+        "BasicProf": "U",
+        "Keyword": "SourceFrameOfReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0034,0005)": {
+        "Tag": "(0034,0005)",
+        "Name": "Source Identifier",
+        "BasicProf": "D",
+        "Keyword": "SourceIdentifier",
+        "VR": "OB",
+        "VM": "1"
+    },
+    "(0008,2112)": {
+        "Tag": "(0008,2112)",
+        "Name": "Source Image Sequence",
+        "BasicProf": "X/Z/U*",
+        "Keyword": "SourceImageSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(300A,0216)": {
+        "Tag": "(300A,0216)",
+        "Name": "Source Manufacturer",
+        "BasicProf": "X",
+        "Keyword": "SourceManufacturer",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0400,0564)": {
+        "Tag": "(0400,0564)",
+        "Name": "Source of Previous Values",
+        "BasicProf": "Z",
+        "Keyword": "SourceOfPreviousValues",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3008,0105)": {
+        "Tag": "(3008,0105)",
+        "Name": "Source Serial Number",
+        "BasicProf": "X/Z",
+        "Keyword": "SourceSerialNumber",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0018,9369)": {
+        "Tag": "(0018,9369)",
+        "Name": "Source Start DateTime",
+        "BasicProf": "D",
+        "Keyword": "SourceStartDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(300A,022C)": {
+        "Tag": "(300A,022C)",
+        "Name": "Source Strength Reference Date",
+        "BasicProf": "D",
+        "Keyword": "SourceStrengthReferenceDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(300A,022E)": {
+        "Tag": "(300A,022E)",
+        "Name": "Source Strength Reference Time",
+        "BasicProf": "D",
+        "Keyword": "SourceStrengthReferenceTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0038,0050)": {
+        "Tag": "(0038,0050)",
+        "Name": "Special Needs",
+        "BasicProf": "X",
+        "Keyword": "SpecialNeeds",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,050A)": {
+        "Tag": "(0040,050A)",
+        "Name": "Specimen Accession Number",
+        "BasicProf": "X",
+        "Keyword": "SpecimenAccessionNumber",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0602)": {
+        "Tag": "(0040,0602)",
+        "Name": "Specimen Detailed Description",
+        "BasicProf": "X",
+        "Keyword": "SpecimenDetailedDescription",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(0040,0551)": {
+        "Tag": "(0040,0551)",
+        "Name": "Specimen Identifier",
+        "BasicProf": "D",
+        "Keyword": "SpecimenIdentifier",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0610)": {
+        "Tag": "(0040,0610)",
+        "Name": "Specimen Preparation Sequence",
+        "BasicProf": "Z",
+        "Keyword": "SpecimenPreparationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,0600)": {
+        "Tag": "(0040,0600)",
+        "Name": "Specimen Short Description",
+        "BasicProf": "X",
+        "Keyword": "SpecimenShortDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,0554)": {
+        "Tag": "(0040,0554)",
+        "Name": "Specimen UID",
+        "BasicProf": "U",
+        "Keyword": "SpecimenUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0018,9516)": {
+        "Tag": "(0018,9516)",
+        "Name": "Start Acquisition DateTime",
+        "BasicProf": "X/D",
+        "Keyword": "StartAcquisitionDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0008,0055)": {
+        "Tag": "(0008,0055)",
+        "Name": "Station AE Title",
+        "BasicProf": "X",
+        "Keyword": "StationAETitle",
+        "VR": "AE",
+        "VM": "1"
+    },
+    "(0008,1010)": {
+        "Tag": "(0008,1010)",
+        "Name": "Station Name",
+        "BasicProf": "X/Z/D",
+        "Keyword": "StationName",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0088,0140)": {
+        "Tag": "(0088,0140)",
+        "Name": "Storage Media File-set UID",
+        "BasicProf": "U",
+        "Keyword": "StorageMediaFileSetUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3006,0008)": {
+        "Tag": "(3006,0008)",
+        "Name": "Structure Set Date",
+        "BasicProf": "Z",
+        "Keyword": "StructureSetDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(3006,0006)": {
+        "Tag": "(3006,0006)",
+        "Name": "Structure Set Description",
+        "BasicProf": "X",
+        "Keyword": "StructureSetDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(3006,0002)": {
+        "Tag": "(3006,0002)",
+        "Name": "Structure Set Label",
+        "BasicProf": "D",
+        "Keyword": "StructureSetLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(3006,0004)": {
+        "Tag": "(3006,0004)",
+        "Name": "Structure Set Name",
+        "BasicProf": "X",
+        "Keyword": "StructureSetName",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(3006,0009)": {
+        "Tag": "(3006,0009)",
+        "Name": "Structure Set Time",
+        "BasicProf": "Z",
+        "Keyword": "StructureSetTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0032,1040)": {
+        "Tag": "(0032,1040)",
+        "Name": "Study Arrival Date",
+        "BasicProf": "X",
+        "Keyword": "StudyArrivalDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,1041)": {
+        "Tag": "(0032,1041)",
+        "Name": "Study Arrival Time",
+        "BasicProf": "X",
+        "Keyword": "StudyArrivalTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0032,4000)": {
+        "Tag": "(0032,4000)",
+        "Name": "Study Comments",
+        "BasicProf": "X",
+        "Keyword": "StudyComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(0032,1050)": {
+        "Tag": "(0032,1050)",
+        "Name": "Study Completion Date",
+        "BasicProf": "X",
+        "Keyword": "StudyCompletionDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,1051)": {
+        "Tag": "(0032,1051)",
+        "Name": "Study Completion Time",
+        "BasicProf": "X",
+        "Keyword": "StudyCompletionTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0020)": {
+        "Tag": "(0008,0020)",
+        "Name": "Study Date",
+        "BasicProf": "Z",
+        "Keyword": "StudyDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0008,1030)": {
+        "Tag": "(0008,1030)",
+        "Name": "Study Description",
+        "BasicProf": "X",
+        "Keyword": "StudyDescription",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0020,0010)": {
+        "Tag": "(0020,0010)",
+        "Name": "Study ID",
+        "BasicProf": "Z",
+        "Keyword": "StudyID",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0032,0012)": {
+        "Tag": "(0032,0012)",
+        "Name": "Study ID Issuer",
+        "BasicProf": "X",
+        "Keyword": "StudyIDIssuer",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0020,000D)": {
+        "Tag": "(0020,000D)",
+        "Name": "Study Instance UID",
+        "BasicProf": "U",
+        "Keyword": "StudyInstanceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0032,0034)": {
+        "Tag": "(0032,0034)",
+        "Name": "Study Read Date",
+        "BasicProf": "X",
+        "Keyword": "StudyReadDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,0035)": {
+        "Tag": "(0032,0035)",
+        "Name": "Study Read Time",
+        "BasicProf": "X",
+        "Keyword": "StudyReadTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0030)": {
+        "Tag": "(0008,0030)",
+        "Name": "Study Time",
+        "BasicProf": "Z",
+        "Keyword": "StudyTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0032,0032)": {
+        "Tag": "(0032,0032)",
+        "Name": "Study Verified Date",
+        "BasicProf": "X",
+        "Keyword": "StudyVerifiedDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(0032,0033)": {
+        "Tag": "(0032,0033)",
+        "Name": "Study Verified Time",
+        "BasicProf": "X",
+        "Keyword": "StudyVerifiedTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0044,0010)": {
+        "Tag": "(0044,0010)",
+        "Name": "Substance Administration DateTime",
+        "BasicProf": "X",
+        "Keyword": "SubstanceAdministrationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0020,0200)": {
+        "Tag": "(0020,0200)",
+        "Name": "Synchronization Frame of Reference UID",
+        "BasicProf": "U",
+        "Keyword": "SynchronizationFrameOfReferenceUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0018,2042)": {
+        "Tag": "(0018,2042)",
+        "Name": "Target UID",
+        "BasicProf": "U",
+        "Keyword": "TargetUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,A354)": {
+        "Tag": "(0040,A354)",
+        "Name": "Telephone Number (Trial)",
+        "BasicProf": "X",
+        "Keyword": "TelephoneNumberTrial",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,DB0D)": {
+        "Tag": "(0040,DB0D)",
+        "Name": "Template Extension Creator UID",
+        "BasicProf": "U",
+        "Keyword": "TemplateExtensionCreatorUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,DB0C)": {
+        "Tag": "(0040,DB0C)",
+        "Name": "Template Extension Organization UID",
+        "BasicProf": "U",
+        "Keyword": "TemplateExtensionOrganizationUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0040,DB07)": {
+        "Tag": "(0040,DB07)",
+        "Name": "Template Local Version",
+        "BasicProf": "X",
+        "Keyword": "TemplateLocalVersion",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,DB06)": {
+        "Tag": "(0040,DB06)",
+        "Name": "Template Version",
+        "BasicProf": "X",
+        "Keyword": "TemplateVersion",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(4000,4000)": {
+        "Tag": "(4000,4000)",
+        "Name": "Text Comments",
+        "BasicProf": "X",
+        "Keyword": "TextComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(2030,0020)": {
+        "Tag": "(2030,0020)",
+        "Name": "Text String",
+        "BasicProf": "X",
+        "Keyword": "TextString",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,A122)": {
+        "Tag": "(0040,A122)",
+        "Name": "Time",
+        "BasicProf": "D",
+        "Keyword": "Time",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0040,A112)": {
+        "Tag": "(0040,A112)",
+        "Name": "Time of Document Creation or Verbal Transaction (Trial)",
+        "BasicProf": "X",
+        "Keyword": "TimeOfDocumentCreationOrVerbalTransactionTrial",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,1201)": {
+        "Tag": "(0018,1201)",
+        "Name": "Time of Last Calibration",
+        "BasicProf": "X",
+        "Keyword": "TimeOfLastCalibration",
+        "VR": "TM",
+        "VM": "1-n"
+    },
+    "(0018,700E)": {
+        "Tag": "(0018,700E)",
+        "Name": "Time of Last Detector Calibration",
+        "BasicProf": "X/D",
+        "Keyword": "TimeOfLastDetectorCalibration",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0018,1014)": {
+        "Tag": "(0018,1014)",
+        "Name": "Time of Secondary Capture",
+        "BasicProf": "X",
+        "Keyword": "TimeOfSecondaryCapture",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(0008,0201)": {
+        "Tag": "(0008,0201)",
+        "Name": "Timezone Offset From UTC",
+        "BasicProf": "X",
+        "Keyword": "TimezoneOffsetFromUTC",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(0088,0910)": {
+        "Tag": "(0088,0910)",
+        "Name": "Topic Author",
+        "BasicProf": "X",
+        "Keyword": "TopicAuthor",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0088,0912)": {
+        "Tag": "(0088,0912)",
+        "Name": "Topic Keywords",
+        "BasicProf": "X",
+        "Keyword": "TopicKeywords",
+        "VR": "LO",
+        "VM": "1-32"
+    },
+    "(0088,0906)": {
+        "Tag": "(0088,0906)",
+        "Name": "Topic Subject",
+        "BasicProf": "X",
+        "Keyword": "TopicSubject",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0088,0904)": {
+        "Tag": "(0088,0904)",
+        "Name": "Topic Title",
+        "BasicProf": "X",
+        "Keyword": "TopicTitle",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0062,0021)": {
+        "Tag": "(0062,0021)",
+        "Name": "Tracking UID",
+        "BasicProf": "U",
+        "Keyword": "TrackingUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0008,1195)": {
+        "Tag": "(0008,1195)",
+        "Name": "Transaction UID",
+        "BasicProf": "U",
+        "Keyword": "TransactionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0018,5011)": {
+        "Tag": "(0018,5011)",
+        "Name": "Transducer Identification Sequence",
+        "BasicProf": "X",
+        "Keyword": "TransducerIdentificationSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(3008,0024)": {
+        "Tag": "(3008,0024)",
+        "Name": "Treatment Control Point Date",
+        "BasicProf": "D",
+        "Keyword": "TreatmentControlPointDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(3008,0025)": {
+        "Tag": "(3008,0025)",
+        "Name": "Treatment Control Point Time",
+        "BasicProf": "D",
+        "Keyword": "TreatmentControlPointTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(3008,0250)": {
+        "Tag": "(3008,0250)",
+        "Name": "Treatment Date",
+        "BasicProf": "X/D",
+        "Keyword": "TreatmentDate",
+        "VR": "DA",
+        "VM": "1"
+    },
+    "(300A,00B2)": {
+        "Tag": "(300A,00B2)",
+        "Name": "Treatment Machine Name",
+        "BasicProf": "X/Z",
+        "Keyword": "TreatmentMachineName",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(300A,0608)": {
+        "Tag": "(300A,0608)",
+        "Name": "Treatment Position Group Label",
+        "BasicProf": "D",
+        "Keyword": "TreatmentPositionGroupLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,0609)": {
+        "Tag": "(300A,0609)",
+        "Name": "Treatment Position Group UID",
+        "BasicProf": "U",
+        "Keyword": "TreatmentPositionGroupUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(300A,0700)": {
+        "Tag": "(300A,0700)",
+        "Name": "Treatment Session UID",
+        "BasicProf": "U",
+        "Keyword": "TreatmentSessionUID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(3010,0077)": {
+        "Tag": "(3010,0077)",
+        "Name": "Treatment Site",
+        "BasicProf": "X/D",
+        "Keyword": "TreatmentSite",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(300A,000B)": {
+        "Tag": "(300A,000B)",
+        "Name": "Treatment Sites",
+        "BasicProf": "X",
+        "Keyword": "TreatmentSites",
+        "VR": "LO",
+        "VM": "1-n"
+    },
+    "(3010,007A)": {
+        "Tag": "(3010,007A)",
+        "Name": "Treatment Technique Notes",
+        "BasicProf": "Z",
+        "Keyword": "TreatmentTechniqueNotes",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(3008,0251)": {
+        "Tag": "(3008,0251)",
+        "Name": "Treatment Time",
+        "BasicProf": "X/D",
+        "Keyword": "TreatmentTime",
+        "VR": "TM",
+        "VM": "1"
+    },
+    "(300A,0736)": {
+        "Tag": "(300A,0736)",
+        "Name": "Treatment Tolerance Violation DateTime",
+        "BasicProf": "D",
+        "Keyword": "TreatmentToleranceViolationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(300A,0734)": {
+        "Tag": "(300A,0734)",
+        "Name": "Treatment Tolerance Violation Description",
+        "BasicProf": "D",
+        "Keyword": "TreatmentToleranceViolationDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0018,100A)": {
+        "Tag": "(0018,100A)",
+        "Name": "UDI Sequence",
+        "BasicProf": "X",
+        "Keyword": "UDISequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A124)": {
+        "Tag": "(0040,A124)",
+        "Name": "UID",
+        "BasicProf": "U",
+        "Keyword": "UID",
+        "VR": "UI",
+        "VM": "1"
+    },
+    "(0018,1009)": {
+        "Tag": "(0018,1009)",
+        "Name": "Unique Device Identifier",
+        "BasicProf": "X",
+        "Keyword": "UniqueDeviceIdentifier",
+        "VR": "UT",
+        "VM": "1"
+    },
+    "(3010,0033)": {
+        "Tag": "(3010,0033)",
+        "Name": "User Content Label",
+        "BasicProf": "D",
+        "Keyword": "UserContentLabel",
+        "VR": "SH",
+        "VM": "1"
+    },
+    "(3010,0034)": {
+        "Tag": "(3010,0034)",
+        "Name": "User Content Long Label",
+        "BasicProf": "D",
+        "Keyword": "UserContentLongLabel",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0040,A352)": {
+        "Tag": "(0040,A352)",
+        "Name": "Verbal Source (Trial)",
+        "BasicProf": "X",
+        "Keyword": "VerbalSourceTrial",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,A358)": {
+        "Tag": "(0040,A358)",
+        "Name": "Verbal Source Identifier Code Sequence (Trial)",
+        "BasicProf": "X",
+        "Keyword": "VerbalSourceIdentifierCodeSequenceTrial",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A030)": {
+        "Tag": "(0040,A030)",
+        "Name": "Verification DateTime",
+        "BasicProf": "D",
+        "Keyword": "VerificationDateTime",
+        "VR": "DT",
+        "VM": "1"
+    },
+    "(0040,A088)": {
+        "Tag": "(0040,A088)",
+        "Name": "Verifying Observer Identification Code Sequence",
+        "BasicProf": "Z",
+        "Keyword": "VerifyingObserverIdentificationCodeSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A075)": {
+        "Tag": "(0040,A075)",
+        "Name": "Verifying Observer Name",
+        "BasicProf": "D",
+        "Keyword": "VerifyingObserverName",
+        "VR": "PN",
+        "VM": "1"
+    },
+    "(0040,A073)": {
+        "Tag": "(0040,A073)",
+        "Name": "Verifying Observer Sequence",
+        "BasicProf": "D",
+        "Keyword": "VerifyingObserverSequence",
+        "VR": "SQ",
+        "VM": "1"
+    },
+    "(0040,A027)": {
+        "Tag": "(0040,A027)",
+        "Name": "Verifying Organization",
+        "BasicProf": "D",
+        "Keyword": "VerifyingOrganization",
+        "VR": "LO",
+        "VM": "1"
+    },
+    "(0038,4000)": {
+        "Tag": "(0038,4000)",
+        "Name": "Visit Comments",
+        "BasicProf": "X",
+        "Keyword": "VisitComments",
+        "VR": "LT",
+        "VM": "1"
+    },
+    "(003A,0329)": {
+        "Tag": "(003A,0329)",
+        "Name": "Waveform Filter Description",
+        "BasicProf": "X",
+        "Keyword": "WaveformFilterDescription",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0018,9371)": {
+        "Tag": "(0018,9371)",
+        "Name": "X-Ray Detector ID",
+        "BasicProf": "D",
+        "Keyword": "XRayDetectorID",
+        "VR": "UC",
+        "VM": "1"
+    },
+    "(0018,9373)": {
+        "Tag": "(0018,9373)",
+        "Name": "X-Ray Detector Label",
+        "BasicProf": "X",
+        "Keyword": "XRayDetectorLabel",
+        "VR": "ST",
+        "VM": "1"
+    },
+    "(0018,9367)": {
+        "Tag": "(0018,9367)",
+        "Name": "X-Ray Source ID",
+        "BasicProf": "D",
+        "Keyword": "XRaySourceID",
+        "VR": "UC",
+        "VM": "1"
+    }
+}
