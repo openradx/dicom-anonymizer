@@ -20,7 +20,11 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "ES2015",
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
+  "include": ["type_libs"],
   "exclude": ["node_modules"]
 }

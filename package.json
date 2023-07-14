@@ -41,6 +41,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
+    "@ngneat/falso": "^6.4.0",
     "dcmjs": "^0.29.6",
     "get-random-values": "^2.1.0"
   }

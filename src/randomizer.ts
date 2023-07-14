@@ -1,5 +1,5 @@
-import * as crypto from "crypto";
-import getRandomValues from 'get-random-values'; 
+import * as crypto from 'crypto';
+import getRandomValues from 'get-random-values'; // use only in node env
 
 export class Randomizer {
   private seed: string;
@@ -15,7 +15,7 @@ export class Randomizer {
 /* for Browserenvironment
   private generateRandomBytes(length: number): Uint8Array {
     const randomValues = new Uint8Array(length);
-    window.crypto.getRandomValues(randomValues);
+    
     return randomValues;
   }
   */
@@ -24,6 +24,7 @@ export class Randomizer {
   private calculateMD5Digest(data: Uint8Array): Uint8Array {
     const hash = crypto.createHash('md5');
     hash.update(data);
+    
     return hash.digest();
   }
   
@@ -33,10 +34,9 @@ export class Randomizer {
     for (const byte of hash) {
       result *= 0x100;
       result += byte;
-      
     }
     let res = BigInt(result);
-    console.log(res);
+    
     return res;
   }
 
@@ -44,6 +44,7 @@ export class Randomizer {
   private generateRandomSeed(): string {
     const randomValues = new Uint8Array(20);
     getRandomValues(randomValues);
+    // window.crypto.getRandomValues(randomValues); -> use in browser env
     const seed = Array.from(randomValues, (byte) => byte.toString(16).padStart(2, '0')).join('');
     
     return seed
@@ -70,7 +71,7 @@ export class Randomizer {
       // console.log(BigInt(Math.floor(Number(big_Int / s))));
       big_Int = big_Int / s;
     }
+    
     return result;
   }
 }
-
