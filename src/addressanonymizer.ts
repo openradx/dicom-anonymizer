@@ -50,9 +50,9 @@ export class AddressAnonymizer {
     }
 
     get_legal_address = (original_value: string): string => {
-        let street = this.get_street_address(original_value);
-        let street_number = this.get_street_number(original_value);
-        let city = this.get_region(original_value);
+        const street = this.get_street_address(original_value);
+        const street_number = this.get_street_number(original_value);
+        const city = this.get_region(original_value);
         
         return `${street_number} ${street}, ${city}`
     }
@@ -61,7 +61,7 @@ export class AddressAnonymizer {
         let street_number_index: number;
         [street_number_index] = this.randomizer.getIntsFromRanges(
             original_value, 1000)
-        var street_number: number = street_number_index + 1
+        let street_number: number = street_number_index + 1
         
         return `${street_number}`
     }
