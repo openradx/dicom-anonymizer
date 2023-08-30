@@ -1,4 +1,3 @@
-
 import * as dcmjs from 'dcmjs';
 
 type returnarg =  {

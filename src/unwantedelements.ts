@@ -11,7 +11,7 @@ export class UnwantedElementStripper {
   }
 
   anonymize = (dataset: any, data_tag: string): boolean => {
-    if (data_tag in this.tags){
+    if (this.tags.includes(data_tag)){
       delete dataset[data_tag]
       return true
     }
