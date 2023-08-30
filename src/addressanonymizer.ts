@@ -13,7 +13,7 @@ export class AddressAnonymizer {
     value_factories: { [key: string]: Function};
     
     
-    constructor(Randomizer: any){
+    constructor(Randomizer: Randomizer){
         this.randomizer = Randomizer;
         this.lists = new lists();
 

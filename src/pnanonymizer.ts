@@ -1,11 +1,12 @@
 import { lists } from "./lists";
+import { Randomizer } from "./randomizer";
 
 export class PNAnonymizer {
 
-  private randomizer: any;
+  private randomizer: Randomizer;
   lists: lists;
 
-  constructor(Randomizer: any){
+  constructor(Randomizer: Randomizer){
     this.randomizer = Randomizer;
     this.lists = new lists();
   }

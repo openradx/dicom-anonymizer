@@ -9,19 +9,18 @@ export class IDAnonymizer {
     private id_suffix: string | undefined;
     private id_prefix: string | undefined;
     private issuer_tag: string;
-    private id_tags: string[];
+    //private tag_ids: string[];
     private alphabet: string;
     private totalAffixesLength: number;
     private indicesForRandomizer: number[];
 
-    constructor(Randomizer: Randomizer, id_prefix?: string | undefined, id_suffix?: string | undefined, ...keywords: string[]) {
+    constructor(Randomizer: Randomizer, keywords: string[],  id_prefix?: string | undefined, id_suffix?: string | undefined) {
         this.keywords = keywords;
         this.randomizer = Randomizer;
         this.id_prefix = id_prefix;
         this.id_suffix = id_suffix;
-
         this.issuer_tag = dcmjs.data.DicomMetaDictionary.nameMap["IssuerOfPatientID"].tag
-        this.id_tags =  this.keywords.map(tag_name => dcmjs.data.DicomMetaDictionary.nameMap[tag_name].tag);
+        //this.tag_ids =  this.keywords.map(tag_name => dcmjs.data.DicomMetaDictionary.unpunctuateTag(dcmjs.data.DicomMetaDictionary.nameMap[tag_name].tag));
         this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
         if (this.id_prefix && this.id_suffix){
@@ -42,7 +41,7 @@ export class IDAnonymizer {
     }
 
     anonymize = (dataset: any, data_tag: string): boolean => {
-        if (data_tag in this.keywords){
+        if (this.keywords.includes(data_tag)){
             this.replace_id(dataset, data_tag)
             return true
         }
