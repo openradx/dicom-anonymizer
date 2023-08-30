@@ -7,6 +7,8 @@ import { UIAnonymizer } from './uianonymizer';
 import { AddressAnonymizer } from './addressanonymizer';
 import { IDAnonymizer } from './idanonymizer';
 import { DateTimeAnonymizer } from './datetimeanonymizer';
+import { Protector } from './protector';
+import { InstitutionAnonymizer } from './institutionanonymizer';
 
 export class Anonymizer {
   /**
@@ -24,6 +26,7 @@ export class Anonymizer {
 
   
   randomizer: Randomizer;
+  address_anonymizer: AddressAnonymizer;
   element_handlers: any[];
   private date_offset_hours: number
   
@@ -39,6 +42,7 @@ export class Anonymizer {
       this.randomizer.toInt("date_offset") % (BigInt(maximum_offset_hours) - BigInt(minimum_offset_hours)) + BigInt(minimum_offset_hours)
     ))
     //this.data = data;
+    this.address_anonymizer = new AddressAnonymizer(this.randomizer);
     this.element_handlers = 
         [new UnwantedElementStripper(["00101081",//"BranchOfService",
                                       "00102180",//"Occupation",
@@ -51,24 +55,27 @@ export class Anonymizer {
                                       "00101100",//"ReferencedPatientPhotoSequence",
                                       "00102299",//"ResponsibleOrganization"
                                       ]).anonymize,
-        new IDAnonymizer(this.randomizer, undefined, undefined,
-                                      "AccessionNumber",
-                                      "OtherPatientIDs",
-                                      "FillerOrderNumberImagingServiceRequest",
-                                      //"FillerOrderNumberImagingServiceRequestRetired", Retired
-                                      //"FillerOrderNumberProcedure", Retired
-                                      "PatientID",
-                                      "PerformedProcedureStepID",
-                                      "PlacerOrderNumberImagingServiceRequest",
-                                      //"PlacerOrderNumberImagingServiceRequestRetired",Retired
-                                      // "PlacerOrderNumberProcedure", Retired 
-                                      "RequestedProcedureID",
-                                      "ScheduledProcedureStepID",
-                                      "StationName",
-                                      "StudyID").anonymize,                              
         new UIAnonymizer(this.randomizer).anonymize,
         new PNAnonymizer(this.randomizer).anonymize,
-        new AddressAnonymizer(this.randomizer).anonymize,
+        new IDAnonymizer(this.randomizer,
+                                     ["00080050",//"AccessionNumber",
+                                      "00101000",//"OtherPatientIDs",
+                                      "00402017",//"FillerOrderNumberImagingServiceRequest",
+                                      //"FillerOrderNumberImagingServiceRequestRetired", Retired
+                                      //"FillerOrderNumberProcedure", Retired
+                                      "00100020",//"PatientID",
+                                      "00400253",//"PerformedProcedureStepID",
+                                      "00402016",//"PlacerOrderNumberImagingServiceRequest",
+                                      //"PlacerOrderNumberImagingServiceRequestRetired",Retired
+                                      // "PlacerOrderNumberProcedure", Retired 
+                                      "00401001",//"RequestedProcedureID",
+                                      "00400009",//"ScheduledProcedureStepID",
+                                      "00081010",//"StationName",
+                                      "00200010",//"StudyID"
+                                      ], 
+                                      undefined, undefined).anonymize,                              
+        this.address_anonymizer.anonymize,
+        new InstitutionAnonymizer(this.address_anonymizer).anonymize,
         new FixedValueAnonymizer("00100020", this.patientID).anonymize,
         new DateTimeAnonymizer(this.date_offset_hours).anonymize
     ];
