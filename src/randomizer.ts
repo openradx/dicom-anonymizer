@@ -35,7 +35,7 @@ export class Randomizer {
       result *= 0x100;
       result += byte;
     }
-    let res = BigInt(result);
+    const res = BigInt(result);
     
     return res;
   }
@@ -55,7 +55,7 @@ export class Randomizer {
     const encoder = new TextEncoder();
     const encoded = encoder.encode(message);  
     const hashed = this.calculateMD5Digest(encoded);
-    let result = this.calculateResult(hashed);
+    const result = this.calculateResult(hashed);
        
     return result;
   }
@@ -64,8 +64,8 @@ export class Randomizer {
   public getIntsFromRanges(originalValue: any, ...suprema: number[]): number[] {
     let big_Int = this.toInt(originalValue);
     const result: number[] = [];
-    for (let x of suprema) {
-      let s = BigInt(x)
+    for (const x of suprema) {
+      const s = BigInt(x)
       result.push(Number(big_Int % s));
       // console.log(s, big_Int, big_Int%s);
       // console.log(BigInt(Math.floor(Number(big_Int / s))));

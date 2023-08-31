@@ -37,13 +37,13 @@ export class DateTimeAnonymizer{
     anonymize_date_and_time = (dataSet: any, dataTag: string): void => {
         
         const dates = dataSet[dataTag].Value 
-        var result: returnarg;
+        let result: returnarg;
         result = this.checkTag(dataSet, dataTag)
 
-        var times = result.value;
+        let times = result.value;
 
-        var newDates: string[] = []
-        var newTimes: string[] = []
+        let newDates: string[] = []
+        let newTimes: string[] = []
 
         for (const [date, time] of this.zipLongest("", dates, times)) {
             const newDateTime = this.shiftDateTime(date + time)
@@ -63,7 +63,7 @@ export class DateTimeAnonymizer{
         const dateTimes = dataSet[dataTag].Value
         const newDateTimes: string[] = []
 
-        for (let dateTimeValue of dateTimes) {
+        for (const dateTimeValue of dateTimes) {
             const newDateTimeString = this.shiftDateTime(dateTimeValue)
             newDateTimes.push(newDateTimeString);
         }

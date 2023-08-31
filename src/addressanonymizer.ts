@@ -29,8 +29,8 @@ export class AddressAnonymizer {
     }
 
     anonymize = (dataset: any, data_tag: string): boolean => {
-        const value_factory = this.value_factories[data_tag]
-        if (typeof value_factory !== 'function' || dataset[data_tag].Value[0] == undefined) {
+        const value_factory: Function = this.value_factories[data_tag]
+        if (value_factory == undefined) {
             return false
         }
                 
@@ -42,7 +42,7 @@ export class AddressAnonymizer {
             return true
         }
         else{
-            const original_value = dataset[data_tag].Value[0]
+            const original_value: string = dataset[data_tag].Value[0]
             dataset[data_tag].Value[0] = value_factory(original_value)
             
             return true
@@ -50,40 +50,36 @@ export class AddressAnonymizer {
     }
 
     get_legal_address = (original_value: string): string => {
-        const street = this.get_street_address(original_value);
-        const street_number = this.get_street_number(original_value);
-        const city = this.get_region(original_value);
+        const street: string = this.get_street_address(original_value);
+        const street_number: string = this.get_street_number(original_value);
+        const city: string = this.get_region(original_value);
         
         return `${street_number} ${street}, ${city}`
     }
 
     get_street_number = (original_value: string): string =>{
-        let street_number_index: number;
-        [street_number_index] = this.randomizer.getIntsFromRanges(
+        const [street_number_index]: number[] = this.randomizer.getIntsFromRanges(
             original_value, 1000)
-        let street_number: number = street_number_index + 1
+        const street_number: number = street_number_index + 1
         
         return `${street_number}`
     }
 
     get_street_address = (original_value: string): string =>{
-        let street_index: number;
-        [street_index] = this.randomizer.getIntsFromRanges(
+        const [street_index]: number[] = this.randomizer.getIntsFromRanges(
             original_value, this.lists.streets.length)
 
         return `${this.lists.streets[street_index]}`
     }
 
     get_region = (original_value: string): string => {
-        let city_index: number;
-        [city_index] = this.randomizer.getIntsFromRanges(original_value, this.lists.cities.length)
+        const [city_index]: number[] = this.randomizer.getIntsFromRanges(original_value, this.lists.cities.length)
         
         return `${this.lists.cities[city_index]}`
     }
 
     get_country = (original_value: string):string => {
-        let country_index: number;
-        [country_index] = this.randomizer.getIntsFromRanges(original_value, this.lists.countries.length)
+        const [country_index]: number[] = this.randomizer.getIntsFromRanges(original_value, this.lists.countries.length)
         
         return `${this.lists.countries[country_index]}`
     }

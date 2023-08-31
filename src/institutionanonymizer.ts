@@ -25,7 +25,7 @@ export class InstitutionAnonymizer {
     }
 
     anonymize = (dataset: any, data_tag: string): boolean => {
-        const value_factory = this.value_factories[data_tag];
+        const value_factory: Function = this.value_factories[data_tag];
         if (value_factory == undefined){
             return false
         }
@@ -38,7 +38,7 @@ export class InstitutionAnonymizer {
             return true
         }
         else{
-            const original_value = dataset[data_tag].Value[0]
+            const original_value: string = dataset[data_tag].Value[0]
             dataset[data_tag].Value[0] = value_factory(original_value)
             
             return true
@@ -46,15 +46,15 @@ export class InstitutionAnonymizer {
     }
 
     anonymize_institution_name= (original_value: string): string => {
-        const region = this.address_anonymizer.get_region(original_value);
-        const street_address = this.address_anonymizer.get_street_address(original_value);
+        const region: string = this.address_anonymizer.get_region(original_value);
+        const street_address: string = this.address_anonymizer.get_street_address(original_value);
 
         return `${region}'S ${street_address} CLINIC`
     }
 
     anonymize_institution_address= (original_value: string): string => {
-        const full_address = this.address_anonymizer.get_legal_address(original_value);
-        const country = this.address_anonymizer.get_country(original_value);
+        const full_address: string = this.address_anonymizer.get_legal_address(original_value);
+        const country: string = this.address_anonymizer.get_country(original_value);
 
         return `${full_address}, ${country}`
     }

@@ -1,6 +1,3 @@
-import {DicomDict, DicomMessage, Tag, DicomMetaDictionary} from 'dcmjs';
-
-
 export class UnwantedElementStripper {
   
   private tags: string[];

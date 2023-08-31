@@ -33,7 +33,7 @@ export class PNAnonymizer {
   }
 
   new_pn(original_value: string, sex?: string | undefined,){
-    var first_names: string[];
+    let first_names: string[];
     if (sex == "F"){
       first_names = this.lists.female_first_names;}
     else if (sex == "M"){
