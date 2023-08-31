@@ -12,7 +12,7 @@ export class UIAnonymizer {
   }
 
   anonymize = (dataset: any, data_tag: string): boolean => {
-    let tag = dcmjs.data.DicomMetaDictionary.punctuateTag(data_tag)
+    const tag = dcmjs.data.DicomMetaDictionary.punctuateTag(data_tag)
     
     try{
       console.log(dcmjs.data.DicomMetaDictionary.dictionary[tag].name)
