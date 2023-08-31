@@ -4,8 +4,8 @@ import getRandomValues from 'get-random-values'; // use only in node env
 export class Randomizer {
   private seed: string;
 
-  constructor(seed?: string | undefined ) {
-    if (seed != null || seed === undefined) {
+  constructor(seed: string = "" ) {
+    if (seed == "") {
       this.seed = this.generateRandomSeed();
     } else {
       this.seed = seed;
@@ -67,8 +67,6 @@ export class Randomizer {
     for (const x of suprema) {
       const s = BigInt(x)
       result.push(Number(big_Int % s));
-      // console.log(s, big_Int, big_Int%s);
-      // console.log(BigInt(Math.floor(Number(big_Int / s))));
       big_Int = big_Int / s;
     }
     

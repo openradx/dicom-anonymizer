@@ -18,33 +18,27 @@ export class Anonymizer {
     reuse an Anonymizer.
     
   */
+ 
   private patientID: string;
-  
-  private id_prefix: string | undefined;
-  private id_suffix: string | undefined;
-  private seed: string | undefined;
-
-  
+  private date_offset_hours: number  
   randomizer: Randomizer;
   address_anonymizer: AddressAnonymizer;
   element_handlers: any[];
-  private date_offset_hours: number
   
-  constructor( patientID: string, id_prefix?: string | undefined, id_suffix?: string | undefined, seed?: string | undefined) {
+  
+  constructor( patientID: string, protected_tags?: string[], id_prefix?: string, id_suffix?: string, seed?: string) {
     const minimum_offset_hours: number = 62 * 24;
     const maximum_offset_hours: number = 730 * 24;
     this.patientID = patientID;
-    this.id_prefix = id_prefix;
-    this.id_suffix = id_suffix;
-    this.seed = seed;
-    this.randomizer = new Randomizer(this.seed)
+    this.randomizer = new Randomizer(seed)
     this.date_offset_hours = Number(-(
       this.randomizer.toInt("date_offset") % (BigInt(maximum_offset_hours) - BigInt(minimum_offset_hours)) + BigInt(minimum_offset_hours)
     ))
     //this.data = data;
     this.address_anonymizer = new AddressAnonymizer(this.randomizer);
     this.element_handlers = 
-        [new UnwantedElementStripper(["00101081",//"BranchOfService",
+        [new Protector(protected_tags).protect,
+         new UnwantedElementStripper(["00101081",//"BranchOfService",
                                       "00102180",//"Occupation",
                                       "00101090",//"MedicalRecordLocator",
                                       "00101080",//"MilitaryRank",
@@ -73,7 +67,7 @@ export class Anonymizer {
                                       "00081010",//"StationName",
                                       "00200010",//"StudyID"
                                       ], 
-                                      undefined, undefined).anonymize,                              
+                                      id_prefix, id_suffix).anonymize,                              
         this.address_anonymizer.anonymize,
         new InstitutionAnonymizer(this.address_anonymizer).anonymize,
         new FixedValueAnonymizer("00100020", this.patientID).anonymize,

@@ -6,15 +6,15 @@ export class IDAnonymizer {
   
     private keywords: string[];
     private randomizer: Randomizer;
-    private id_suffix: string | undefined;
-    private id_prefix: string | undefined;
+    private id_suffix: string;
+    private id_prefix: string;
     private issuer_tag: string;
     //private tag_ids: string[];
     private alphabet: string;
     private totalAffixesLength: number;
     private indicesForRandomizer: number[];
 
-    constructor(Randomizer: Randomizer, keywords: string[],  id_prefix?: string | undefined, id_suffix?: string | undefined) {
+    constructor(Randomizer: Randomizer, keywords: string[],  id_prefix: string = "", id_suffix: string = "") {
         this.keywords = keywords;
         this.randomizer = Randomizer;
         this.id_prefix = id_prefix;
@@ -22,21 +22,7 @@ export class IDAnonymizer {
         this.issuer_tag = dcmjs.data.DicomMetaDictionary.nameMap["IssuerOfPatientID"].tag
         //this.tag_ids =  this.keywords.map(tag_name => dcmjs.data.DicomMetaDictionary.unpunctuateTag(dcmjs.data.DicomMetaDictionary.nameMap[tag_name].tag));
         this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-        if (this.id_prefix && this.id_suffix){
-            this.totalAffixesLength = this.id_prefix.length + this.id_suffix.length
-        } else if (this.id_prefix && !this.id_suffix){
-            this.id_suffix = ""
-            this.totalAffixesLength = this.id_prefix.length
-
-        } else if (!this.id_prefix && this.id_suffix){
-            this.id_prefix = ""
-            this.totalAffixesLength = this.id_suffix.length
-        }
-        else {
-            this.totalAffixesLength = 0
-        }
-        
+        this.totalAffixesLength = this.id_prefix.length + this.id_suffix.length
         this.indicesForRandomizer = new Array<number>(12 - this.totalAffixesLength).fill(this.alphabet.length)
     }
 
