@@ -10,7 +10,7 @@ export class AddressAnonymizer {
     address_tag: string = dcmjs.data.DicomMetaDictionary.nameMap["PatientAddress"].tag;
     region_tag: string = dcmjs.data.DicomMetaDictionary.nameMap["RegionOfResidence"].tag;
     country_tag: string = dcmjs.data.DicomMetaDictionary.nameMap["CountryOfResidence"].tag;
-    value_factories: { [key: string]: Function};
+    value_factories: { [key: string]: (original_value: string) => string};
     
     
     constructor(Randomizer: Randomizer){
@@ -29,7 +29,7 @@ export class AddressAnonymizer {
     }
 
     anonymize = (dataset: any, data_tag: string): boolean => {
-        const value_factory: Function = this.value_factories[data_tag]
+        const value_factory: (original_value: string) => string = this.value_factories[data_tag]
         if (value_factory == undefined) {
             return false
         }

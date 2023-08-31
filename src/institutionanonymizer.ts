@@ -8,7 +8,7 @@ export class InstitutionAnonymizer {
     institution_name: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
     institution_address: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
     institutional_department_name: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
-    value_factories: { [key: string]: Function};
+    value_factories: { [key: string]: (original_value: string) => string};
 
     constructor(AddressAnonymizer: AddressAnonymizer){
         this.address_anonymizer = AddressAnonymizer;
@@ -25,7 +25,7 @@ export class InstitutionAnonymizer {
     }
 
     anonymize = (dataset: any, data_tag: string): boolean => {
-        const value_factory: Function = this.value_factories[data_tag];
+        const value_factory: (original_value: string) => string = this.value_factories[data_tag];
         if (value_factory == undefined){
             return false
         }
