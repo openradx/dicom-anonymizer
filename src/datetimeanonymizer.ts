@@ -75,7 +75,7 @@ export class DateTimeAnonymizer{
         const dateTimeFormat = "%Y%m%d%H".slice(0, dateTimeValue.length - 2);
         const oldDateTime = this.parseDateTime(dateTimeValue);
         const newDateTime = new Date(oldDateTime.getTime() + this.offset)
-        var newDateTimeString = this.formatDate(newDateTime, dateTimeFormat)
+        let newDateTimeString = this.formatDate(newDateTime, dateTimeFormat)
         newDateTimeString += dateTimeValue.slice(newDateTimeString.length);
         
         return newDateTimeString
@@ -135,7 +135,7 @@ export class DateTimeAnonymizer{
             timeNameTag = dcmjs.data.DicomMetaDictionary.unpunctuateTag(timeNameTag);
 
             if (timeNameTag in dataSet){
-                let timeElement = dataSet[timeNameTag]
+                const timeElement = dataSet[timeNameTag]
                 const returnArg: returnarg = {
                     value: timeElement.Value,
                     tag: timeNameTag,
