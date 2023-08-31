@@ -1,15 +1,15 @@
 
 export class Protector {
   
-    private tags: string[];
+    private protected_tags: string[];
     
   
-    constructor(keywords: string[]) {
-      this.tags = keywords;
+    constructor(keywords: string[] = []) {
+      this.protected_tags = keywords;
     }
   
-    anonymize = (data_tag: string): boolean => {
-      if (this.tags.includes(data_tag)){
+    protect = (data_tag: string): boolean => {
+      if (this.protected_tags.includes(data_tag)){
         return true
       }
       else{

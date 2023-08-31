@@ -15,7 +15,6 @@ export class UIAnonymizer {
     const tag = dcmjs.data.DicomMetaDictionary.punctuateTag(data_tag)
     
     try{
-      console.log(dcmjs.data.DicomMetaDictionary.dictionary[tag].name)
       if (dataset[data_tag].vr != "UI" 
           || dataset[data_tag].Value[0] == undefined
           || dcmjs.data.DicomMetaDictionary.dictionary[tag].name.endsWith('ClassUID')
@@ -38,7 +37,6 @@ export class UIAnonymizer {
       }
     }
     catch (error:any){
-      console.log(tag)
       return false
     }
   }
