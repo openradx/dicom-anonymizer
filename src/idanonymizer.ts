@@ -14,7 +14,7 @@ export class IDAnonymizer {
     private totalAffixesLength: number;
     private indicesForRandomizer: number[];
 
-    constructor(Randomizer: Randomizer, keywords: string[],  id_prefix: string = "", id_suffix: string = "") {
+    constructor(Randomizer: Randomizer, keywords: string[],  id_prefix = "", id_suffix = "") {
         this.keywords = keywords;
         this.randomizer = Randomizer;
         this.id_prefix = id_prefix;

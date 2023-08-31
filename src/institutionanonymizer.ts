@@ -32,7 +32,7 @@ export class InstitutionAnonymizer {
 
         if (dataset[data_tag].Value.length>1){
             dataset[data_tag].Value = dataset[data_tag].Value.map((original_value:string) => {
-            return value_factory(original_value);
+                return value_factory(original_value)
             });
             
             return true
@@ -45,21 +45,21 @@ export class InstitutionAnonymizer {
         }
     }
 
-    anonymize_institution_name= (original_value: string): string => {
+    anonymize_institution_name = (original_value: string): string => {
         const region: string = this.address_anonymizer.get_region(original_value);
         const street_address: string = this.address_anonymizer.get_street_address(original_value);
 
         return `${region}'S ${street_address} CLINIC`
     }
 
-    anonymize_institution_address= (original_value: string): string => {
+    anonymize_institution_address = (original_value: string): string => {
         const full_address: string = this.address_anonymizer.get_legal_address(original_value);
         const country: string = this.address_anonymizer.get_country(original_value);
 
         return `${full_address}, ${country}`
     }
 
-    anonymize_department_name= (original_value: string): string => {
+    anonymize_department_name = (): string => {
         return 'RADIOLOGY'
     }
 

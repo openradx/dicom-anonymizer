@@ -4,7 +4,7 @@ import getRandomValues from 'get-random-values'; // use only in node env
 export class Randomizer {
   private seed: string;
 
-  constructor(seed: string = "" ) {
+  constructor(seed = "" ) {
     if (seed == "") {
       this.seed = this.generateRandomSeed();
     } else {

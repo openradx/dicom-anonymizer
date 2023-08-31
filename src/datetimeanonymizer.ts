@@ -116,7 +116,7 @@ export class DateTimeAnonymizer{
     
     
 
-    zipLongest = (fillValue: string = "", ...arr: any[]): string[][] =>{
+    zipLongest = (fillValue = "", ...arr: any[]): string[][] =>{
         const maxLength = Math.max(...arr.map((arr: any) => arr.length));
     
         return Array.from({ length: maxLength }, (_, index) => {
