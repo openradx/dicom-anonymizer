@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "composite": false,
     "declaration": true,
     "declarationMap": true,
@@ -21,10 +22,8 @@
     "strictNullChecks": true,
     "target": "ES2015",
     "tsBuildInfoFile": ".tsbuildinfo",
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "typeRoots": ["./node_modules/@types", "./type_libs/dcmjs/index.d.ts"]
   },
-  "include": ["type_libs"],
+  //"include": ["type_libs/dcmjs/index.d.ts"],
   "exclude": ["node_modules"]
 }

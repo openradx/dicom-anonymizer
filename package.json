@@ -12,7 +12,7 @@
     "test:watch": "vitest watch",
     "lint": "eslint ./src --ext .js,.ts",
     "ci": "npm run lint && npm run build && npm run tsc && npm run test",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier-format": "prettier --config .prettierrc '' --write"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,7 @@
+node_modules
+dist
+.*
+tsconfig.json
+tsup.config.ts
+package.json
+package-lock.json
