@@ -1,66 +1,68 @@
-import * as dcmjs from 'dcmjs';
-import { AddressAnonymizer } from './addressanonymizer';
+// /// <reference path="../typings/dcmjs/dcmjs.d.ts" />
+import { DicomMetaDictionary } from "dcmjs";
+import { dataSet } from "dcmjs";
+import { AddressAnonymizer } from "./addressanonymizer";
 
 export class InstitutionAnonymizer {
+  private address_anonymizer: AddressAnonymizer;
 
-    private address_anonymizer: AddressAnonymizer;
+  institution_name: string = DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
+  institution_address: string = DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
+  institutional_department_name: string =
+    DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
+  value_factories: { [key: string]: (original_value: string) => string };
 
-    institution_name: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
-    institution_address: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
-    institutional_department_name: string = dcmjs.data.DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
-    value_factories: { [key: string]: (original_value: string) => string};
+  constructor(AddressAnonymizer: AddressAnonymizer) {
+    this.address_anonymizer = AddressAnonymizer;
 
-    constructor(AddressAnonymizer: AddressAnonymizer){
-        this.address_anonymizer = AddressAnonymizer;
-        
-        this.institution_name = dcmjs.data.DicomMetaDictionary.unpunctuateTag(this.institution_name);
-        this.institution_address = dcmjs.data.DicomMetaDictionary.unpunctuateTag(this.institution_address);
-        this.institutional_department_name = dcmjs.data.DicomMetaDictionary.unpunctuateTag(this.institutional_department_name);
+    this.institution_name = DicomMetaDictionary.unpunctuateTag(this.institution_name);
+    this.institution_address = DicomMetaDictionary.unpunctuateTag(this.institution_address);
+    this.institutional_department_name = DicomMetaDictionary.unpunctuateTag(
+      this.institutional_department_name
+    );
 
-        this.value_factories = {
-            [this.institution_name]: this.anonymize_institution_name,
-            [this.institution_address]: this.anonymize_institution_address,
-            [this.institutional_department_name]: this.anonymize_department_name
-        };
+    this.value_factories = {
+      [this.institution_name]: this.anonymize_institution_name,
+      [this.institution_address]: this.anonymize_institution_address,
+      [this.institutional_department_name]: this.anonymize_department_name,
+    };
+  }
+
+  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
+    const value_factory: (original_value: string) => string = this.value_factories[data_tag];
+    if (value_factory == undefined) {
+      return false;
     }
 
-    anonymize = (dataset: any, data_tag: string): boolean => {
-        const value_factory: (original_value: string) => string = this.value_factories[data_tag];
-        if (value_factory == undefined){
-            return false
-        }
+    if (dataset[data_tag].Value.length > 1) {
+      dataset[data_tag].Value = dataset[data_tag].Value.map((original_value: string) => {
+        return value_factory(original_value);
+      });
 
-        if (dataset[data_tag].Value.length>1){
-            dataset[data_tag].Value = dataset[data_tag].Value.map((original_value:string) => {
-                return value_factory(original_value)
-            });
-            
-            return true
-        }
-        else{
-            const original_value: string = dataset[data_tag].Value[0]
-            dataset[data_tag].Value[0] = value_factory(original_value)
-            
-            return true
-        }
+      return true;
+    } else {
+      const original_value: string = dataset[data_tag].Value[0];
+      dataset[data_tag].Value[0] = value_factory(original_value);
+
+      return true;
     }
+  };
 
-    anonymize_institution_name = (original_value: string): string => {
-        const region: string = this.address_anonymizer.get_region(original_value);
-        const street_address: string = this.address_anonymizer.get_street_address(original_value);
+  anonymize_institution_name = (original_value: string): string => {
+    const region: string = this.address_anonymizer.get_region(original_value);
+    const street_address: string = this.address_anonymizer.get_street_address(original_value);
 
-        return `${region}'S ${street_address} CLINIC`
-    }
+    return `${region}'S ${street_address} CLINIC`;
+  };
 
-    anonymize_institution_address = (original_value: string): string => {
-        const full_address: string = this.address_anonymizer.get_legal_address(original_value);
-        const country: string = this.address_anonymizer.get_country(original_value);
+  anonymize_institution_address = (original_value: string): string => {
+    const full_address: string = this.address_anonymizer.get_legal_address(original_value);
+    const country: string = this.address_anonymizer.get_country(original_value);
 
-        return `${full_address}, ${country}`
-    }
+    return `${full_address}, ${country}`;
+  };
 
-    anonymize_department_name = (): string => {
-        return 'RADIOLOGY'
-    }
-
+  anonymize_department_name = (): string => {
+    return "RADIOLOGY";
+  };
 }

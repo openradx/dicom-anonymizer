@@ -1,5 +1,5 @@
 {
-  "semi": false,
+  "semi": true,
   "printWidth": 100,
   "importOrder": ["<THIRD_PARTY_MODULES>", "^[/]", "^[.]"],
   "plugins": ["./node_modules/@trivago/prettier-plugin-sort-imports"]

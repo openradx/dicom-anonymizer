@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "lint": "eslint ./src --ext .js,.ts",
-    "ci": "npm run lint && npm run build && npm run tsc && npm run test"
+    "ci": "npm run lint && npm run build && npm run tsc && npm run test",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,12 @@
   "homepage": "https://github.com/radexperts/dicom-anonymizer#readme",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^20.5.9",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.6",
+    "prettier": "^2.8.8",
     "tsup": "^6.7.0",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
@@ -43,6 +45,7 @@
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
     "dcmjs": "^0.29.6",
+    "fs": "^0.0.1-security",
     "get-random-values": "^2.1.0"
   }
 }

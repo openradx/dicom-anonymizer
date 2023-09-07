@@ -1,3 +1,3 @@
 export function doit() {
-  return "foobar"
+  return "foobar";
 }
