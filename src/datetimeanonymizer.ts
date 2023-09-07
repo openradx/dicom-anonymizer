@@ -12,7 +12,7 @@ export class DateTimeAnonymizer {
     this.offset = date_offset_hours * 60 * 60 * 1000;
   }
 
-  anonymize = (dataset: typeof dataSet, dataTag: string): boolean => {
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
     if (dataset[dataTag].vr != "DA" && dataset[dataTag].vr != "DT") {
       return false;
     }
@@ -28,7 +28,7 @@ export class DateTimeAnonymizer {
     return true;
   };
 
-  anonymize_date_and_time = (dataset: typeof dataSet, dataTag: string): void => {
+  anonymize_date_and_time = (dataset: dataSet, dataTag: string): void => {
     const dates = dataset[dataTag].Value;
     const result: returnarg = this.checkTag(dataset, dataTag);
 
@@ -50,7 +50,7 @@ export class DateTimeAnonymizer {
     }
   };
 
-  anonymize_datetime = (dataset: typeof dataSet, dataTag: string): void => {
+  anonymize_datetime = (dataset: dataSet, dataTag: string): void => {
     const dateTimes = dataset[dataTag].Value;
     const newDateTimes: string[] = [];
 
@@ -112,7 +112,7 @@ export class DateTimeAnonymizer {
     });
   };
 
-  checkTag = (dataset: typeof dataSet, dataTag: string): returnarg => {
+  checkTag = (dataset: dataSet, dataTag: string): returnarg => {
     const tagName = DicomMetaDictionary.dictionary[DicomMetaDictionary.punctuateTag(dataTag)].name;
     const timeName = tagName.replace("Date", "Time");
 

@@ -90,12 +90,12 @@ export class Anonymizer {
     ];
   }
 
-  anonymize(data: typeof DicomDict) {
+  anonymize(data: DicomDict) {
     this.walk(data.meta, this.element_handlers);
     this.walk(data.dict, this.element_handlers);
   }
 
-  walk(dataset: typeof dataSet, handler: any) {
+  walk(dataset: dataSet, handler: any) {
     const tagList = Object.keys(dataset);
     for (const tag of tagList) {
       const element = dataset[tag];
@@ -118,7 +118,7 @@ export class Anonymizer {
     }
   }
 
-  anonymize_element(dataset: typeof dataSet, tag: string, handler: any) {
+  anonymize_element(dataset: dataSet, tag: string, handler: any) {
     // Perform operations on the element
     for (const callback of handler) {
       if (callback(dataset, tag)) {

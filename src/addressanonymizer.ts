@@ -26,7 +26,7 @@ export class AddressAnonymizer {
     };
   }
 
-  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
     const value_factory: (original_value: string) => string = this.value_factories[data_tag];
     if (value_factory == undefined) {
       return false;

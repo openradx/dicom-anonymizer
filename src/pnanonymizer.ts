@@ -11,7 +11,7 @@ export class PNAnonymizer {
     this.lists = new lists();
   }
 
-  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
     if (dataset[data_tag].vr != "PN") {
       return false;
     }
