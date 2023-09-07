@@ -5,7 +5,9 @@ declare module "dcmjs" {
       Value: any;
     };
   }
-  //export = dataSet
+  
+  
+  
 
   interface nameMap {
     [key: string]: {
@@ -81,15 +83,15 @@ declare module "dcmjs" {
   }
 
   export = DicomMetaDictionary;
-
+  
   declare class DicomDict {
     constructor(meta: dataSet);
     meta: dataSet;
     dict: dataSet;
-    upsertTag(tag: string, vr: string, values: any): void;
+    static upsertTag(tag: string, vr: string, values: any): void;
   }
   export = DicomDict;
-
+  
   export namespace DicomMessage {
     export class DicomMessage {}
     export function readFile(buffer: any, options?: any): any;
@@ -127,14 +129,14 @@ declare module "dcmjs" {
     static readFile(
       buffer: any,
       options?:
-        | {
+          {
             ignoreErrors: boolean;
-            untilTag: any;
+            untilTag: null;
             includeUntilTagValue: boolean;
             noCopy: boolean;
           }
-        | any
-    ): DicomDict;
+        
+    ): any;
     writeTagObject(
       stream: any,
       tagString: any,
@@ -183,8 +185,4 @@ declare module "dcmjs" {
       }
     ): number;
   }
-
-  //export {Tag, DicomMessage, DicomDict, DicomMetaDictionary, ValueRepresentation, dataSet}
-
-  //export = 'dcmjs';
 }
