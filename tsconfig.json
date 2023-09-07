@@ -21,9 +21,8 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "ES2015",
-    "tsBuildInfoFile": ".tsbuildinfo",
-    "typeRoots": ["./node_modules/@types", "./type_libs/dcmjs/index.d.ts"]
+    "tsBuildInfoFile": ".tsbuildinfo"
+    
   },
-  //"include": ["type_libs/dcmjs/index.d.ts"],
   "exclude": ["node_modules"]
 }
