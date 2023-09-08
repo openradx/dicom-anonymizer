@@ -22,7 +22,7 @@
     "strictNullChecks": true,
     "target": "ES2015",
     "tsBuildInfoFile": ".tsbuildinfo"
-    
   },
+  "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }
