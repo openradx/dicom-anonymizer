@@ -1,5 +1,4 @@
-//// <reference path="../typings/dcmjs/dcmjs.d.ts" />
-import { DicomDict, Tag, dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 import { AddressAnonymizer } from "./addressanonymizer";
 import { DateTimeAnonymizer } from "./datetimeanonymizer";
 import { FixedValueAnonymizer } from "./fixedvalueanonymizer";
@@ -90,7 +89,7 @@ export class Anonymizer {
     ];
   }
 
-  anonymize(data: DicomDict) {
+  anonymize(data: data.DicomDict) {
     this.walk(data.meta, this.element_handlers);
     this.walk(data.dict, this.element_handlers);
   }
@@ -129,7 +128,7 @@ export class Anonymizer {
 
   del_private_tags(dataset: any, data_tag: string): boolean {
     //const currTag = dcmjs.data.Tag.fromString(data_tag);
-    const currTag = Tag.fromString(data_tag);
+    const currTag = data.Tag.fromString(data_tag);
     //if (currTag.isPrivateCreator()){
     if (currTag.group() % 2 === 1) {
       delete dataset[data_tag];

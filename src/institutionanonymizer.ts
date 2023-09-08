@@ -1,23 +1,21 @@
-// /// <reference path="../typings/dcmjs/dcmjs.d.ts" />
-import { DicomMetaDictionary } from "dcmjs";
-import { dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 import { AddressAnonymizer } from "./addressanonymizer";
 
 export class InstitutionAnonymizer {
   private address_anonymizer: AddressAnonymizer;
 
-  institution_name: string = DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
-  institution_address: string = DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
+  institution_name: string = data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
+  institution_address: string = data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
   institutional_department_name: string =
-    DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
+    data.DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
   value_factories: { [key: string]: (original_value: string) => string };
 
   constructor(AddressAnonymizer: AddressAnonymizer) {
     this.address_anonymizer = AddressAnonymizer;
 
-    this.institution_name = DicomMetaDictionary.unpunctuateTag(this.institution_name);
-    this.institution_address = DicomMetaDictionary.unpunctuateTag(this.institution_address);
-    this.institutional_department_name = DicomMetaDictionary.unpunctuateTag(
+    this.institution_name = data.DicomMetaDictionary.unpunctuateTag(this.institution_name);
+    this.institution_address = data.DicomMetaDictionary.unpunctuateTag(this.institution_address);
+    this.institutional_department_name = data.DicomMetaDictionary.unpunctuateTag(
       this.institutional_department_name
     );
 
@@ -28,7 +26,7 @@ export class InstitutionAnonymizer {
     };
   }
 
-  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
     const value_factory: (original_value: string) => string = this.value_factories[data_tag];
     if (value_factory == undefined) {
       return false;

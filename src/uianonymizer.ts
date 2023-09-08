@@ -1,4 +1,4 @@
-import { DicomMetaDictionary, dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 import { Randomizer } from "./randomizer";
 
 export class UIAnonymizer {
@@ -8,15 +8,15 @@ export class UIAnonymizer {
     this.randomizer = Randomizer;
   }
 
-  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
-    const tag = DicomMetaDictionary.punctuateTag(data_tag);
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
+    const tag = data.DicomMetaDictionary.punctuateTag(data_tag);
 
     try {
       if (
         dataset[data_tag].vr != "UI" ||
         dataset[data_tag].Value[0] == undefined ||
-        DicomMetaDictionary.dictionary[tag].name.endsWith("ClassUID") ||
-        DicomMetaDictionary.dictionary[tag].name == "TransferSyntaxUID"
+        data.DicomMetaDictionary.dictionary[tag].name.endsWith("ClassUID") ||
+        data.DicomMetaDictionary.dictionary[tag].name == "TransferSyntaxUID"
       ) {
         return false;
       } else {

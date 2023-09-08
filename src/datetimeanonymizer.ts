@@ -1,4 +1,4 @@
-import { DicomMetaDictionary, dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 
 type returnarg = {
   value: object | string;
@@ -113,12 +113,13 @@ export class DateTimeAnonymizer {
   };
 
   checkTag = (dataset: dataSet, dataTag: string): returnarg => {
-    const tagName = DicomMetaDictionary.dictionary[DicomMetaDictionary.punctuateTag(dataTag)].name;
+    const tagName =
+      data.DicomMetaDictionary.dictionary[data.DicomMetaDictionary.punctuateTag(dataTag)].name;
     const timeName = tagName.replace("Date", "Time");
 
-    if (typeof DicomMetaDictionary.nameMap[timeName] !== "undefined") {
-      let timeNameTag = DicomMetaDictionary.nameMap[timeName].tag;
-      timeNameTag = DicomMetaDictionary.unpunctuateTag(timeNameTag);
+    if (typeof data.DicomMetaDictionary.nameMap[timeName] !== "undefined") {
+      let timeNameTag = data.DicomMetaDictionary.nameMap[timeName].tag;
+      timeNameTag = data.DicomMetaDictionary.unpunctuateTag(timeNameTag);
 
       if (timeNameTag in dataset) {
         const timeElement = dataset[timeNameTag];

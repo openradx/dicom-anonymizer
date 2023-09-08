@@ -1,4 +1,4 @@
-import { DicomMetaDictionary, dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 import { Randomizer } from "./randomizer";
 
 export class IDAnonymizer {
@@ -17,7 +17,7 @@ export class IDAnonymizer {
     this.randomizer = Randomizer;
     this.id_prefix = id_prefix;
     this.id_suffix = id_suffix;
-    this.issuer_tag = DicomMetaDictionary.nameMap["IssuerOfPatientID"].tag;
+    this.issuer_tag = data.DicomMetaDictionary.nameMap["IssuerOfPatientID"].tag;
 
     this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     this.totalAffixesLength = this.id_prefix.length + this.id_suffix.length;
@@ -26,7 +26,7 @@ export class IDAnonymizer {
     );
   }
 
-  anonymize = (dataset: typeof dataSet, data_tag: string): boolean => {
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
     if (this.keywords.includes(data_tag)) {
       this.replace_id(dataset, data_tag);
       return true;
@@ -38,7 +38,7 @@ export class IDAnonymizer {
     }
   };
 
-  replace_id = (dataset: typeof dataSet, data_tag: string): void => {
+  replace_id = (dataset: dataSet, data_tag: string): void => {
     if (dataset[data_tag].Value.length > 1) {
       dataset[data_tag].Value = dataset[data_tag].Value.map((original_value: string) => {
         return this.new_id(original_value);
