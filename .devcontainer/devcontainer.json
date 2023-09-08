@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "DICOM Anonymizer",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+	"postCreateCommand": "npm install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"dsznajder.es7-react-js-snippets",
+				"eamodio.gitlens",
+				"esbenp.prettier-vscode",
+				"meganrogge.template-string-converter",
+				"mgmcdermott.vscode-language-babel",
+				"mhutchie.git-graph",
+				"streetsidesoftware.code-spell-checker",
+				"visualstudioexptteam.vscodeintellicode",
+				"wayou.vscode-todo-highlight",
+				"zixuanchen.vitest-explorer"
+			]
+		}
+	}
+}
