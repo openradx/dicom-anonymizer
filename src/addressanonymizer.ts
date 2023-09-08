@@ -1,4 +1,5 @@
-import { DicomMetaDictionary, dataSet } from "dcmjs";
+import { data } from "dcmjs";
+import type { dataSet } from "dcmjs";
 import { lists } from "./lists";
 import { Randomizer } from "./randomizer";
 
@@ -6,18 +7,18 @@ export class AddressAnonymizer {
   private randomizer: Randomizer;
   private lists: lists;
 
-  address_tag: string = DicomMetaDictionary.nameMap["PatientAddress"].tag;
-  region_tag: string = DicomMetaDictionary.nameMap["RegionOfResidence"].tag;
-  country_tag: string = DicomMetaDictionary.nameMap["CountryOfResidence"].tag;
+  address_tag: string = data.DicomMetaDictionary.nameMap["PatientAddress"].tag;
+  region_tag: string = data.DicomMetaDictionary.nameMap["RegionOfResidence"].tag;
+  country_tag: string = data.DicomMetaDictionary.nameMap["CountryOfResidence"].tag;
   value_factories: { [key: string]: (original_value: string) => string };
 
   constructor(Randomizer: Randomizer) {
     this.randomizer = Randomizer;
     this.lists = new lists();
 
-    this.address_tag = DicomMetaDictionary.unpunctuateTag(this.address_tag);
-    this.region_tag = DicomMetaDictionary.unpunctuateTag(this.region_tag);
-    this.country_tag = DicomMetaDictionary.unpunctuateTag(this.country_tag);
+    this.address_tag = data.DicomMetaDictionary.unpunctuateTag(this.address_tag);
+    this.region_tag = data.DicomMetaDictionary.unpunctuateTag(this.region_tag);
+    this.country_tag = data.DicomMetaDictionary.unpunctuateTag(this.country_tag);
 
     this.value_factories = {
       [this.address_tag]: this.get_legal_address,
