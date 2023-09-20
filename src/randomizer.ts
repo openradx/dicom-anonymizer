@@ -49,7 +49,7 @@ export class Randomizer {
     return seed;
   }
 
-  public toInt(originalValue: any): bigint {
+  public toInt(originalValue: string): bigint {
     const message = this.seed + String(originalValue);
     const encoder = new TextEncoder();
     const encoded = encoder.encode(message);
@@ -59,7 +59,7 @@ export class Randomizer {
     return result;
   }
 
-  public getIntsFromRanges(originalValue: any, ...suprema: number[]): number[] {
+  public getIntsFromRanges(originalValue: string, ...suprema: number[]): number[] {
     let big_Int = this.toInt(originalValue);
     const result: number[] = [];
     for (const x of suprema) {

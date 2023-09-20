@@ -10,6 +10,8 @@ import { Randomizer } from "./randomizer";
 import { UIAnonymizer } from "./uianonymizer";
 import { UnwantedElementStripper } from "./unwantedelements";
 
+type ElementHandler = (dataset: dataSet, tag: string) => boolean;
+
 export class Anonymizer {
   /**
     The main class responsible for anonymizing dcmjs datasets.
@@ -23,7 +25,7 @@ export class Anonymizer {
   private date_offset_hours: number;
   randomizer: Randomizer;
   address_anonymizer: AddressAnonymizer;
-  element_handlers: any[];
+  element_handlers: ElementHandler[];
 
   constructor(
     patientID: string,
@@ -94,7 +96,7 @@ export class Anonymizer {
     this.walk(data.dict, this.element_handlers);
   }
 
-  walk(dataset: dataSet, handler: any) {
+  walk(dataset: dataSet, handler: ElementHandler[]) {
     const tagList = Object.keys(dataset);
     for (const tag of tagList) {
       const element = dataset[tag];
@@ -117,7 +119,7 @@ export class Anonymizer {
     }
   }
 
-  anonymize_element(dataset: dataSet, tag: string, handler: any) {
+  anonymize_element(dataset: dataSet, tag: string, handler: ElementHandler[]) {
     // Perform operations on the element
     for (const callback of handler) {
       if (callback(dataset, tag)) {
@@ -126,10 +128,8 @@ export class Anonymizer {
     }
   }
 
-  del_private_tags(dataset: any, data_tag: string): boolean {
-    //const currTag = dcmjs.data.Tag.fromString(data_tag);
+  del_private_tags(dataset: dataSet, data_tag: string): boolean {
     const currTag = data.Tag.fromString(data_tag);
-    //if (currTag.isPrivateCreator()){
     if (currTag.group() % 2 === 1) {
       delete dataset[data_tag];
       return true;

@@ -49,7 +49,7 @@ export class IDAnonymizer {
     }
   };
 
-  new_id = (original_value: any): string => {
+  new_id = (original_value: string): string => {
     const indexes = this.randomizer.getIntsFromRanges(original_value, ...this.indicesForRandomizer);
     const id_root: string = indexes.map((i) => this.alphabet[i]).join("");
 

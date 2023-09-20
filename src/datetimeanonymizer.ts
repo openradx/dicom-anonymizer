@@ -1,7 +1,7 @@
 import { data, dataSet } from "dcmjs";
 
 type returnarg = {
-  value: object | string;
+  value: string;
   tag: string;
 };
 
@@ -32,7 +32,7 @@ export class DateTimeAnonymizer {
     const dates = dataset[dataTag].Value;
     const result: returnarg = this.checkTag(dataset, dataTag);
 
-    const times = result.value;
+    const times: string = result.value;
 
     const newDates: string[] = [];
     const newTimes: string[] = [];
@@ -104,11 +104,11 @@ export class DateTimeAnonymizer {
       .replace("%S", seconds);
   };
 
-  zipLongest = (fillValue = "", ...arr: any[]): string[][] => {
-    const maxLength = Math.max(...arr.map((arr: any) => arr.length));
+  zipLongest = (fillValue = "", ...arr: string[]): string[][] => {
+    const maxLength = Math.max(...arr.map((arr: string) => arr.length));
 
     return Array.from({ length: maxLength }, (_, index) => {
-      return arr.map((arr: any) => (arr[index] !== undefined ? arr[index] : fillValue));
+      return arr.map((arr: string[number]) => (arr[index] !== undefined ? arr[index] : fillValue));
     });
   };
 

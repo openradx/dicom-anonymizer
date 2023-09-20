@@ -1,3 +1,5 @@
+import { dataSet } from "dcmjs";
+
 export class FixedValueAnonymizer {
   private tag: string;
   private value: string;
@@ -7,7 +9,7 @@ export class FixedValueAnonymizer {
     this.value = value;
   }
 
-  anonymize = (dataset: any, data_tag: string): boolean => {
+  anonymize = (dataset: dataSet, data_tag: string): boolean => {
     if (data_tag == this.tag) {
       dataset[data_tag].Value[0] = this.value;
 

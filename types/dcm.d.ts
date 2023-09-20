@@ -31,7 +31,7 @@ declare module "dcmjs" {
       constructor(meta: dataSet);
       meta: dataSet;
       dict: dataSet;
-      static upsertTag(tag: string, vr: string, values: any): void;
+      
     }
 
     export class DicomMessage {
@@ -39,15 +39,12 @@ declare module "dcmjs" {
     }
 
     export class DicomMetaDictionary {
-      constructor(customDictionary: any);
       static nameMap: nameMap;
       static dictionary: dictionary;
       static punctuateTag(rawTag: string): string;
       static unpunctuateTag(tag: string): string;
       static parseIntFromTag(tag: string): number;
-      static tagAsIntegerFromName(name: string): number | undefined;
-      static cleanDataset(dataset: dataSet): any;
-      static namifyDataset(dataset: dataSet): any;
+      
       /** converts from DICOM JSON Model dataset to a natural dataset
        * - sequences become lists
        * - single element lists are replaced by their first element,
@@ -55,25 +52,22 @@ declare module "dcmjs" {
        *     proxy for the child values, see addAccessors for examples
        * - object member names are dictionary, not group/element tag
        */
-      static naturalizeDataset(dataset: dataSet): { _vrMap: any };
-      denaturalizeValue(naturalValue: any): any;
-      denaturalizeDataset(dataset: dataSet, nameMap?: any): any;
-      uid(): string;
-      date(): string;
-      time(): string;
-      dateTime(): string;
+      // static naturalizeDataset(dataset: dataSet): { _vrMap: any };
+      // static denaturalizeValue(naturalValue: any): any;
+      // static denaturalizeDataset(dataset: dataSet, nameMap?: any): any;
+      static uid(): string;
+      static date(): string;
+      static time(): string;
+      static dateTime(): string;
     }
 
     export class Tag {
       static fromString(str: string): Tag;
-      static fromPString(str: any): Tag;
-      static fromNumbers(group: any, element: any): Tag;
-      static readTag(stream: any): Tag;
       group(): number;
       constructor(value: any);
       toString(): string;
       toCleanString(): string;
-      is(t: any): boolean;
+      is(t: string): boolean;
       element(): number;
       isPixelDataTag(): boolean;
       isPrivateCreator(): boolean;
