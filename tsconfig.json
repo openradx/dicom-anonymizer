@@ -23,6 +23,6 @@
     "target": "ES2015",
     "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "include": ["src/**/*", "types/**/*"],
+  "include": ["src/**/*", "types/**/*", "tests/*"],
   "exclude": ["node_modules"]
 }
