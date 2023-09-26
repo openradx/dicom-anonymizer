@@ -21,14 +21,14 @@ export class Anonymizer {
     
   */
 
-  private patientID: string;
+  private patientID?: string;
   private date_offset_hours: number;
   randomizer: Randomizer;
   address_anonymizer: AddressAnonymizer;
   element_handlers: ElementHandler[];
 
   constructor(
-    patientID: string,
+    patientID?: string,
     protected_tags?: string[],
     id_prefix?: string,
     id_suffix?: string,
@@ -36,7 +36,9 @@ export class Anonymizer {
   ) {
     const minimum_offset_hours: number = 62 * 24;
     const maximum_offset_hours: number = 730 * 24;
-    this.patientID = patientID;
+    if (patientID) {
+      this.patientID = patientID;
+    }
     this.randomizer = new Randomizer(seed);
     this.date_offset_hours = Number(
       -(
@@ -86,9 +88,12 @@ export class Anonymizer {
       ).anonymize,
       this.address_anonymizer.anonymize,
       new InstitutionAnonymizer(this.address_anonymizer).anonymize,
-      new FixedValueAnonymizer("00100020", this.patientID).anonymize,
+
       new DateTimeAnonymizer(this.date_offset_hours).anonymize,
     ];
+    if (patientID) {
+      this.element_handlers.push(new FixedValueAnonymizer("00100020", patientID).anonymize);
+    }
   }
 
   anonymize(data: data.DicomDict) {
