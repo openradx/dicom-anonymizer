@@ -1,8 +1,8 @@
 declare module "dcmjs" {
   export interface dataSet {
     [tag: string]: {
-      vr: string;
       Value: any;
+      vr: string;
     };
   }
 
@@ -11,6 +11,8 @@ declare module "dcmjs" {
       name: string;
       tag: string;
       value: string;
+      vr: string;
+      vm: string;
     };
   }
 
@@ -28,10 +30,10 @@ declare module "dcmjs" {
   // see https://github.com/dcmjs-org/dcmjs/blob/master/src/index.js
   declare namespace data {
     export class DicomDict {
-      constructor(meta: dataSet);
+      constructor(meta: object);
       meta: dataSet;
       dict: dataSet;
-      
+      upsertTag(tag: string, vr: string, values: string | object);
     }
 
     export class DicomMessage {
@@ -43,8 +45,6 @@ declare module "dcmjs" {
       static dictionary: dictionary;
       static punctuateTag(rawTag: string): string;
       static unpunctuateTag(tag: string): string;
-      static parseIntFromTag(tag: string): number;
-      
       /** converts from DICOM JSON Model dataset to a natural dataset
        * - sequences become lists
        * - single element lists are replaced by their first element,
@@ -64,39 +64,12 @@ declare module "dcmjs" {
     export class Tag {
       static fromString(str: string): Tag;
       group(): number;
-      constructor(value: any);
       toString(): string;
       toCleanString(): string;
       is(t: string): boolean;
       element(): number;
       isPixelDataTag(): boolean;
       isPrivateCreator(): boolean;
-      write(stream: any, vrType: any, values: any, syntax: any, writeOptions: any): any;
-    }
-
-    export class ValueRepresentation {
-      createByTypeString(type: any): any;
-      constructor(type: any);
-      type: any;
-      multi: boolean;
-      _isBinary: boolean;
-      _allowMultiple: boolean;
-      _isExplicit: boolean;
-      isBinary(): boolean;
-      allowMultiple(): boolean;
-      isExplicit(): boolean;
-      read(stream: any, length: any, syntax: any): any;
-      readBytes(stream: any, length: any): any;
-      readNullPaddedString(stream: any, length: any): any;
-      write(stream: any, type: any, ...args: any[]): any[];
-      writeBytes(
-        stream: any,
-        value: any,
-        lengths: any,
-        writeOptions?: {
-          allowInvalidVRLength: boolean;
-        }
-      ): number;
     }
   }
 }
