@@ -31,6 +31,7 @@ declare module "dcmjs" {
   declare namespace data {
     export class DicomDict {
       constructor(meta: object);
+      [key: string]: dataSet;
       meta: dataSet;
       dict: dataSet;
       upsertTag(tag: string, vr: string, values: string | object);
