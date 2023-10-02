@@ -25,6 +25,7 @@ export class DateTimeAnonymizer {
     } else {
       this.anonymize_datetime(dataset, dataTag);
     }
+
     return true;
   };
 

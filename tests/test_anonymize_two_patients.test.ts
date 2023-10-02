@@ -8,25 +8,15 @@ import { loadInstance } from "./data_for_tests";
 
 // Replace with the actual structure of your dataset
 
-class OneSeriesTwoInstances {
-  dataset1: data.DicomDict;
-  dataset2: data.DicomDict;
-
-  constructor() {
-    this.dataset1 = loadInstance(1, 1, 1, 1);
-    this.dataset2 = loadInstance(1, 1, 1, 2);
-
-    const anonymizer = new Anonymizer("");
-    anonymizer.anonymize(this.dataset1);
-    anonymizer.anonymize(this.dataset2);
-  }
-}
-
 describe("patient", () => {
-  it("should anonymize patient, study and series attributes the same", () => {
-    const diffInstances = new OneSeriesTwoInstances();
-    const dataset1 = diffInstances.dataset1;
-    const dataset2 = diffInstances.dataset2;
+  it("should anonymize all attributes differently", () => {
+    //const diffInstances = new TwoPatients();
+    const dataset1 = loadInstance(1);
+    const dataset2 = loadInstance(2);
+    const anonymizer = new Anonymizer("");
+    anonymizer.anonymize(dataset1);
+    anonymizer.anonymize(dataset2);
+
     const elementPaths: string[][] = [
       // patient
       ["dict", "00100020"], // PatientID
@@ -63,30 +53,10 @@ describe("patient", () => {
       ["dict", "00400009"], // ScheduledProcedureStepID
       ["dict", "00080021"], // SeriesDate
       ["dict", "00080031"], // SeriesTime
-    ];
-
-    for (const elementPath of elementPaths) {
-      if (elementPath.length == 2) {
-        const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0];
-        const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0];
-        expect(value1).toEqual(value2);
-      } else {
-        const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
-        const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
-        expect(value1).toEqual(value2);
-      }
-    }
-  });
-
-  it("should anonymize instance attributes differently", () => {
-    const diffInstances = new OneSeriesTwoInstances();
-    const dataset1 = diffInstances.dataset1;
-    const dataset2 = diffInstances.dataset2;
-    const elementPaths = [
       // instance
       ["dict", "00080018"], //SOPInstanceUID
       ["meta", "00020003"], //MediaStorageSOPInstanceUID
-      //["dict", "00080012"], //InstanceCreationDate
+      ["dict", "00080012"], //InstanceCreationDate
       ["dict", "00080013"], //InstanceCreationTime
     ];
 
@@ -101,5 +71,20 @@ describe("patient", () => {
         expect(value1).not.toEqual(value2);
       }
     }
+  });
+
+  it("should anonymize same patient with different formatted name the same way", () => {
+    const dataset1 = loadInstance(1);
+    dataset1.dict["00100010"].Value[0] = "LAST^FIRST^MIDDLE";
+    const dataset2 = loadInstance(1);
+    dataset2.dict["00100010"].Value[0] = "LAST^FIRST^MIDDLE^";
+
+    const anonymizer = new Anonymizer("");
+    anonymizer.anonymize(dataset1);
+    anonymizer.anonymize(dataset2);
+
+    const value1 = dataset1.dict["00100010"].Value[0];
+    const value2 = dataset2.dict["00100010"].Value[0];
+    expect(value1).toEqual(value2);
   });
 });

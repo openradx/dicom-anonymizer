@@ -88,7 +88,8 @@ export class Anonymizer {
       ).anonymize,
       this.address_anonymizer.anonymize,
       new InstitutionAnonymizer(this.address_anonymizer).anonymize,
-
+      new FixedValueAnonymizer("00321033", "").anonymize, // RequestingService
+      new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
       new DateTimeAnonymizer(this.date_offset_hours).anonymize,
     ];
     if (patientID) {

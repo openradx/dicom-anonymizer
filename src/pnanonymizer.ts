@@ -40,7 +40,7 @@ export class PNAnonymizer {
     }
     const last_names = this.lists.last_names;
     if (original_value != undefined) {
-      original_value = original_value.replace("^", "");
+      original_value = original_value.replaceAll("^", "");
     }
 
     const indices = this.randomizer.getIntsFromRanges(

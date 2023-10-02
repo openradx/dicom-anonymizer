@@ -8,13 +8,13 @@ import { loadInstance } from "./data_for_tests";
 
 // Replace with the actual structure of your dataset
 
-class OneSeriesTwoInstances {
+class OneStudyTwoSeries {
   dataset1: data.DicomDict;
   dataset2: data.DicomDict;
 
   constructor() {
-    this.dataset1 = loadInstance(1, 1, 1, 1);
-    this.dataset2 = loadInstance(1, 1, 1, 2);
+    this.dataset1 = loadInstance(1, 1, 1);
+    this.dataset2 = loadInstance(1, 1, 2);
 
     const anonymizer = new Anonymizer("");
     anonymizer.anonymize(this.dataset1);
@@ -23,8 +23,8 @@ class OneSeriesTwoInstances {
 }
 
 describe("patient", () => {
-  it("should anonymize patient, study and series attributes the same", () => {
-    const diffInstances = new OneSeriesTwoInstances();
+  it("should anonymize patient and study attributes the same", () => {
+    const diffInstances = new OneStudyTwoSeries();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths: string[][] = [
@@ -49,20 +49,6 @@ describe("patient", () => {
       ["dict", "00080020"], // StudyDate
       ["dict", "00200010"], // StudyID
       ["dict", "00080030"], // StudyTime
-      // series
-      ["dict", "0020000E"], // SeriesInstanceUID
-      ["dict", "00081070"], // OperatorsName
-      ["dict", "00081050"], // PerformingPhysicianName
-      ["dict", "00400275", "00401001"], // RequestAttributesSequence[0].RequestedProcedureID
-      ["dict", "00400275", "00400009"], // RequestAttributesSequence[0].ScheduledProcedureStepID
-      ["dict", "00200052"], // FrameOfReferenceUID
-      ["dict", "00080081"], // InstitutionAddress
-      ["dict", "00080080"], // InstitutionName
-      ["dict", "00400253"], // PerformedProcedureStepID
-      ["dict", "00401001"], // RequestedProcedureID
-      ["dict", "00400009"], // ScheduledProcedureStepID
-      ["dict", "00080021"], // SeriesDate
-      ["dict", "00080031"], // SeriesTime
     ];
 
     for (const elementPath of elementPaths) {
@@ -78,11 +64,25 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize instance attributes differently", () => {
-    const diffInstances = new OneSeriesTwoInstances();
+  it("should anonymize series and instance attributes differently", () => {
+    const diffInstances = new OneStudyTwoSeries();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths = [
+      // series
+      ["dict", "0020000E"], // SeriesInstanceUID
+      ["dict", "00081070"], // OperatorsName
+      ["dict", "00081050"], // PerformingPhysicianName
+      ["dict", "00400275", "00401001"], // RequestAttributesSequence[0].RequestedProcedureID
+      ["dict", "00400275", "00400009"], // RequestAttributesSequence[0].ScheduledProcedureStepID
+      ["dict", "00200052"], // FrameOfReferenceUID
+      ["dict", "00080081"], // InstitutionAddress
+      ["dict", "00080080"], // InstitutionName
+      ["dict", "00400253"], // PerformedProcedureStepID
+      ["dict", "00401001"], // RequestedProcedureID
+      ["dict", "00400009"], // ScheduledProcedureStepID
+      //["dict", "00080021"], // SeriesDate
+      ["dict", "00080031"], // SeriesTime
       // instance
       ["dict", "00080018"], //SOPInstanceUID
       ["meta", "00020003"], //MediaStorageSOPInstanceUID

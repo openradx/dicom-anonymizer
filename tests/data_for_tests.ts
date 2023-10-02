@@ -18,7 +18,7 @@ export function loadInstance(
 export function loadMinimalInstance(): data.DicomDict {
   const filePath_dicom = "./samples";
   const files: string[] = fs.readdirSync(filePath_dicom);
-  const fileBuffer = fs.readFileSync(filePath_dicom + "/" + files[0]).buffer;
+  const fileBuffer = fs.readFileSync(filePath_dicom + "/" + files[10]).buffer;
   return data.DicomMessage.readFile(fileBuffer);
 }
 
@@ -207,7 +207,7 @@ function _setInstanceAttributes(
   );
 }
 
-function populateTag(
+export function populateTag(
   dataset: data.DicomDict,
   tagName: string,
   ...values: string[] | object[]
