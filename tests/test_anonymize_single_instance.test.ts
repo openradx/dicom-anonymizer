@@ -13,7 +13,7 @@ describe("patient", () => {
       ["meta", "00020010"], // TransferSyntaxUID
       ["meta", "00020012"], // ImplementationClassUID
       ["dict", "00080016"], // SOPClassUID
-      ["dict", "00082112", 0, "00081155"], // "SourceImageSequence[0].ReferencedSOPClassUID"
+      ["dict", "00082112", 0, "00081150"], // "SourceImageSequence[0].ReferencedSOPClassUID"
     ];
 
     const dataset = loadTestInstance();
@@ -23,7 +23,7 @@ describe("patient", () => {
         expected.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
       } else {
         expected.push(
-          dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]][elementPath[3]].Value[0]
+          dataset[elementPath[0]][elementPath[1]].Value[elementPath[2]][elementPath[3]].Value[0]
         );
       }
     }
@@ -37,7 +37,7 @@ describe("patient", () => {
         actual.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
       } else {
         actual.push(
-          dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]][elementPath[3]].Value[0]
+          dataset[elementPath[0]][elementPath[1]].Value[elementPath[2]][elementPath[3]].Value[0]
         );
       }
     }
@@ -51,20 +51,21 @@ describe("patient", () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080018"], //SOPInstanceUID
       ["meta", "00020003"], //MediaStorageSOPInstanceUID
-      ["dict", "00082112", 0, "00081150"], // "SourceImageSequence[0].ReferencedSOPInstanceUID"
+      ["dict", "00082112", 0, "00081155"], // "SourceImageSequence[0].ReferencedSOPInstanceUID"
       ["dict", "0020000D"], // StudyInstanceUID
       ["dict", "00200052"], // FrameOfReferenceUID
       ["dict", "0020000E"], // SeriesInstanceUID
     ];
 
     const dataset = loadTestInstance();
+    const dataV = data;
     const before: string[] = [];
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
         before.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
       } else {
         before.push(
-          dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]][elementPath[3]].Value[0]
+          dataset[elementPath[0]][elementPath[1]].Value[elementPath[2]][elementPath[3]].Value[0]
         );
       }
     }
@@ -78,7 +79,7 @@ describe("patient", () => {
         actual.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
       } else {
         actual.push(
-          dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]][elementPath[3]].Value[0]
+          dataset[elementPath[0]][elementPath[1]].Value[elementPath[2]][elementPath[3]].Value[0]
         );
       }
     }
@@ -120,7 +121,7 @@ describe("patient", () => {
         before.push(dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0]);
       } else {
         before.push(
-          dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]][elementPath[3]].Value[0]
+          dataset[elementPath[0]][elementPath[1]].Value[elementPath[2]][elementPath[3]].Value[0]
         );
       }
     }
@@ -185,19 +186,19 @@ describe("patient", () => {
 
     const actual = dataset.dict["00100021"].Value[0];
 
-    expect(actual).toBe("WieAuchImmerDiesesToolHeisenWird");
+    expect(actual).toBe("DICOM_ANONYMIZER");
   });
 
-  it("should anonymize issuer of patientID if not empty", () => {
+  it("should not add issuer of patientID if empty", () => {
     const dataset = loadTestInstance();
-    dataset.dict["00100021"].Value[0] = "NOTEMPTY";
+    dataset.dict["00100021"].Value[0] = "";
 
     const anonymizer = new Anonymizer();
     anonymizer.anonymize(dataset);
 
     const actual = dataset.dict["00100021"].Value[0];
 
-    expect(actual).toBe("WieAuchImmerDiesesToolHeisenWird");
+    expect(actual).toBe("");
   });
 
   it("should anonymize female patient name", () => {
@@ -442,5 +443,218 @@ describe("patient", () => {
       expect(new_date_string).not.toBe(original_date_string);
       expect(new_time_string).not.toBe(original_time_string);
     }
+  });
+
+  it("should anonymize date when there is no time", () => {
+    const dataset = loadTestInstance();
+    const original_birth_date = "19830213";
+    populateTag(dataset, "PatientBirthDate", original_birth_date);
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_birt_date = dataset.dict["00100030"].Value[0];
+
+    expect(new_birt_date).not.toBe(original_birth_date);
+    expect(Object.keys(dataset.dict)).not.toContain("PatientBirthTime");
+  });
+
+  it("should anonymize date when there is time", () => {
+    const dataset = loadTestInstance();
+    const original_birth_date = "19830213";
+    const original_birth_time = "123456";
+    populateTag(dataset, "PatientBirthDate", original_birth_date);
+    populateTag(dataset, "PatientBirthTime", original_birth_time);
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_date_string = dataset.dict["00100030"].Value[0];
+    const new_time_string = dataset.dict["00100032"].Value[0];
+
+    expect(new_date_string).not.toEqual(original_birth_date);
+    expect(new_date_string.length).toBe(original_birth_date.length);
+    expect(new_time_string.slice(2)).toEqual(original_birth_time.slice(2));
+    expect(new_time_string.length).toBe(original_birth_time.length);
+  });
+
+  it("should anonymize date when time has various lengths", () => {
+    const elementPaths: string[] = [
+      "",
+      "07",
+      "0911",
+      "131517",
+      "192123.1",
+      "192123.12",
+      "192123.123",
+      "192123.1234",
+      "192123.12345",
+      "192123.123456",
+    ];
+
+    const dataset = loadTestInstance();
+    const original_birth_date = "19830213";
+
+    for (const elementPath of elementPaths) {
+      populateTag(dataset, "PatientBirthDate", original_birth_date);
+      populateTag(dataset, "PatientBirthTime", elementPath);
+      const anonymizer = new Anonymizer();
+      anonymizer.anonymize(dataset);
+      const new_date_string = dataset.dict["00100030"].Value[0];
+      const new_time_string = dataset.dict["00100032"].Value[0];
+
+      expect(new_date_string).not.toBe(original_birth_date);
+      expect(new_date_string.length).toBe(original_birth_date.length);
+      expect(new_time_string.slice(2)).toBe(elementPath.slice(2));
+      expect(new_time_string.length).toBe(elementPath.length);
+    }
+  });
+
+  it("should anonymize multivalue date when there is no time", () => {
+    const dataset = loadTestInstance();
+    const original_birth_date = ["20010401", "20010402"];
+
+    populateTag(dataset, "DateOfLastCalibration", "20010401", "20010402");
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_date_string = dataset.dict["00181200"].Value;
+
+    expect(new_date_string).not.toBe(original_birth_date);
+    expect(new_date_string.length).toBe(original_birth_date.length);
+  });
+
+  it("should anonymize multivalue date with time pair", () => {
+    const dataset = loadTestInstance();
+    const original_date = ["20010401", "20010402"];
+    const original_time = ["120000", "135959"];
+
+    populateTag(dataset, "DateOfLastCalibration", original_date[0], original_date[1]);
+    populateTag(dataset, "TimeOfLastCalibration", original_time[0], original_time[1]);
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_date_string = dataset.dict["00181200"].Value;
+    const new_time_string = dataset.dict["00181201"].Value;
+
+    expect(new_date_string).not.toBe(original_date);
+    expect(new_date_string.length).toBe(original_date.length);
+    expect(new_time_string).not.toBe(original_time);
+    expect(new_time_string.length).toBe(original_time.length);
+  });
+
+  it("should anonymize multivalue date and time pair same with same seed", () => {
+    const dataset1 = loadTestInstance();
+    const dataset2 = loadTestInstance();
+    const original_date = ["20010401", "20010402"];
+    const original_time = ["120000", "135959"];
+
+    populateTag(dataset1, "DateOfLastCalibration", original_date[0], original_date[1]);
+    populateTag(dataset1, "TimeOfLastCalibration", original_time[0], original_time[1]);
+
+    populateTag(dataset2, "DateOfLastCalibration", original_date[0], original_date[1]);
+    populateTag(dataset2, "TimeOfLastCalibration", original_time[0], original_time[1]);
+
+    const anonymizer1 = new Anonymizer(undefined, undefined, undefined, undefined, "123");
+    anonymizer1.anonymize(dataset1);
+    const anonymizer2 = new Anonymizer(undefined, undefined, undefined, undefined, "123");
+    anonymizer2.anonymize(dataset2);
+
+    const new_date1 = dataset1.dict["00181200"].Value;
+    const new_time1 = dataset1.dict["00181201"].Value;
+
+    const new_date2 = dataset2.dict["00181200"].Value;
+    const new_time2 = dataset2.dict["00181201"].Value;
+
+    expect(new_date1).toEqual(new_date2);
+    expect(new_time1).toEqual(new_time2);
+  });
+
+  it("should anonymize datetime", () => {
+    const elementPaths: string[] = [
+      "AcquisitionDateTime",
+      "FrameReferenceDateTime",
+      "FrameAcquisitionDateTime",
+      "StartAcquisitionDateTime",
+      "EndAcquisitionDateTime",
+      "PerformedProcedureStepStartDateTime",
+      "PerformedProcedureStepEndDateTime",
+    ];
+
+    const dataset = loadTestInstance();
+
+    const original_datetime = new Date(1974, 11, 3, 12, 15, 58);
+    const original_datetime_string = original_datetime.toISOString().replace(/[:TZ-]/g, "");
+
+    for (const elementPath of elementPaths) {
+      populateTag(dataset, elementPath, original_datetime_string);
+    }
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    for (const elmentPath of elementPaths) {
+      const tagDict = data.DicomMetaDictionary.nameMap[elmentPath];
+      const tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
+      const new_datetime = dataset.dict[tag].Value[0];
+      expect(new_datetime).not.toEqual(original_datetime_string);
+    }
+  });
+
+  it("should anonymize datetime with various lenghts", () => {
+    const elementPaths: string[] = [
+      "1947",
+      "194711",
+      "19471103",
+      "1947110307",
+      "194711030911",
+      "19471103131517",
+      "19471103192123.1",
+      "19471103192123.12",
+      "19471103192123.123",
+      "19471103192123.1234",
+      "19471103192123.12345",
+      "19471103192123.123456",
+    ];
+
+    const dataset = loadTestInstance();
+    const anonymizer = new Anonymizer();
+
+    for (const elementPath of elementPaths) {
+      populateTag(dataset, "AcquisitionDateTime", elementPath);
+      anonymizer.anonymize(dataset);
+      const new_datetime = dataset.dict["0008002A"].Value[0];
+      expect(new_datetime).not.toEqual(elementPath);
+      expect(new_datetime.length).toBe(elementPath.length);
+    }
+  });
+
+  it("should anonymize mulitvalue datetime", () => {
+    const original_datetime: string[] = ["19741103121558", "19721004161558"];
+
+    const dataset = loadTestInstance();
+    populateTag(dataset, "AcquisitionDateTime", "19741103121558", "19721004161558");
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_datetime = dataset.dict["0008002A"].Value;
+
+    expect(new_datetime).not.toEqual(original_datetime);
+    expect(new_datetime.length).toBe(original_datetime.length);
+  });
+
+  it("should anonymize PatientName also without sex", () => {
+    const dataset = loadTestInstance();
+    delete dataset.dict["00100040"];
+    const old_name = dataset.dict["00100010"].Value[0];
+
+    const anonymizer = new Anonymizer();
+    anonymizer.anonymize(dataset);
+
+    const new_name = dataset.dict["00100010"].Value[0];
+
+    expect(new_name).not.toEqual(old_name);
   });
 });

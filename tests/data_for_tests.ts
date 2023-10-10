@@ -27,7 +27,7 @@ export function loadTestInstance(): data.DicomDict {
   const sourceImageDataset = new data.DicomDict({});
   populateTag(sourceImageDataset, "ReferencedSOPClassUID", "1.2.3.0.1");
   populateTag(sourceImageDataset, "ReferencedSOPInstanceUID", "1.2.3.1.1");
-  populateTag(dataset, "SourceImageSequence", [sourceImageDataset.dict]);
+  populateTag(dataset, "SourceImageSequence", sourceImageDataset.dict);
 
   populateTag(dataset, "OperatorsName", "OPERATOR^FIRST^MIDDLE");
   populateTag(dataset, "NameOfPhysiciansReadingStudy", "READING^FIRST^MIDDLE");
@@ -81,10 +81,12 @@ export function loadTestInstance(): data.DicomDict {
   const other_patient_id_item1 = new data.DicomDict({});
   populateTag(other_patient_id_item1, "PatientID", "opi-1-ID");
   populateTag(other_patient_id_item1, "IssuerOfPatientID", "ISSUER");
-  populateTag(dataset, "OtherPatientIDsSequence", [
+  populateTag(
+    dataset,
+    "OtherPatientIDsSequence",
     other_patient_id_item0.dict,
-    other_patient_id_item1.dict,
-  ]);
+    other_patient_id_item1.dict
+  );
 
   const request_attribute_item = new data.DicomDict({});
   populateTag(request_attribute_item, "RequestedProcedureID", "rai-0-REQID");
