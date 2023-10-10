@@ -9,6 +9,7 @@
     "incremental": true,
     "inlineSources": false,
     "isolatedModules": true,
+    "lib": ["ES2021"],
     "module": "ES2015",
     "moduleResolution": "node",
     "noEmit": true,
