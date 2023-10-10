@@ -30,8 +30,8 @@ export class IDAnonymizer {
     if (this.keywords.includes(data_tag)) {
       this.replace_id(dataset, data_tag);
       return true;
-    } else if (data_tag == this.issuer_tag) {
-      dataset[data_tag].Value[0] = "WieAuchImmerDiesesToolHeisenWird";
+    } else if (data_tag == this.issuer_tag && dataset[data_tag].Value[0] != "") {
+      dataset[data_tag].Value[0] = "DICOM_ANONYMIZER";
       return true;
     } else {
       return false;

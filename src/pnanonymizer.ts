@@ -15,8 +15,11 @@ export class PNAnonymizer {
     if (dataset[data_tag].vr != "PN") {
       return false;
     }
+    let patient_sex = "";
+    if ("00100040" in dataset) {
+      patient_sex = dataset["00100040"].Value[0]; //PatientSex
+    }
 
-    const patient_sex = dataset["00100040"].Value[0]; //PatientSex
     if (dataset[data_tag].Value.length > 1) {
       dataset[data_tag].Value = dataset[data_tag].Value.map((original_name: string) => {
         return this.new_pn(original_name, patient_sex);

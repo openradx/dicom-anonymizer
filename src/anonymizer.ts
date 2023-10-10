@@ -114,7 +114,7 @@ export class Anonymizer {
       this.anonymize_element(dataset, tag, handler);
 
       // If the element is a sequence, recursively walk through its items
-      if (tag in dataset && element.vr === "SQ") {
+      if (tag in dataset && element.vr == "SQ") {
         for (let i = 0; i < element.Value.length; i++) {
           const sequence = element.Value;
           for (const item of sequence) {

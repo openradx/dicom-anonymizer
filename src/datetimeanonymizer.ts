@@ -20,7 +20,7 @@ export class DateTimeAnonymizer {
       return true;
     }
 
-    if (dataset[dataTag].vr != "DA") {
+    if (dataset[dataTag].vr == "DA") {
       this.anonymize_date_and_time(dataset, dataTag);
     } else {
       this.anonymize_datetime(dataset, dataTag);
@@ -47,7 +47,11 @@ export class DateTimeAnonymizer {
 
     dataset[dataTag].Value = newDates;
     if (result.tag != "") {
-      dataset[result.tag].Value = newTimes;
+      try {
+        dataset[result.tag].Value = newTimes;
+      } catch {
+        console.log();
+      }
     }
   };
 
@@ -64,6 +68,7 @@ export class DateTimeAnonymizer {
 
   shiftDateTime = (dateTimeValue: string): string => {
     const dateTimeFormat = "%Y%m%d%H".slice(0, dateTimeValue.length - 2);
+
     const oldDateTime = this.parseDateTime(dateTimeValue);
     const newDateTime = new Date(oldDateTime.getTime() + this.offset);
     let newDateTimeString = this.formatDate(newDateTime, dateTimeFormat);
@@ -95,6 +100,7 @@ export class DateTimeAnonymizer {
     const hours = padZero(date.getHours(), 2);
     const minutes = padZero(date.getMinutes(), 2);
     const seconds = padZero(date.getSeconds(), 2);
+    const milliseconds = padZero(date.getMilliseconds(), 6);
 
     return format
       .replace("%Y", year)
@@ -102,7 +108,8 @@ export class DateTimeAnonymizer {
       .replace("%d", day)
       .replace("%H", hours)
       .replace("%M", minutes)
-      .replace("%S", seconds);
+      .replace("%S", seconds)
+      .replace("%s", milliseconds);
   };
 
   zipLongest = (fillValue = "", ...arr: string[]): string[][] => {
@@ -133,7 +140,7 @@ export class DateTimeAnonymizer {
       } else {
         const returnArg: returnarg = {
           value: "",
-          tag: timeNameTag,
+          tag: "",
         };
         return returnArg;
       }
