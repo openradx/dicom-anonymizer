@@ -1,10 +1,10 @@
 import { data, dataSet } from "dcmjs";
 
 export class PrivatTagAnonymizer {
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    const currTag = data.Tag.fromString(data_tag);
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    const currTag = data.Tag.fromString(dataTag);
     if (currTag.group() % 2 === 1) {
-      delete dataset[data_tag];
+      delete dataset[dataTag];
       return true;
     } else {
       return false;

@@ -7,85 +7,85 @@ export class AddressAnonymizer {
   private randomizer: Randomizer;
   private lists: lists;
 
-  address_tag: string = data.DicomMetaDictionary.nameMap["PatientAddress"].tag;
-  region_tag: string = data.DicomMetaDictionary.nameMap["RegionOfResidence"].tag;
-  country_tag: string = data.DicomMetaDictionary.nameMap["CountryOfResidence"].tag;
-  value_factories: { [key: string]: (original_value: string) => string };
+  addressTag: string = data.DicomMetaDictionary.nameMap["PatientAddress"].tag;
+  regionTag: string = data.DicomMetaDictionary.nameMap["RegionOfResidence"].tag;
+  countryTag: string = data.DicomMetaDictionary.nameMap["CountryOfResidence"].tag;
+  valueFactories: { [key: string]: (originalValue: string) => string };
 
   constructor(Randomizer: Randomizer) {
     this.randomizer = Randomizer;
     this.lists = new lists();
 
-    this.address_tag = data.DicomMetaDictionary.unpunctuateTag(this.address_tag);
-    this.region_tag = data.DicomMetaDictionary.unpunctuateTag(this.region_tag);
-    this.country_tag = data.DicomMetaDictionary.unpunctuateTag(this.country_tag);
+    this.addressTag = data.DicomMetaDictionary.unpunctuateTag(this.addressTag);
+    this.regionTag = data.DicomMetaDictionary.unpunctuateTag(this.regionTag);
+    this.countryTag = data.DicomMetaDictionary.unpunctuateTag(this.countryTag);
 
-    this.value_factories = {
-      [this.address_tag]: this.get_legal_address,
-      [this.region_tag]: this.get_region,
-      [this.country_tag]: this.get_country,
+    this.valueFactories = {
+      [this.addressTag]: this.getLegalAddress,
+      [this.regionTag]: this.getRegion,
+      [this.countryTag]: this.getCountry,
     };
   }
 
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    const value_factory: (original_value: string) => string = this.value_factories[data_tag];
-    if (value_factory == undefined) {
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    const valueFactory: (originalValue: string) => string = this.valueFactories[dataTag];
+    if (valueFactory == undefined) {
       return false;
     }
 
-    if (dataset[data_tag].Value.length > 1) {
-      dataset[data_tag].Value = dataset[data_tag].Value.map((original_value: string) => {
-        return value_factory(original_value);
+    if (dataset[dataTag].Value.length > 1) {
+      dataset[dataTag].Value = dataset[dataTag].Value.map((originalValue: string) => {
+        return valueFactory(originalValue);
       });
 
       return true;
     } else {
-      const original_value: string = dataset[data_tag].Value[0];
-      dataset[data_tag].Value[0] = value_factory(original_value);
+      const originalValue: string = dataset[dataTag].Value[0];
+      dataset[dataTag].Value[0] = valueFactory(originalValue);
 
       return true;
     }
   };
 
-  get_legal_address = (original_value: string): string => {
-    const street: string = this.get_street_address(original_value);
-    const street_number: string = this.get_street_number(original_value);
-    const city: string = this.get_region(original_value);
+  getLegalAddress = (originalValue: string): string => {
+    const street: string = this.getStreetAddress(originalValue);
+    const streetNumber: string = this.getStreetNumber(originalValue);
+    const city: string = this.getRegion(originalValue);
 
-    return `${street_number} ${street}, ${city}`;
+    return `${streetNumber} ${street}, ${city}`;
   };
 
-  get_street_number = (original_value: string): string => {
-    const [street_number_index]: number[] = this.randomizer.getIntsFromRanges(original_value, 1000);
-    const street_number: number = street_number_index + 1;
+  getStreetNumber = (originalValue: string): string => {
+    const [streetNumberIndex]: number[] = this.randomizer.getIntsFromRanges(originalValue, 1000);
+    const streetNumber: number = streetNumberIndex + 1;
 
-    return `${street_number}`;
+    return `${streetNumber}`;
   };
 
-  get_street_address = (original_value: string): string => {
-    const [street_index]: number[] = this.randomizer.getIntsFromRanges(
-      original_value,
+  getStreetAddress = (originalValue: string): string => {
+    const [streetIndex]: number[] = this.randomizer.getIntsFromRanges(
+      originalValue,
       this.lists.streets.length
     );
 
-    return `${this.lists.streets[street_index]}`;
+    return `${this.lists.streets[streetIndex]}`;
   };
 
-  get_region = (original_value: string): string => {
-    const [city_index]: number[] = this.randomizer.getIntsFromRanges(
-      original_value,
+  getRegion = (originalValue: string): string => {
+    const [cityIndex]: number[] = this.randomizer.getIntsFromRanges(
+      originalValue,
       this.lists.cities.length
     );
 
-    return `${this.lists.cities[city_index]}`;
+    return `${this.lists.cities[cityIndex]}`;
   };
 
-  get_country = (original_value: string): string => {
-    const [country_index]: number[] = this.randomizer.getIntsFromRanges(
-      original_value,
+  getCountry = (originalValue: string): string => {
+    const [countryIndex]: number[] = this.randomizer.getIntsFromRanges(
+      originalValue,
       this.lists.countries.length
     );
 
-    return `${this.lists.countries[country_index]}`;
+    return `${this.lists.countries[countryIndex]}`;
   };
 }

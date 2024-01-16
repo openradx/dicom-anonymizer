@@ -8,8 +8,8 @@ type returnarg = {
 export class DateTimeAnonymizer {
   private offset: number;
 
-  constructor(date_offset_hours: number) {
-    this.offset = date_offset_hours * 60 * 60 * 1000;
+  constructor(dateOffsetHours: number) {
+    this.offset = dateOffsetHours * 60 * 60 * 1000;
   }
 
   anonymize = (dataset: dataSet, dataTag: string): boolean => {
@@ -21,15 +21,15 @@ export class DateTimeAnonymizer {
     }
 
     if (dataset[dataTag].vr == "DA") {
-      this.anonymize_date_and_time(dataset, dataTag);
+      this.anonymizeDateAndTime(dataset, dataTag);
     } else {
-      this.anonymize_datetime(dataset, dataTag);
+      this.anonymizeDatetime(dataset, dataTag);
     }
 
     return true;
   };
 
-  anonymize_date_and_time = (dataset: dataSet, dataTag: string): void => {
+  anonymizeDateAndTime = (dataset: dataSet, dataTag: string): void => {
     const dates = dataset[dataTag].Value;
     const result: returnarg = this.checkTag(dataset, dataTag);
 
@@ -55,7 +55,7 @@ export class DateTimeAnonymizer {
     }
   };
 
-  anonymize_datetime = (dataset: dataSet, dataTag: string): void => {
+  anonymizeDatetime = (dataset: dataSet, dataTag: string): void => {
     const dateTimes = dataset[dataTag].Value;
     const newDateTimes: string[] = [];
 

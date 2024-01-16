@@ -2,65 +2,65 @@ import { data, dataSet } from "dcmjs";
 import { AddressAnonymizer } from "./addressanonymizer";
 
 export class InstitutionAnonymizer {
-  private address_anonymizer: AddressAnonymizer;
+  private addressAnonymizer: AddressAnonymizer;
 
-  institution_name: string = data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
-  institution_address: string = data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
-  institutional_department_name: string =
+  institutionName: string = data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
+  institutionAddress: string = data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
+  institutionalDepartmentName: string =
     data.DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
-  value_factories: { [key: string]: (original_value: string) => string };
+  valueFactories: { [key: string]: (originalValue: string) => string };
 
   constructor(AddressAnonymizer: AddressAnonymizer) {
-    this.address_anonymizer = AddressAnonymizer;
+    this.addressAnonymizer = AddressAnonymizer;
 
-    this.institution_name = data.DicomMetaDictionary.unpunctuateTag(this.institution_name);
-    this.institution_address = data.DicomMetaDictionary.unpunctuateTag(this.institution_address);
-    this.institutional_department_name = data.DicomMetaDictionary.unpunctuateTag(
-      this.institutional_department_name
+    this.institutionName = data.DicomMetaDictionary.unpunctuateTag(this.institutionName);
+    this.institutionAddress = data.DicomMetaDictionary.unpunctuateTag(this.institutionAddress);
+    this.institutionalDepartmentName = data.DicomMetaDictionary.unpunctuateTag(
+      this.institutionalDepartmentName
     );
 
-    this.value_factories = {
-      [this.institution_name]: this.anonymize_institution_name,
-      [this.institution_address]: this.anonymize_institution_address,
-      [this.institutional_department_name]: this.anonymize_department_name,
+    this.valueFactories = {
+      [this.institutionName]: this.anonymizeInstitutionName,
+      [this.institutionAddress]: this.anonymizeInstitutionAddress,
+      [this.institutionalDepartmentName]: this.anonymizeDepartmentName,
     };
   }
 
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    const value_factory: (original_value: string) => string = this.value_factories[data_tag];
-    if (value_factory == undefined) {
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    const valueFactory: (originalValue: string) => string = this.valueFactories[dataTag];
+    if (valueFactory == undefined) {
       return false;
     }
 
-    if (dataset[data_tag].Value.length > 1) {
-      dataset[data_tag].Value = dataset[data_tag].Value.map((original_value: string) => {
-        return value_factory(original_value);
+    if (dataset[dataTag].Value.length > 1) {
+      dataset[dataTag].Value = dataset[dataTag].Value.map((originalValue: string) => {
+        return valueFactory(originalValue);
       });
 
       return true;
     } else {
-      const original_value: string = dataset[data_tag].Value[0];
-      dataset[data_tag].Value[0] = value_factory(original_value);
+      const originalValue: string = dataset[dataTag].Value[0];
+      dataset[dataTag].Value[0] = valueFactory(originalValue);
 
       return true;
     }
   };
 
-  anonymize_institution_name = (original_value: string): string => {
-    const region: string = this.address_anonymizer.get_region(original_value);
-    const street_address: string = this.address_anonymizer.get_street_address(original_value);
+  anonymizeInstitutionName = (originalValue: string): string => {
+    const region: string = this.addressAnonymizer.getRegion(originalValue);
+    const streetAddress: string = this.addressAnonymizer.getStreetAddress(originalValue);
 
-    return `${region}'S ${street_address} CLINIC`;
+    return `${region}'S ${streetAddress} CLINIC`;
   };
 
-  anonymize_institution_address = (original_value: string): string => {
-    const full_address: string = this.address_anonymizer.get_legal_address(original_value);
-    const country: string = this.address_anonymizer.get_country(original_value);
+  anonymizeInstitutionAddress = (originalValue: string): string => {
+    const fullAddress: string = this.addressAnonymizer.getLegalAddress(originalValue);
+    const country: string = this.addressAnonymizer.getCountry(originalValue);
 
-    return `${full_address}, ${country}`;
+    return `${fullAddress}, ${country}`;
   };
 
-  anonymize_department_name = (): string => {
+  anonymizeDepartmentName = (): string => {
     return "RADIOLOGY";
   };
 }

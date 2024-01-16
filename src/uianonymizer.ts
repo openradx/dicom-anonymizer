@@ -8,31 +8,31 @@ export class UIAnonymizer {
     this.randomizer = Randomizer;
   }
 
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    const tag = data.DicomMetaDictionary.punctuateTag(data_tag);
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    const tag = data.DicomMetaDictionary.punctuateTag(dataTag);
 
     if (
-      dataset[data_tag].vr != "UI" ||
-      dataset[data_tag].Value[0] == undefined ||
+      dataset[dataTag].vr != "UI" ||
+      dataset[dataTag].Value[0] == undefined ||
       data.DicomMetaDictionary.dictionary[tag].name.endsWith("ClassUID") ||
       data.DicomMetaDictionary.dictionary[tag].name == "TransferSyntaxUID"
     ) {
       return false;
     } else {
-      if (dataset[data_tag].Value.length > 1) {
-        dataset[data_tag].Value = dataset[data_tag].Value.map((original_ui: string) => {
-          return this.new_ui(original_ui);
+      if (dataset[dataTag].Value.length > 1) {
+        dataset[dataTag].Value = dataset[dataTag].Value.map((originalUI: string) => {
+          return this.newUI(originalUI);
         });
       } else {
-        const original_ui = dataset[data_tag].Value[0];
-        dataset[data_tag].Value[0] = this.new_ui(original_ui);
+        const originalUI = dataset[dataTag].Value[0];
+        dataset[dataTag].Value[0] = this.newUI(originalUI);
       }
 
       return true;
     }
   };
 
-  new_ui(orig_ui: string) {
-    return `2.${BigInt(10 ** 39) + this.randomizer.toInt(orig_ui)}`;
+  newUI(origUI: string) {
+    return `2.${BigInt(10 ** 39) + this.randomizer.toInt(origUI)}`;
   }
 }

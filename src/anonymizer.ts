@@ -23,35 +23,35 @@ export class Anonymizer {
   */
 
   private patientID?: string;
-  private date_offset_hours: number;
+  private dateOffsetHours: number;
   randomizer: Randomizer;
-  address_anonymizer: AddressAnonymizer;
-  element_handlers: ElementHandler[];
+  addressAnonymizer: AddressAnonymizer;
+  elementHandlers: ElementHandler[];
 
   constructor(
     patientID?: string,
-    protected_tags?: string[],
+    protectedTags?: string[],
     anonymizePrivateTags?: boolean,
-    id_prefix?: string,
-    id_suffix?: string,
+    idPrefix?: string,
+    idSuffix?: string,
     seed?: string
   ) {
-    const minimum_offset_hours: number = 62 * 24;
-    const maximum_offset_hours: number = 730 * 24;
+    const minimumOffsetHours: number = 62 * 24;
+    const maximumOffsetHours: number = 730 * 24;
     if (patientID) {
       this.patientID = patientID;
     }
     this.randomizer = new Randomizer(seed);
-    this.date_offset_hours = Number(
+    this.dateOffsetHours = Number(
       -(
-        (this.randomizer.toInt("date_offset") %
-          (BigInt(maximum_offset_hours) - BigInt(minimum_offset_hours))) +
-        BigInt(minimum_offset_hours)
+        (this.randomizer.toInt("dateOffset") %
+          (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
+        BigInt(minimumOffsetHours)
       )
     );
     //this.data = data;
-    this.address_anonymizer = new AddressAnonymizer(this.randomizer);
-    this.element_handlers = [
+    this.addressAnonymizer = new AddressAnonymizer(this.randomizer);
+    this.elementHandlers = [
       new UnwantedElementStripper([
         "00101081", //"BranchOfService",
         "00102180", //"Occupation",
@@ -84,28 +84,28 @@ export class Anonymizer {
           "00081010", //"StationName",
           "00200010", //"StudyID"
         ],
-        id_prefix,
-        id_suffix
+        idPrefix,
+        idSuffix
       ).anonymize,
-      this.address_anonymizer.anonymize,
-      new InstitutionAnonymizer(this.address_anonymizer).anonymize,
+      this.addressAnonymizer.anonymize,
+      new InstitutionAnonymizer(this.addressAnonymizer).anonymize,
       new FixedValueAnonymizer("00321033", "").anonymize, // RequestingService
       new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
-      new DateTimeAnonymizer(this.date_offset_hours).anonymize,
+      new DateTimeAnonymizer(this.dateOffsetHours).anonymize,
     ];
-    if (protected_tags) {
-      this.element_handlers.unshift(new ValueKeeper(protected_tags).keep);
+    if (protectedTags) {
+      this.elementHandlers.unshift(new ValueKeeper(protectedTags).keep);
     }
     if (this.patientID) {
-      this.element_handlers.push(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
+      this.elementHandlers.push(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
     }
     if (anonymizePrivateTags) {
-      this.element_handlers.push(new PrivatTagAnonymizer().anonymize);
+      this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
     }
   }
   anonymize(data: data.DicomDict) {
-    this.walk(data.meta, this.element_handlers);
-    this.walk(data.dict, this.element_handlers);
+    this.walk(data.meta, this.elementHandlers);
+    this.walk(data.dict, this.elementHandlers);
   }
 
   walk(dataset: dataSet, handler: ElementHandler[]) {
@@ -113,7 +113,7 @@ export class Anonymizer {
     for (const tag of tagList) {
       const element = dataset[tag];
 
-      this.anonymize_element(dataset, tag, handler);
+      this.anonymizeElement(dataset, tag, handler);
 
       // If the element is a sequence, recursively walk through its items
       if (tag in dataset && element.vr == "SQ") {
@@ -127,7 +127,7 @@ export class Anonymizer {
     }
   }
 
-  anonymize_element(dataset: dataSet, tag: string, handler: ElementHandler[]) {
+  anonymizeElement(dataset: dataSet, tag: string, handler: ElementHandler[]) {
     // Perform operations on the element
     for (const callback of handler) {
       if (callback(dataset, tag)) {

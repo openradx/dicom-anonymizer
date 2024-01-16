@@ -11,50 +11,50 @@ export class PNAnonymizer {
     this.lists = new lists();
   }
 
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    if (dataset[data_tag].vr != "PN") {
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    if (dataset[dataTag].vr != "PN") {
       return false;
     }
-    let patient_sex = "";
+    let patientSex = "";
     if ("00100040" in dataset) {
-      patient_sex = dataset["00100040"].Value[0]; //PatientSex
+      patientSex = dataset["00100040"].Value[0]; //PatientSex
     }
 
-    if (dataset[data_tag].Value.length > 1) {
-      dataset[data_tag].Value = dataset[data_tag].Value.map((original_name: string) => {
-        return this.new_pn(original_name, patient_sex);
+    if (dataset[dataTag].Value.length > 1) {
+      dataset[dataTag].Value = dataset[dataTag].Value.map((originalName: string) => {
+        return this.newPN(originalName, patientSex);
       });
     } else {
-      const original_name = dataset[data_tag].Value[0];
-      dataset[data_tag].Value[0] = this.new_pn(original_name, patient_sex);
+      const originalName = dataset[dataTag].Value[0];
+      dataset[dataTag].Value[0] = this.newPN(originalName, patientSex);
     }
 
     return true;
   };
 
-  new_pn(original_value: string, sex = "") {
-    let first_names: string[];
+  newPN(originalValue: string, sex = "") {
+    let firstNames: string[];
     if (sex == "F") {
-      first_names = this.lists.female_first_names;
+      firstNames = this.lists.femaleFirstNames;
     } else if (sex == "M") {
-      first_names = this.lists.male_first_names;
+      firstNames = this.lists.maleFirstNames;
     } else {
-      first_names = this.lists.all_first_names;
+      firstNames = this.lists.allFirstNames;
     }
-    const last_names = this.lists.last_names;
-    if (original_value != undefined) {
-      original_value = original_value.replaceAll("^", "");
+    const lastNames = this.lists.lastNames;
+    if (originalValue != undefined) {
+      originalValue = originalValue.replaceAll("^", "");
     }
 
     const indices = this.randomizer.getIntsFromRanges(
-      original_value,
-      this.lists.last_names.length,
-      first_names.length,
-      this.lists.all_first_names.length
+      originalValue,
+      this.lists.lastNames.length,
+      firstNames.length,
+      this.lists.allFirstNames.length
     );
 
-    return `${last_names[indices[0]]}^${first_names[indices[1]]}^${
-      this.lists.all_first_names[indices[2]]
+    return `${lastNames[indices[0]]}^${firstNames[indices[1]]}^${
+      this.lists.allFirstNames[indices[2]]
     }`;
   }
 }

@@ -11,14 +11,14 @@ class TagError extends Error {
 }
 
 export class ValueKeeper {
-  private protected_tags: string[] = [];
+  private protectedTags: string[] = [];
 
   constructor(keywords: string[] = []) {
     for (const tag of keywords) {
       let pattern = /^\(?([0-9A-F]{4}),?([0-9A-F]{4})\)?$/;
       let match = tag.match(pattern);
       if (match) {
-        this.protected_tags.push(match[1] + match[2]);
+        this.protectedTags.push(match[1] + match[2]);
       } else {
         pattern = /^[a-zA-Z]+$/;
 
@@ -28,7 +28,7 @@ export class ValueKeeper {
           if (!tempTag) {
             throw new TagError("invalidTag");
           } else {
-            this.protected_tags.push(tempTag.tag);
+            this.protectedTags.push(tempTag.tag);
           }
         } catch (error) {
           if (error instanceof TagError) {
@@ -42,8 +42,8 @@ export class ValueKeeper {
     }
   }
 
-  keep = (_: dataSet, data_tag: string): boolean => {
-    if (this.protected_tags.includes(data_tag)) {
+  keep = (_: dataSet, dataTag: string): boolean => {
+    if (this.protectedTags.includes(dataTag)) {
       return true;
     } else {
       return false;

@@ -2,13 +2,13 @@ export class lists {
   public streets: string[];
   public cities: string[];
   public countries: string[];
-  public female_first_names: string[];
-  public male_first_names: string[];
-  public all_first_names: string[];
-  public last_names: string[];
+  public femaleFirstNames: string[];
+  public maleFirstNames: string[];
+  public allFirstNames: string[];
+  public lastNames: string[];
 
   constructor() {
-    this.female_first_names = [
+    this.femaleFirstNames = [
       "MARY",
       "PATRICIA",
       "LINDA",
@@ -1010,7 +1010,7 @@ export class lists {
       "TERRA",
       "CELINA",
     ];
-    this.male_first_names = [
+    this.maleFirstNames = [
       "JAMES",
       "JOHN",
       "ROBERT",
@@ -2012,8 +2012,8 @@ export class lists {
       "JEFFEREY",
       "AHMED",
     ];
-    this.all_first_names = this.female_first_names.concat(this.male_first_names);
-    this.last_names = [
+    this.allFirstNames = this.femaleFirstNames.concat(this.maleFirstNames);
+    this.lastNames = [
       "SMITH",
       "JOHNSON",
       "WILLIAMS",

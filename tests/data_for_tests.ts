@@ -8,17 +8,17 @@ export function loadInstance(
   instanceNumber = 1
 ): data.DicomDict {
   const dataset = loadMinimalInstance();
-  _setPatientAttributes(dataset, patientNumber);
-  _setStudyAttributes(dataset, patientNumber, studyNumber);
-  _setSeriesAttributes(dataset, patientNumber, studyNumber, seriesNumber);
-  _setInstanceAttributes(dataset, patientNumber, studyNumber, seriesNumber, instanceNumber);
+  setPatientAttributes(dataset, patientNumber);
+  setStudyAttributes(dataset, patientNumber, studyNumber);
+  setSeriesAttributes(dataset, patientNumber, studyNumber, seriesNumber);
+  setInstanceAttributes(dataset, patientNumber, studyNumber, seriesNumber, instanceNumber);
   return dataset;
 }
 
 export function loadMinimalInstance(): data.DicomDict {
-  const filePath_dicom = "./samples";
-  const files: string[] = fs.readdirSync(filePath_dicom);
-  const fileBuffer = fs.readFileSync(filePath_dicom + "/" + files[10]).buffer;
+  const filePathDicom = "./samples";
+  const files: string[] = fs.readdirSync(filePathDicom);
+  const fileBuffer = fs.readFileSync(filePathDicom + "/" + files[10]).buffer;
   return data.DicomMessage.readFile(fileBuffer);
 }
 
@@ -63,35 +63,35 @@ export function loadTestInstance(): data.DicomDict {
   populateTag(dataset, "PatientReligiousPreference", "PRIVATE");
   populateTag(dataset, "MedicalRecordLocator", "FILING CABINET 1");
 
-  const referenced_sop_item = new data.DicomDict({});
-  populateTag(referenced_sop_item, "ReferencedSOPClassUID", "2.3.4.5.6.7");
-  populateTag(referenced_sop_item, "ReferencedSOPInstanceUID", "2.3.4.5.6.7.1.2.3");
+  const referencedSOPItem = new data.DicomDict({});
+  populateTag(referencedSOPItem, "ReferencedSOPClassUID", "2.3.4.5.6.7");
+  populateTag(referencedSOPItem, "ReferencedSOPInstanceUID", "2.3.4.5.6.7.1.2.3");
   const item = new data.DicomDict({});
   populateTag(item, "TypeOfInstances", "DICOM");
   populateTag(item, "StudyInstanceUID", "1.2.3.4.5.6");
   populateTag(item, "SeriesInstanceUID", "1.2.3.4.5.6.1");
-  populateTag(item, "ReferencedSOPSequence", referenced_sop_item.dict);
+  populateTag(item, "ReferencedSOPSequence", referencedSOPItem.dict);
   populateTag(dataset, "ReferencedPatientPhotoSequence", item.dict);
 
   populateTag(dataset, "ResponsibleOrganization", "RESPONSIBLE ORGANIZATION");
 
-  const other_patient_id_item0 = new data.DicomDict({});
-  populateTag(other_patient_id_item0, "PatientID", "opi-0-ID");
-  populateTag(other_patient_id_item0, "IssuerOfPatientID", "ISSUER");
-  const other_patient_id_item1 = new data.DicomDict({});
-  populateTag(other_patient_id_item1, "PatientID", "opi-1-ID");
-  populateTag(other_patient_id_item1, "IssuerOfPatientID", "ISSUER");
+  const otherPatientIDItem0 = new data.DicomDict({});
+  populateTag(otherPatientIDItem0, "PatientID", "opi-0-ID");
+  populateTag(otherPatientIDItem0, "IssuerOfPatientID", "ISSUER");
+  const otherPatientIDItem1 = new data.DicomDict({});
+  populateTag(otherPatientIDItem1, "PatientID", "opi-1-ID");
+  populateTag(otherPatientIDItem1, "IssuerOfPatientID", "ISSUER");
   populateTag(
     dataset,
     "OtherPatientIDsSequence",
-    other_patient_id_item0.dict,
-    other_patient_id_item1.dict
+    otherPatientIDItem0.dict,
+    otherPatientIDItem1.dict
   );
 
-  const request_attribute_item = new data.DicomDict({});
-  populateTag(request_attribute_item, "RequestedProcedureID", "rai-0-REQID");
-  populateTag(request_attribute_item, "ScheduledProcedureStepID", "rai-0-SCHEDID");
-  populateTag(dataset, "RequestAttributesSequence", request_attribute_item.dict);
+  const request_attributeItem = new data.DicomDict({});
+  populateTag(request_attributeItem, "RequestedProcedureID", "rai-0-REQID");
+  populateTag(request_attributeItem, "ScheduledProcedureStepID", "rai-0-SCHEDID");
+  populateTag(dataset, "RequestAttributesSequence", request_attributeItem.dict);
 
   populateTag(dataset, "InstitutionName", "INSTITUTIONNAME");
   populateTag(dataset, "InstitutionAddress", "INSTITUTIONADDRESS");
@@ -104,16 +104,16 @@ export function loadTestInstance(): data.DicomDict {
   return dataset;
 }
 
-function _setPatientAttributes(dataset: data.DicomDict, patientNumber: number): void {
+function setPatientAttributes(dataset: data.DicomDict, patientNumber: number): void {
   populateTag(dataset, "PatientAddress", `${123 + patientNumber} Fake Street`);
   populateTag(dataset, "PatientBirthDate", `${19830213 + patientNumber}`);
   populateTag(dataset, "PatientBirthTime", `13140${patientNumber}`);
   populateTag(dataset, "PatientID", `4MR${patientNumber}`);
   populateTag(dataset, "PatientName", `CompressedSamples^MR${patientNumber}`);
   populateTag(dataset, "OtherPatientIDs", `OTH${dataset.dict["00100020"].Value[0]}`); //PatientID
-  const other_patient_id_item = new data.DicomDict({});
-  populateTag(other_patient_id_item, "PatientID", `OTHSEQ${dataset.dict["00100020"].Value[0]}`); //PatientID
-  populateTag(dataset, "OtherPatientIDsSequence", other_patient_id_item.dict);
+  const otherPatientIDItem = new data.DicomDict({});
+  populateTag(otherPatientIDItem, "PatientID", `OTHSEQ${dataset.dict["00100020"].Value[0]}`); //PatientID
+  populateTag(dataset, "OtherPatientIDsSequence", otherPatientIDItem.dict);
 
   populateTag(dataset, "OtherPatientNames", `Other${dataset.dict["00100010"].Value[0]}`); //PatientName
   populateTag(dataset, "PatientBirthName", `Birth${dataset.dict["00100010"].Value[0]}`); //PatientName
@@ -121,7 +121,7 @@ function _setPatientAttributes(dataset: data.DicomDict, patientNumber: number): 
   populateTag(dataset, "ResponsiblePerson", `Responsible${dataset.dict["00100010"].Value[0]}`); //PatientName
 }
 
-function _setStudyAttributes(
+function setStudyAttributes(
   dataset: data.DicomDict,
   patientNumber: number,
   studyNumber: number
@@ -156,7 +156,7 @@ function _setStudyAttributes(
   ); //StudyID
 }
 
-function _setSeriesAttributes(
+function setSeriesAttributes(
   dataset: data.DicomDict,
   patientNumber: number,
   studyNumber: number,
@@ -190,7 +190,7 @@ function _setSeriesAttributes(
   populateTag(dataset, "StationName", `STATIONNAME${seriesSuffix}`);
 }
 
-function _setInstanceAttributes(
+function setInstanceAttributes(
   dataset: data.DicomDict,
   patientNumber: number,
   studyNumber: number,

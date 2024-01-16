@@ -9,9 +9,9 @@ export class FixedValueAnonymizer {
     this.value = value;
   }
 
-  anonymize = (dataset: dataSet, data_tag: string): boolean => {
-    if (data_tag == this.tag) {
-      dataset[data_tag].Value[0] = this.value;
+  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+    if (dataTag == this.tag) {
+      dataset[dataTag].Value[0] = this.value;
 
       return true;
     } else {
