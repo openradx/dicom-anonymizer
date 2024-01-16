@@ -63,7 +63,9 @@ declare module "dcmjs" {
     }
 
     export class Tag {
+      constructor(value: object);
       static fromString(str: string): Tag;
+      static fromPString(str: string): Tag;
       group(): number;
       toString(): string;
       toCleanString(): string;

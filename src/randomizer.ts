@@ -35,9 +35,7 @@ export class Randomizer {
       result *= 0x100;
       result += byte;
     }
-    const res = BigInt(result);
-
-    return res;
+    return BigInt(result);
   }
 
   private generateRandomSeed(): string {
@@ -54,9 +52,7 @@ export class Randomizer {
     const encoder = new TextEncoder();
     const encoded = encoder.encode(message);
     const hashed = this.calculateMD5Digest(encoded);
-    const result = this.calculateResult(hashed);
-
-    return result;
+    return this.calculateResult(hashed);
   }
 
   public getIntsFromRanges(originalValue: string, ...suprema: number[]): number[] {

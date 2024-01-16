@@ -557,9 +557,9 @@ describe("patient", () => {
     populateTag(dataset2, "DateOfLastCalibration", original_date[0], original_date[1]);
     populateTag(dataset2, "TimeOfLastCalibration", original_time[0], original_time[1]);
 
-    const anonymizer1 = new Anonymizer(undefined, undefined, undefined, undefined, "123");
+    const anonymizer1 = new Anonymizer(undefined, undefined, true, undefined, undefined, "123");
     anonymizer1.anonymize(dataset1);
-    const anonymizer2 = new Anonymizer(undefined, undefined, undefined, undefined, "123");
+    const anonymizer2 = new Anonymizer(undefined, undefined, true, undefined, undefined, "123");
     anonymizer2.anonymize(dataset2);
 
     const new_date1 = dataset1.dict["00181200"].Value;

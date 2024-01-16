@@ -12,5 +12,6 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "testing.automaticallyOpenPeekView": "never"
 }
