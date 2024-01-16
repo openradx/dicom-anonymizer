@@ -5,10 +5,11 @@ import { FixedValueAnonymizer } from "./fixedvalueanonymizer";
 import { IDAnonymizer } from "./idanonymizer";
 import { InstitutionAnonymizer } from "./institutionanonymizer";
 import { PNAnonymizer } from "./pnanonymizer";
-import { Protector } from "./protector";
+import { PrivatTagAnonymizer } from "./privatetaganonymizer";
 import { Randomizer } from "./randomizer";
 import { UIAnonymizer } from "./uianonymizer";
 import { UnwantedElementStripper } from "./unwantedelements";
+import { ValueKeeper } from "./valuekeeper";
 
 type ElementHandler = (dataset: dataSet, tag: string) => boolean;
 
@@ -30,6 +31,7 @@ export class Anonymizer {
   constructor(
     patientID?: string,
     protected_tags?: string[],
+    anonymizePrivateTags?: boolean,
     id_prefix?: string,
     id_suffix?: string,
     seed?: string
@@ -50,7 +52,6 @@ export class Anonymizer {
     //this.data = data;
     this.address_anonymizer = new AddressAnonymizer(this.randomizer);
     this.element_handlers = [
-      new Protector(protected_tags).protect,
       new UnwantedElementStripper([
         "00101081", //"BranchOfService",
         "00102180", //"Occupation",
@@ -92,11 +93,16 @@ export class Anonymizer {
       new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
       new DateTimeAnonymizer(this.date_offset_hours).anonymize,
     ];
-    if (patientID) {
-      this.element_handlers.push(new FixedValueAnonymizer("00100020", patientID).anonymize);
+    if (protected_tags) {
+      this.element_handlers.unshift(new ValueKeeper(protected_tags).keep);
+    }
+    if (this.patientID) {
+      this.element_handlers.push(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
+    }
+    if (anonymizePrivateTags) {
+      this.element_handlers.push(new PrivatTagAnonymizer().anonymize);
     }
   }
-
   anonymize(data: data.DicomDict) {
     this.walk(data.meta, this.element_handlers);
     this.walk(data.dict, this.element_handlers);
@@ -106,10 +112,6 @@ export class Anonymizer {
     const tagList = Object.keys(dataset);
     for (const tag of tagList) {
       const element = dataset[tag];
-
-      if (this.del_private_tags(dataset, tag)) {
-        continue;
-      }
 
       this.anonymize_element(dataset, tag, handler);
 
@@ -132,16 +134,5 @@ export class Anonymizer {
         return;
       }
     }
-  }
-
-  del_private_tags(dataset: dataSet, data_tag: string): boolean {
-    const currTag = data.Tag.fromString(data_tag);
-    if (currTag.group() % 2 === 1) {
-      delete dataset[data_tag];
-      return true;
-    } else {
-      return false;
-    }
-    //return true
   }
 }
