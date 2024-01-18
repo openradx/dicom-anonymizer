@@ -1,4 +1,5 @@
 import * as crypto from "crypto";
+import { data } from "dcmjs";
 import getRandomValues from "get-random-values";
 
 // use only in node env
@@ -25,8 +26,12 @@ export class Randomizer {
   private calculateMD5Digest(data: Uint8Array): Uint8Array {
     const hash = crypto.createHash("md5");
     hash.update(data);
-
     return hash.digest();
+  }
+
+  private async calculateMD5DigestWeb(data: Uint8Array): Promise<Uint8Array> {
+    const hashBuffer = await crypto.subtle.digest("MD5", data);
+    return new Uint8Array(hashBuffer);
   }
 
   private calculateResult(hash: Uint8Array): bigint {
@@ -47,23 +52,37 @@ export class Randomizer {
     return seed;
   }
 
-  public toInt(originalValue: string): bigint {
+  public toInt(originalValue: string, callback: (result: bigint) => void): void {
     const message = this.seed + String(originalValue);
     const encoder = new TextEncoder();
     const encoded = encoder.encode(message);
-    const hashed = this.calculateMD5Digest(encoded);
-    return this.calculateResult(hashed);
+
+    if (typeof window !== "undefined") {
+      this.calculateMD5DigestWeb(encoded).then((hashBuffer) => {
+        const hashed = hashBuffer;
+        const result = this.calculateResult(hashed);
+        callback(result);
+      });
+    } else {
+      const hashed = this.calculateMD5Digest(encoded);
+      const result = this.calculateResult(hashed);
+      callback(result);
+    }
   }
 
   public getIntsFromRanges(originalValue: string, ...suprema: number[]): number[] {
-    let big_Int = this.toInt(originalValue);
-    const result: number[] = [];
-    for (const x of suprema) {
-      const s = BigInt(x);
-      result.push(Number(big_Int % s));
-      big_Int = big_Int / s;
-    }
+    let result: bigint | number[] = [];
+    this.toInt(originalValue, (res) => {
+      let bigNumber = res;
+      const arr: number[] = [];
+      for (const x of suprema) {
+        const s = BigInt(x);
+        arr.push(Number(bigNumber % s));
+        bigNumber = bigNumber / s;
+      }
 
+      result = arr;
+    });
     return result;
   }
 }

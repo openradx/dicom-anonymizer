@@ -42,13 +42,15 @@ export class Anonymizer {
       this.patientID = patientID;
     }
     this.randomizer = new Randomizer(seed);
-    this.dateOffsetHours = Number(
-      -(
-        (this.randomizer.toInt("dateOffset") %
-          (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
-        BigInt(minimumOffsetHours)
-      )
-    );
+    this.dateOffsetHours = Number(0);
+    this.randomizer.toInt("dateOffset", (res) => {
+      this.dateOffsetHours = Number(
+        -(
+          (res % (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
+          BigInt(minimumOffsetHours)
+        )
+      );
+    });
     //this.data = data;
     this.addressAnonymizer = new AddressAnonymizer(this.randomizer);
     this.elementHandlers = [

@@ -33,6 +33,10 @@ export class UIAnonymizer {
   };
 
   newUI(origUI: string) {
-    return `2.${BigInt(10 ** 39) + this.randomizer.toInt(origUI)}`;
+    let number4String = BigInt(0);
+    this.randomizer.toInt(origUI, (res) => {
+      number4String = res;
+    });
+    return `2.${BigInt(10 ** 39) + number4String}`;
   }
 }
