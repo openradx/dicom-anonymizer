@@ -1,5 +1,4 @@
-import * as crypto from "crypto";
-import { data } from "dcmjs";
+// import * as crypto from "crypto";
 import getRandomValues from "get-random-values";
 
 // use only in node env
@@ -15,22 +14,16 @@ export class Randomizer {
     }
   }
 
-  /* for Browserenvironment
-  private generateRandomBytes(length: number): Uint8Array {
-    const randomValues = new Uint8Array(length);
-    
-    return randomValues;
-  }
-  */
+  
+  // For Node work
+  // private calculateMD5Digest(data: Uint8Array): Uint8Array {
+  //   const hash = crypto.createHash("md5");
+  //   hash.update(data);
+  //   return hash.digest();
+  // }
 
-  private calculateMD5Digest(data: Uint8Array): Uint8Array {
-    const hash = crypto.createHash("md5");
-    hash.update(data);
-    return hash.digest();
-  }
-
-  private async calculateMD5DigestWeb(data: Uint8Array): Promise<Uint8Array> {
-    const hashBuffer = await crypto.subtle.digest("MD5", data);
+  private async calculateSHADigestWeb(array: Uint8Array): Promise<Uint8Array> {
+    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
     return new Uint8Array(hashBuffer);
   }
 
@@ -58,15 +51,15 @@ export class Randomizer {
     const encoded = encoder.encode(message);
 
     if (typeof window !== "undefined") {
-      this.calculateMD5DigestWeb(encoded).then((hashBuffer) => {
+      this.calculateSHADigestWeb(encoded).then((hashBuffer) => {
         const hashed = hashBuffer;
         const result = this.calculateResult(hashed);
         callback(result);
       });
     } else {
-      const hashed = this.calculateMD5Digest(encoded);
-      const result = this.calculateResult(hashed);
-      callback(result);
+      // const hashed = this.calculateMD5Digest(encoded);
+      // const result = this.calculateResult(hashed);
+      // callback(result);
     }
   }
 
