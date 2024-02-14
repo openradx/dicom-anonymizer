@@ -9,7 +9,7 @@ export class FixedValueAnonymizer {
     this.value = value;
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     if (dataTag == this.tag) {
       dataset[dataTag].Value[0] = this.value;
 

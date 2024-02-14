@@ -6,33 +6,38 @@ export class PNAnonymizer {
   private randomizer: Randomizer;
   lists: lists;
 
-  constructor(Randomizer: Randomizer) {
-    this.randomizer = Randomizer;
+  constructor(randomizer: Randomizer) {
+    this.randomizer = randomizer;
     this.lists = new lists();
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     if (dataset[dataTag].vr != "PN") {
       return false;
     }
+
     let patientSex = "";
     if ("00100040" in dataset) {
       patientSex = dataset["00100040"].Value[0]; //PatientSex
     }
 
     if (dataset[dataTag].Value.length > 1) {
-      dataset[dataTag].Value = dataset[dataTag].Value.map((originalName: string) => {
-        return this.newPN(originalName, patientSex);
-      });
+      for (let i = 0; i < dataset[dataTag].Value.length; i++) {
+        dataset[dataTag].Value[i].Alphabetic = await this.newPN(
+          dataset[dataTag].Value[i].Alphabetic,
+          patientSex
+        );
+      }
     } else {
-      const originalName = dataset[dataTag].Value[0];
-      dataset[dataTag].Value[0] = this.newPN(originalName, patientSex);
+      const originalName = dataset[dataTag].Value[0].Alphabetic;
+
+      dataset[dataTag].Value[0].Alphabetic = await this.newPN(originalName, patientSex);
     }
 
     return true;
   };
 
-  newPN(originalValue: string, sex = "") {
+  async newPN(originalValue: string, sex = "") {
     let firstNames: string[];
     if (sex == "F") {
       firstNames = this.lists.femaleFirstNames;
@@ -46,7 +51,7 @@ export class PNAnonymizer {
       originalValue = originalValue.replaceAll("^", "");
     }
 
-    const indices = this.randomizer.getIntsFromRanges(
+    const indices = await this.randomizer.getIntsFromRanges(
       originalValue,
       this.lists.lastNames.length,
       firstNames.length,

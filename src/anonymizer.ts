@@ -11,7 +11,7 @@ import { UIAnonymizer } from "./uianonymizer";
 import { UnwantedElementStripper } from "./unwantedelements";
 import { ValueKeeper } from "./valuekeeper";
 
-type ElementHandler = (dataset: dataSet, tag: string) => boolean;
+type ElementHandler = (dataset: dataSet, tag: string) => boolean | Promise<boolean>;
 
 export class Anonymizer {
   /**
@@ -23,7 +23,8 @@ export class Anonymizer {
   */
 
   private patientID?: string;
-  private dateOffsetHours: number;
+  private anonymizePrivateTags?: boolean = true;
+  private dateOffsetHours = 0;
   randomizer: Randomizer;
   addressAnonymizer: AddressAnonymizer;
   elementHandlers: ElementHandler[];
@@ -36,22 +37,16 @@ export class Anonymizer {
     idSuffix?: string,
     seed?: string
   ) {
-    const minimumOffsetHours: number = 62 * 24;
-    const maximumOffsetHours: number = 730 * 24;
     if (patientID) {
       this.patientID = patientID;
     }
+    if (anonymizePrivateTags) {
+      this.anonymizePrivateTags = anonymizePrivateTags;
+    }
+
     this.randomizer = new Randomizer(seed);
-    this.dateOffsetHours = Number(0);
-    this.randomizer.toInt("dateOffset", (res) => {
-      this.dateOffsetHours = Number(
-        -(
-          (res % (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
-          BigInt(minimumOffsetHours)
-        )
-      );
-    });
-    //this.data = data;
+    this.setOffset();
+
     this.addressAnonymizer = new AddressAnonymizer(this.randomizer);
     this.elementHandlers = [
       new UnwantedElementStripper([
@@ -93,29 +88,44 @@ export class Anonymizer {
       new InstitutionAnonymizer(this.addressAnonymizer).anonymize,
       new FixedValueAnonymizer("00321033", "").anonymize, // RequestingService
       new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
-      new DateTimeAnonymizer(this.dateOffsetHours).anonymize,
     ];
     if (protectedTags) {
       this.elementHandlers.unshift(new ValueKeeper(protectedTags).keep);
     }
     if (this.patientID) {
-      this.elementHandlers.push(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
+      this.elementHandlers.unshift(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
     }
-    if (anonymizePrivateTags) {
+    if (this.anonymizePrivateTags) {
       this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
     }
   }
-  anonymize(data: data.DicomDict) {
-    this.walk(data.meta, this.elementHandlers);
-    this.walk(data.dict, this.elementHandlers);
+  async setOffset() {
+    const res = await this.randomizer.toInt("dateOffset");
+    const minimumOffsetHours: number = 62 * 24;
+    const maximumOffsetHours: number = 730 * 24;
+    console.log(res);
+    this.dateOffsetHours = Number(
+      -(
+        (res % (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
+        BigInt(minimumOffsetHours)
+      )
+    );
+
+    this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
   }
 
-  walk(dataset: dataSet, handler: ElementHandler[]) {
+  async anonymize(dcmDict: data.DicomDict) {
+    await this.walk(dcmDict.meta, this.elementHandlers);
+    await this.walk(dcmDict.dict, this.elementHandlers);
+  }
+
+  async walk(dataset: dataSet, handler: ElementHandler[]) {
     const tagList = Object.keys(dataset);
+
     for (const tag of tagList) {
       const element = dataset[tag];
 
-      this.anonymizeElement(dataset, tag, handler);
+      await this.anonymizeElement(dataset, tag, handler);
 
       // If the element is a sequence, recursively walk through its items
       if (tag in dataset && element.vr == "SQ") {
@@ -129,10 +139,13 @@ export class Anonymizer {
     }
   }
 
-  anonymizeElement(dataset: dataSet, tag: string, handler: ElementHandler[]) {
+  async anonymizeElement(dataset: dataSet, tag: string, handler: ElementHandler[]) {
     // Perform operations on the element
+
     for (const callback of handler) {
-      if (callback(dataset, tag)) {
+      const result = await callback(dataset, tag);
+
+      if (result) {
         return;
       }
     }

@@ -12,7 +12,7 @@ export class DateTimeAnonymizer {
     this.offset = dateOffsetHours * 60 * 60 * 1000;
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     if (dataset[dataTag].vr != "DA" && dataset[dataTag].vr != "DT") {
       return false;
     }
@@ -21,9 +21,9 @@ export class DateTimeAnonymizer {
     }
 
     if (dataset[dataTag].vr == "DA") {
-      this.anonymizeDateAndTime(dataset, dataTag);
+      await this.anonymizeDateAndTime(dataset, dataTag);
     } else {
-      this.anonymizeDatetime(dataset, dataTag);
+      await this.anonymizeDatetime(dataset, dataTag);
     }
 
     return true;

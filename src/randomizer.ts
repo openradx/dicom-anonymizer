@@ -14,7 +14,6 @@ export class Randomizer {
     }
   }
 
-  
   // For Node work
   // private calculateMD5Digest(data: Uint8Array): Uint8Array {
   //   const hash = crypto.createHash("md5");
@@ -38,44 +37,56 @@ export class Randomizer {
 
   private generateRandomSeed(): string {
     const randomValues = new Uint8Array(20);
-    getRandomValues(randomValues);
-    // window.crypto.getRandomValues(randomValues); -> use in browser env
+
+    if (typeof window !== "undefined") {
+      window.crypto.getRandomValues(randomValues); //-> use in browser env
+    } else {
+      getRandomValues(randomValues);
+    }
+
     const seed = Array.from(randomValues, (byte) => byte.toString(16).padStart(2, "0")).join("");
 
     return seed;
   }
 
-  public toInt(originalValue: string, callback: (result: bigint) => void): void {
+  // public toInt(originalValue: string, callback: (result: bigint) => void): void {
+  //   const message = this.seed + String(originalValue);
+  //   const encoder = new TextEncoder();
+  //   const encoded = encoder.encode(message);
+
+  //   if (typeof window !== "undefined") {
+  //     this.calculateSHADigestWeb(encoded).then((hashBuffer) => {
+  //       const hashed = hashBuffer;
+  //       const result = this.calculateResult(hashed);
+  //       callback(result);
+  //     });
+  //   } else {
+  //     // const hashed = this.calculateMD5Digest(encoded);
+  //     // const result = this.calculateResult(hashed);
+  //     // callback(result);
+  //   }
+  // }
+  public async toInt(originalValue: string): Promise<bigint> {
     const message = this.seed + String(originalValue);
     const encoder = new TextEncoder();
     const encoded = encoder.encode(message);
+    const hashed = await this.calculateSHADigestWeb(encoded);
+    const result = this.calculateResult(hashed);
 
-    if (typeof window !== "undefined") {
-      this.calculateSHADigestWeb(encoded).then((hashBuffer) => {
-        const hashed = hashBuffer;
-        const result = this.calculateResult(hashed);
-        callback(result);
-      });
-    } else {
-      // const hashed = this.calculateMD5Digest(encoded);
-      // const result = this.calculateResult(hashed);
-      // callback(result);
-    }
+    return result;
   }
-
-  public getIntsFromRanges(originalValue: string, ...suprema: number[]): number[] {
+  public async getIntsFromRanges(originalValue: string, ...suprema: number[]): Promise<number[]> {
     let result: bigint | number[] = [];
-    this.toInt(originalValue, (res) => {
-      let bigNumber = res;
-      const arr: number[] = [];
-      for (const x of suprema) {
-        const s = BigInt(x);
-        arr.push(Number(bigNumber % s));
-        bigNumber = bigNumber / s;
-      }
+    let bigNumber = await this.toInt(originalValue);
+    const arr: number[] = [];
+    for (const x of suprema) {
+      const s = BigInt(x);
+      arr.push(Number(bigNumber % s));
+      bigNumber = bigNumber / s;
+    }
 
-      result = arr;
-    });
+    result = arr;
+
     return result;
   }
 }

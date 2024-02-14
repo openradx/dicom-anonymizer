@@ -8,7 +8,7 @@ export class UIAnonymizer {
     this.randomizer = Randomizer;
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     const tag = data.DicomMetaDictionary.punctuateTag(dataTag);
 
     if (
@@ -20,23 +20,21 @@ export class UIAnonymizer {
       return false;
     } else {
       if (dataset[dataTag].Value.length > 1) {
-        dataset[dataTag].Value = dataset[dataTag].Value.map((originalUI: string) => {
-          return this.newUI(originalUI);
-        });
+        for (let i = 0; i < dataset[dataTag].Value.length; i++) {
+          dataset[dataTag].Value[i] = await this.newUI(dataset[dataTag].Value[i]);
+        }
       } else {
         const originalUI = dataset[dataTag].Value[0];
-        dataset[dataTag].Value[0] = this.newUI(originalUI);
+        dataset[dataTag].Value[0] = await this.newUI(originalUI);
       }
 
       return true;
     }
   };
 
-  newUI(origUI: string) {
-    let number4String = BigInt(0);
-    this.randomizer.toInt(origUI, (res) => {
-      number4String = res;
-    });
+  async newUI(origUI: string) {
+    const result = await this.randomizer.toInt(origUI);
+    const number4String = BigInt(result);
     return `2.${BigInt(10 ** 39) + number4String}`;
   }
 }

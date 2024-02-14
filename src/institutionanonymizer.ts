@@ -8,7 +8,7 @@ export class InstitutionAnonymizer {
   institutionAddress: string = data.DicomMetaDictionary.nameMap["InstitutionAddress"].tag; //0008,0081
   institutionalDepartmentName: string =
     data.DicomMetaDictionary.nameMap["InstitutionalDepartmentName"].tag; //0008,1040
-  valueFactories: { [key: string]: (originalValue: string) => string };
+  valueFactories; //: { [key: string]: (originalValue: string) => string };
 
   constructor(AddressAnonymizer: AddressAnonymizer) {
     this.addressAnonymizer = AddressAnonymizer;
@@ -26,41 +26,49 @@ export class InstitutionAnonymizer {
     };
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
-    const valueFactory: (originalValue: string) => string = this.valueFactories[dataTag];
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
+    const valueFactory: (originalValue: string) => Promise<string> = await this.valueFactories[
+      dataTag
+    ];
     if (valueFactory == undefined) {
       return false;
     }
 
     if (dataset[dataTag].Value.length > 1) {
-      dataset[dataTag].Value = dataset[dataTag].Value.map((originalValue: string) => {
-        return valueFactory(originalValue);
-      });
+      for (let i = 0; i < dataset[dataTag].Value.length; i++) {
+        dataset[dataTag].Value[i] = await valueFactory(dataset[dataTag].Value[i]);
+      }
+      // dataset[dataTag].Value = await dataset[dataTag].Value.map((originalValue: string) => {
+      //   return valueFactory(originalValue);
+      // });
 
       return true;
     } else {
       const originalValue: string = dataset[dataTag].Value[0];
-      dataset[dataTag].Value[0] = valueFactory(originalValue);
+      dataset[dataTag].Value[0] = await valueFactory(originalValue);
 
       return true;
     }
   };
 
-  anonymizeInstitutionName = (originalValue: string): string => {
-    const region: string = this.addressAnonymizer.getRegion(originalValue);
-    const streetAddress: string = this.addressAnonymizer.getStreetAddress(originalValue);
+  anonymizeInstitutionName = async (originalValue: string): Promise<string> => {
+    const region = await this.addressAnonymizer.getRegion(originalValue);
+    const streetAddress = await this.addressAnonymizer.getStreetAddress(originalValue);
+    const returnString = `${region}'S ${streetAddress} CLINIC`;
 
-    return `${region}'S ${streetAddress} CLINIC`;
+    return returnString;
   };
 
-  anonymizeInstitutionAddress = (originalValue: string): string => {
-    const fullAddress: string = this.addressAnonymizer.getLegalAddress(originalValue);
-    const country: string = this.addressAnonymizer.getCountry(originalValue);
+  anonymizeInstitutionAddress = async (originalValue: string): Promise<string> => {
+    const fullAddress = await this.addressAnonymizer.getLegalAddress(originalValue);
+    const country = await this.addressAnonymizer.getCountry(originalValue);
 
-    return `${fullAddress}, ${country}`;
+    const returnString = `${fullAddress}, ${country}`;
+
+    return returnString;
   };
 
-  anonymizeDepartmentName = (): string => {
-    return "RADIOLOGY";
+  anonymizeDepartmentName = (): Promise<string> => {
+    return Promise.resolve("RADIOLOGY");
   };
 }

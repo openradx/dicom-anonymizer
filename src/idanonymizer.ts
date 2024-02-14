@@ -25,9 +25,10 @@ export class IDAnonymizer {
     );
   }
 
-  anonymize = (dataset: dataSet, dataTag: string): boolean => {
+  anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     if (this.keywords.includes(dataTag)) {
-      this.replaceID(dataset, dataTag);
+      await this.replaceID(dataset, dataTag);
+
       return true;
     } else if (dataTag == this.issuerTag && dataset[dataTag].Value[0] != "") {
       dataset[dataTag].Value[0] = "DICOM_ANONYMIZER";
@@ -37,19 +38,22 @@ export class IDAnonymizer {
     }
   };
 
-  replaceID = (dataset: dataSet, dataTag: string): void => {
+  replaceID = async (dataset: dataSet, dataTag: string) => {
     if (dataset[dataTag].Value.length > 1) {
-      dataset[dataTag].Value = dataset[dataTag].Value.map((originalValue: string) => {
-        return this.newID(originalValue);
-      });
+      for (let i = 0; i < dataset[dataTag].Value.length; i++) {
+        dataset[dataTag].Value[i] = await this.newID(dataset[dataTag].Value[i]);
+      }
     } else {
       const originalValue = dataset[dataTag].Value[0];
-      dataset[dataTag].Value[0] = this.newID(originalValue);
+      dataset[dataTag].Value[0] = await this.newID(originalValue);
     }
   };
 
-  newID = (originalValue: string): string => {
-    const indexes = this.randomizer.getIntsFromRanges(originalValue, ...this.indicesForRandomizer);
+  newID = async (originalValue: string) => {
+    const indexes = await this.randomizer.getIntsFromRanges(
+      originalValue,
+      ...this.indicesForRandomizer
+    );
     const idRoot: string = indexes.map((i) => this.alphabet[i]).join("");
 
     return this.idPrefix + idRoot + this.idSuffix;
