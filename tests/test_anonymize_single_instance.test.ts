@@ -172,17 +172,12 @@ describe("patient", async () => {
       originalIDs[2],
       originalIDs[3]
     );
-    console.log("thats origIDs:", originalIDs);
 
-    console.log("länge:", dataset.dict["00101000"].Value.length);
-    console.log("inhalt:", dataset.dict["00101000"]);
     const anonymizer = new Anonymizer();
     await anonymizer.anonymize(dataset);
     const actual = dataset.dict["00101000"].Value;
-    console.log(originalIDs);
-    console.log(actual);
+
     for (let i = 0; i < originalIDs.length; i++) {
-      console.log(actual[i]);
       expect(typeof actual[i]).toBe("string");
       expect(originalIDs[i]).not.toEqual(actual[i]);
     }
