@@ -17,11 +17,11 @@ const elementPaths: string[][] = [
   ["dict", "00200010"], // StudyID
 ];
 
-describe("patient", () => {
-  it("should prepend idPrefix to IDs", () => {
+describe("patient", async () => {
+  it("should prepend idPrefix to IDs", async () => {
     const dataset = loadInstance();
     const anonymizer = new Anonymizer(undefined, undefined, true, "A1");
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -36,11 +36,11 @@ describe("patient", () => {
     }
   });
 
-  it("should prepend idPrefix to each OtherPatientIDs", () => {
+  it("should prepend idPrefix to each OtherPatientIDs", async () => {
     const dataset = loadInstance();
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
     const anonymizer = new Anonymizer(undefined, undefined, true, "B2");
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const value0 = dataset.dict["00101000"].Value[0];
     const firstStartsWithA1 = value0.startsWith("B2");
@@ -51,10 +51,10 @@ describe("patient", () => {
     expect(secondStartsWithA1).toBe(true);
   });
 
-  it("should append idSuffix to IDs", () => {
+  it("should append idSuffix to IDs", async () => {
     const dataset = loadInstance();
     const anonymizer = new Anonymizer(undefined, undefined, true, undefined, "1A");
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -69,11 +69,11 @@ describe("patient", () => {
     }
   });
 
-  it("should append idSuffix to each OtherPatientIDs", () => {
+  it("should append idSuffix to each OtherPatientIDs", async () => {
     const dataset = loadInstance();
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
     const anonymizer = new Anonymizer(undefined, undefined, true, undefined, "2B");
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const value0 = dataset.dict["00101000"].Value[0];
     const firstStartsWithA1 = value0.endsWith("2B");
@@ -84,10 +84,10 @@ describe("patient", () => {
     expect(secondStartsWithA1).toBe(true);
   });
 
-  it("should append and prepend idPrefix and idSuffix to ID", () => {
+  it("should append and prepend idPrefix and idSuffix to ID", async () => {
     const dataset = loadInstance();
     const anonymizer = new Anonymizer(undefined, undefined, true, "C3", "3C");
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const value = dataset.dict["00100020"].Value[0];
 

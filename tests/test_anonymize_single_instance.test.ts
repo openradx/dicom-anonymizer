@@ -1,4 +1,4 @@
-import { data } from "dcmjs";
+import { data, dictionary } from "dcmjs";
 import { describe, expect, it } from "vitest";
 // Import your data_for_tests module
 import { Anonymizer } from "../src/anonymizer";
@@ -6,8 +6,8 @@ import { lists } from "../src/lists";
 // Replace with your testing library imports
 import { loadInstance, populateTag, loadTestInstance } from "./data_for_tests";
 
-describe("patient", () => {
-  it("should not alter nonidentifying UIs", () => {
+describe("patient", async () => {
+  it("should not alter nonidentifying UIs", async () => {
     const elementPaths: (string | number)[][] = [
       ["meta", "00020002"], //"MediaStorageSOPClassUID"
       ["meta", "00020010"], // TransferSyntaxUID
@@ -29,7 +29,7 @@ describe("patient", () => {
     }
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -47,7 +47,7 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize identifying UIs", () => {
+  it("should anonymize identifying UIs", async () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080018"], //SOPInstanceUID
       ["meta", "00020003"], //MediaStorageSOPInstanceUID
@@ -70,7 +70,7 @@ describe("patient", () => {
     }
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -90,7 +90,7 @@ describe("patient", () => {
 
   //test_repeatedIDentifyingUIs_get_same_values???
 
-  it("should anonymize IDs", () => {
+  it("should anonymize IDs", async () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080050"], //"AccessionNumber"
       ["dict", "00100021"], // IssuerOfPatientID
@@ -126,7 +126,7 @@ describe("patient", () => {
     }
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -146,70 +146,82 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize single OtherPatientIDs to single ID", () => {
+  it("should anonymize single OtherPatientIDs to single ID", async () => {
     const dataset = loadTestInstance();
     dataset.dict["00101000"].Value = ["ID1"];
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
     const actual = dataset.dict["00101000"].Value[0];
 
     expect(actual).not.toBe("ID1");
   });
 
-  it("should anonymize multiple OtherPatientIDs to same number of IDs", () => {
+  it("should anonymize multiple OtherPatientIDs to same number of IDs", async () => {
     const dataset = loadTestInstance();
     const numberOfIDs = 5; // Replace with the desired number of IDs
     const originalIDs: string[] = [];
 
-    for (let i = 1; i <= numberOfIDs; i++) {
+    for (let i = 1; i < numberOfIDs; i++) {
       originalIDs.push(`ID${i}`);
     }
+    populateTag(
+      dataset,
+      "OtherPatientIDs",
+      originalIDs[0],
+      originalIDs[1],
+      originalIDs[2],
+      originalIDs[3]
+    );
+    console.log("thats origIDs:", originalIDs);
 
-    dataset.dict["00101000"].Value = originalIDs;
+    console.log("länge:", dataset.dict["00101000"].Value.length);
+    console.log("inhalt:", dataset.dict["00101000"]);
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
     const actual = dataset.dict["00101000"].Value;
-
+    console.log(originalIDs);
+    console.log(actual);
     for (let i = 0; i < originalIDs.length; i++) {
+      console.log(actual[i]);
       expect(typeof actual[i]).toBe("string");
       expect(originalIDs[i]).not.toEqual(actual[i]);
     }
   });
 
-  it("should anonymize issuer of patientID if not empty", () => {
+  it("should anonymize issuer of patientID if not empty", async () => {
     const dataset = loadTestInstance();
     dataset.dict["00100021"].Value[0] = "NOTEMPTY";
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual = dataset.dict["00100021"].Value[0];
 
     expect(actual).toBe("DICOM_ANONYMIZER");
   });
 
-  it("should not add issuer of patientID if empty", () => {
+  it("should not add issuer of patientID if empty", async () => {
     const dataset = loadTestInstance();
     dataset.dict["00100021"].Value[0] = "";
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual = dataset.dict["00100021"].Value[0];
 
     expect(actual).toBe("");
   });
 
-  it("should anonymize female patient name", () => {
+  it("should anonymize female patient name", async () => {
     const dataset = loadTestInstance();
 
     populateTag(dataset, "PatientSex", "F");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
-    const originalName = dataset.dict["00100010"].Value[0];
+    const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
-    const newName = dataset.dict["00100010"].Value[0];
+    await anonymizer.anonymize(dataset);
+    const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
     expect(newName).not.toBe(originalName);
@@ -221,16 +233,16 @@ describe("patient", () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize male patient name", () => {
+  it("should anonymize male patient name", async () => {
     const dataset = loadTestInstance();
 
     populateTag(dataset, "PatientSex", "M");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
-    const originalName = dataset.dict["00100010"].Value[0];
+    const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
-    const newName = dataset.dict["00100010"].Value[0];
+    await anonymizer.anonymize(dataset);
+    const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
     expect(newName).not.toBe(originalName);
@@ -242,16 +254,16 @@ describe("patient", () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize sex other patient name", () => {
+  it("should anonymize sex other patient name", async () => {
     const dataset = loadTestInstance();
 
     populateTag(dataset, "PatientSex", "O");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
-    const originalName = dataset.dict["00100010"].Value[0];
+    const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
-    const newName = dataset.dict["00100010"].Value[0];
+    await anonymizer.anonymize(dataset);
+    const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
     expect(newName).not.toBe(originalName);
@@ -263,51 +275,59 @@ describe("patient", () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize multiple PatientNames to same number of names", () => {
+  it("should anonymize multiple PatientNames to same number of names", async () => {
     const dataset = loadTestInstance();
     const numberOfNames = 5; // Replace with the desired number of IDs
-    const originalNames: string[] = [];
+    const originalNames = [];
 
     for (let i = 1; i <= numberOfNames; i++) {
       originalNames.push(`NAME${i + 1}`);
     }
-
-    dataset.dict["00100010"].Value = originalNames;
+    populateTag(
+      dataset,
+      "PatientName",
+      originalNames[0],
+      originalNames[1],
+      originalNames[2],
+      originalNames[3],
+      originalNames[4]
+    );
+    //dataset.dict["00100010"].Value = originalNames;
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
     const actual = dataset.dict["00100010"].Value;
 
     for (let i = 0; i < originalNames.length; i++) {
-      expect(typeof actual[i]).toBe("string");
+      expect(typeof actual[i].Alphabetic).toBe("string");
       expect(actual.length).toEqual(numberOfNames);
-      expect(originalNames[i]).not.toEqual(actual[i]);
+      expect(originalNames[i]).not.toEqual(actual[i].Alphabetic);
     }
   });
 
-  it("should anonymize non patient names", () => {
+  it("should anonymize non patient names", async () => {
     const elementPaths: (string | number)[][] = [
+      ["dict", "00080090"], // ReferringPhysicianName
+      ["dict", "00081050"], // PerformingPhysicianName
       ["dict", "00081060"], //NameOfPhysiciansReadingStudy
       ["dict", "00081070"], //OperatorsName
       ["dict", "00101005"], //PatientBirthName
-
-      ["dict", "00081050"], // PerformingPhysicianName
-      ["dict", "00080090"], // ReferringPhysicianName
-      ["dict", "00321032"], // RequestingPhysician
       ["dict", "00102297"], // ResponsiblePerson
+      ["dict", "00321032"], // RequestingPhysician
     ];
 
     const dataset = loadTestInstance();
     const before: string[] = [];
     for (const elementPath of elementPaths) {
-      before.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
+      const x = dataset[elementPath[0]][elementPath[1]].Value[0].Alphabetic;
+      before.push(x);
     }
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
-      actual.push(dataset[elementPath[0]][elementPath[1]].Value[0]);
+      actual.push(dataset[elementPath[0]][elementPath[1]].Value[0].Alphabetic);
     }
 
     for (let i = 0; i < before.length; i++) {
@@ -315,14 +335,14 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize non patient names", () => {
+  it("should anonymize non patient names", async () => {
     const dataset = loadTestInstance();
     const originalAddress = dataset.dict["00101040"].Value[0]; //PatientAddress
     const originalRegion = dataset.dict["00102152"].Value[0]; //RegionOfResidence
     const originalCountry = dataset.dict["00102150"].Value[0]; //CountryOfResidence
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newAddress = dataset.dict["00101040"].Value[0];
     const newRegion = dataset.dict["00102152"].Value[0];
@@ -333,7 +353,7 @@ describe("patient", () => {
     expect(originalCountry).not.toEqual(newCountry);
   });
 
-  it("should remove extra patient attributes", () => {
+  it("should remove extra patient attributes", async () => {
     const elementPaths: string[] = [
       "00101081", //"BranchOfService",
       "00102180", //"Occupation",
@@ -350,14 +370,14 @@ describe("patient", () => {
     const dataset = loadTestInstance();
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
       expect(Object.keys(dataset.dict)).not.toContain(elementPath);
     }
   });
 
-  it("should anonymize non patient names", () => {
+  it("should anonymize non patient names", async () => {
     const dataset = loadTestInstance();
     const originalInstitutionName = dataset.dict["00080080"].Value[0]; //InstitutionName
     const originalInstitutionAddress = dataset.dict["00080081"].Value[0]; //InstitutionAddress
@@ -365,7 +385,7 @@ describe("patient", () => {
     const originalStationName = dataset.dict["00081010"].Value[0]; //StationName
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newInstitutionName = dataset.dict["00080080"].Value[0]; //InstitutionName
     const newInstitutionAddress = dataset.dict["00080081"].Value[0]; //InstitutionAddress
@@ -380,33 +400,33 @@ describe("patient", () => {
 
   // test_station_gets_anonymized_when_no_modality???
 
-  it("should anonymize requesiting service", () => {
+  it("should anonymize requesiting service", async () => {
     const dataset = loadTestInstance();
     dataset.dict["00321033"].Value[0] = "ANY_SERVICE";
     const original = dataset.dict["00321033"].Value[0]; //RequestingService
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual = dataset.dict["00321033"].Value[0];
 
     expect(original).not.toBe(actual);
   });
 
-  it("should anonymize current patient location", () => {
+  it("should anonymize current patient location", async () => {
     const dataset = loadTestInstance();
     dataset.dict["00380300"].Value[0] = "ANY_LOCATION";
     const original = dataset.dict["00380300"].Value[0]; //CurrentPatientLocation
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const actual = dataset.dict["00380300"].Value[0];
 
     expect(original).not.toBe(actual);
   });
 
-  it("should anonymize date and times when both are present", () => {
+  it("should anonymize date and times when both are present", async () => {
     const elementPaths: string[] = [
       "AcquisitionDate",
       "ContentDate",
@@ -430,7 +450,7 @@ describe("patient", () => {
     }
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
       const tagDictDate = data.DicomMetaDictionary.nameMap[elementPath];
@@ -444,13 +464,13 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize date when there is no time", () => {
+  it("should anonymize date when there is no time", async () => {
     const dataset = loadTestInstance();
     const originalBirthDate = "19830213";
     populateTag(dataset, "PatientBirthDate", originalBirthDate);
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newBirthDate = dataset.dict["00100030"].Value[0];
 
@@ -458,7 +478,7 @@ describe("patient", () => {
     expect(Object.keys(dataset.dict)).not.toContain("PatientBirthTime");
   });
 
-  it("should anonymize date when there is time", () => {
+  it("should anonymize date when there is time", async () => {
     const dataset = loadTestInstance();
     const originalBirthDate = "19830213";
     const originalBirthTime = "123456";
@@ -466,7 +486,7 @@ describe("patient", () => {
     populateTag(dataset, "PatientBirthTime", originalBirthTime);
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newDateString = dataset.dict["00100030"].Value[0];
     const newTimeString = dataset.dict["00100032"].Value[0];
@@ -477,7 +497,7 @@ describe("patient", () => {
     expect(newTimeString.length).toBe(originalBirthTime.length);
   });
 
-  it("should anonymize date when time has various lengths", () => {
+  it("should anonymize date when time has various lengths", async () => {
     const elementPaths: string[] = [
       "",
       "07",
@@ -498,7 +518,7 @@ describe("patient", () => {
       populateTag(dataset, "PatientBirthDate", originalBirthDate);
       populateTag(dataset, "PatientBirthTime", elementPath);
       const anonymizer = new Anonymizer();
-      anonymizer.anonymize(dataset);
+      await anonymizer.anonymize(dataset);
       const newDateString = dataset.dict["00100030"].Value[0];
       const newTimeString = dataset.dict["00100032"].Value[0];
 
@@ -509,14 +529,14 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize multivalue date when there is no time", () => {
+  it("should anonymize multivalue date when there is no time", async () => {
     const dataset = loadTestInstance();
     const originalBirthDate = ["20010401", "20010402"];
 
     populateTag(dataset, "DateOfLastCalibration", "20010401", "20010402");
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newDateString = dataset.dict["00181200"].Value;
 
@@ -524,7 +544,7 @@ describe("patient", () => {
     expect(newDateString.length).toBe(originalBirthDate.length);
   });
 
-  it("should anonymize multivalue date with time pair", () => {
+  it("should anonymize multivalue date with time pair", async () => {
     const dataset = loadTestInstance();
     const originalDate = ["20010401", "20010402"];
     const originalTime = ["120000", "135959"];
@@ -533,7 +553,7 @@ describe("patient", () => {
     populateTag(dataset, "TimeOfLastCalibration", originalTime[0], originalTime[1]);
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newDateString = dataset.dict["00181200"].Value;
     const newTimeString = dataset.dict["00181201"].Value;
@@ -544,7 +564,7 @@ describe("patient", () => {
     expect(newTimeString.length).toBe(originalTime.length);
   });
 
-  it("should anonymize multivalue date and time pair same with same seed", () => {
+  it("should anonymize multivalue date and time pair same with same seed", async () => {
     const dataset1 = loadTestInstance();
     const dataset2 = loadTestInstance();
     const originalDate = ["20010401", "20010402"];
@@ -571,7 +591,7 @@ describe("patient", () => {
     expect(newTime1).toEqual(newTime2);
   });
 
-  it("should anonymize datetime", () => {
+  it("should anonymize datetime", async () => {
     const elementPaths: string[] = [
       "AcquisitionDateTime",
       "FrameReferenceDateTime",
@@ -591,7 +611,7 @@ describe("patient", () => {
       populateTag(dataset, elementPath, originalDatetimeString);
     }
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     for (const elmentPath of elementPaths) {
       const tagDict = data.DicomMetaDictionary.nameMap[elmentPath];
@@ -601,7 +621,7 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize datetime with various lenghts", () => {
+  it("should anonymize datetime with various lenghts", async () => {
     const elementPaths: string[] = [
       "1947",
       "194711",
@@ -622,21 +642,21 @@ describe("patient", () => {
 
     for (const elementPath of elementPaths) {
       populateTag(dataset, "AcquisitionDateTime", elementPath);
-      anonymizer.anonymize(dataset);
+      await anonymizer.anonymize(dataset);
       const newDatetime = dataset.dict["0008002A"].Value[0];
       expect(newDatetime).not.toEqual(elementPath);
       expect(newDatetime.length).toBe(elementPath.length);
     }
   });
 
-  it("should anonymize mulitvalue datetime", () => {
+  it("should anonymize mulitvalue datetime", async () => {
     const originalDatetime: string[] = ["19741103121558", "19721004161558"];
 
     const dataset = loadTestInstance();
     populateTag(dataset, "AcquisitionDateTime", "19741103121558", "19721004161558");
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
     const newDatetime = dataset.dict["0008002A"].Value;
 
@@ -644,15 +664,15 @@ describe("patient", () => {
     expect(newDatetime.length).toBe(originalDatetime.length);
   });
 
-  it("should anonymize PatientName also without sex", () => {
+  it("should anonymize PatientName also without sex", async () => {
     const dataset = loadTestInstance();
     delete dataset.dict["00100040"];
-    const oldName = dataset.dict["00100010"].Value[0];
+    const oldName = dataset.dict["00100010"].Value[0].Alphabetic;
 
     const anonymizer = new Anonymizer();
-    anonymizer.anonymize(dataset);
+    await anonymizer.anonymize(dataset);
 
-    const newName = dataset.dict["00100010"].Value[0];
+    const newName = dataset.dict["00100010"].Value[0].Alphabetic;
 
     expect(newName).not.toEqual(oldName);
   });

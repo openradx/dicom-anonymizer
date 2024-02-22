@@ -1,4 +1,4 @@
-// import * as crypto from "crypto";
+import * as crypto from "crypto";
 import getRandomValues from "get-random-values";
 
 // use only in node env
@@ -22,8 +22,17 @@ export class Randomizer {
   // }
 
   private async calculateSHADigestWeb(array: Uint8Array): Promise<Uint8Array> {
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
-    return new Uint8Array(hashBuffer);
+    if (typeof window !== "undefined") {
+      const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
+      return new Uint8Array(hashBuffer);
+    } else {
+      const hash = crypto.createHash("sha256");
+      hash.update(array);
+      const arr = new Uint8Array(hash.digest());
+      return new Promise((resolve) => {
+        resolve(arr);
+      });
+    }
   }
 
   private calculateResult(hash: Uint8Array): bigint {

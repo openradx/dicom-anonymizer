@@ -23,7 +23,7 @@ class OnePatientTwoStudies {
 }
 
 describe("patient", () => {
-  it("should anonymize patient attributes the same", () => {
+  it("should anonymize patient attributes the same", async() => {
     const diffInstances = new OnePatientTwoStudies();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
@@ -55,7 +55,7 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize study, series and instance attributes differently", () => {
+  it("should anonymize study, series and instance attributes differently", async () => {
     const diffInstances = new OnePatientTwoStudies();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;

@@ -22,7 +22,7 @@ class OneStudyTwoSeries {
   }
 }
 
-describe("patient", () => {
+describe("patient",  () => {
   it("should anonymize patient and study attributes the same", () => {
     const diffInstances = new OneStudyTwoSeries();
     const dataset1 = diffInstances.dataset1;

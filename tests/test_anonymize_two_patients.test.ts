@@ -73,18 +73,18 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize same patient with different formatted name the same way", () => {
+  it("should anonymize same patient with different formatted name the same way", async () => {
     const dataset1 = loadInstance(1);
-    dataset1.dict["00100010"].Value[0] = "LAST^FIRST^MIDDLE";
+    dataset1.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE";
     const dataset2 = loadInstance(1);
-    dataset2.dict["00100010"].Value[0] = "LAST^FIRST^MIDDLE^";
+    dataset2.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE^";
 
     const anonymizer = new Anonymizer("");
-    anonymizer.anonymize(dataset1);
-    anonymizer.anonymize(dataset2);
+    await anonymizer.anonymize(dataset1);
+    await anonymizer.anonymize(dataset2);
 
-    const value1 = dataset1.dict["00100010"].Value[0];
-    const value2 = dataset2.dict["00100010"].Value[0];
+    const value1 = dataset1.dict["00100010"].Value[0].Alphabetic;
+    const value2 = dataset2.dict["00100010"].Value[0].Alphabetic;
     expect(value1).toEqual(value2);
   });
 });

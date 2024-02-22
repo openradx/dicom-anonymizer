@@ -103,7 +103,7 @@ export class Anonymizer {
     const res = await this.randomizer.toInt("dateOffset");
     const minimumOffsetHours: number = 62 * 24;
     const maximumOffsetHours: number = 730 * 24;
-    console.log(res);
+    
     this.dateOffsetHours = Number(
       -(
         (res % (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +

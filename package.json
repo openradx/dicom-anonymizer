@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
-    "dcmjs": "^0.29.6",
+    "dcmjs": "^0.30.1",
     "fs": "^0.0.1-security",
     "get-random-values": "^2.1.0"
   }

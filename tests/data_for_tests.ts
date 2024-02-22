@@ -18,7 +18,7 @@ export function loadInstance(
 export function loadMinimalInstance(): data.DicomDict {
   const filePathDicom = "./samples";
   const files: string[] = fs.readdirSync(filePathDicom);
-  const fileBuffer = fs.readFileSync(filePathDicom + "/" + files[10]).buffer;
+  const fileBuffer = fs.readFileSync(filePathDicom + "/" + files[0]).buffer;
   return data.DicomMessage.readFile(fileBuffer);
 }
 
@@ -110,15 +110,16 @@ function setPatientAttributes(dataset: data.DicomDict, patientNumber: number): v
   populateTag(dataset, "PatientBirthTime", `13140${patientNumber}`);
   populateTag(dataset, "PatientID", `4MR${patientNumber}`);
   populateTag(dataset, "PatientName", `CompressedSamples^MR${patientNumber}`);
+  const patientName = dataset.dict["00100010"].Value[0].Alphabetic;
   populateTag(dataset, "OtherPatientIDs", `OTH${dataset.dict["00100020"].Value[0]}`); //PatientID
   const otherPatientIDItem = new data.DicomDict({});
   populateTag(otherPatientIDItem, "PatientID", `OTHSEQ${dataset.dict["00100020"].Value[0]}`); //PatientID
   populateTag(dataset, "OtherPatientIDsSequence", otherPatientIDItem.dict);
 
-  populateTag(dataset, "OtherPatientNames", `Other${dataset.dict["00100010"].Value[0]}`); //PatientName
-  populateTag(dataset, "PatientBirthName", `Birth${dataset.dict["00100010"].Value[0]}`); //PatientName
-  populateTag(dataset, "PatientMotherBirthName", `Mother${dataset.dict["00100010"].Value[0]}`); //PatientName
-  populateTag(dataset, "ResponsiblePerson", `Responsible${dataset.dict["00100010"].Value[0]}`); //PatientName
+  populateTag(dataset, "OtherPatientNames", `Other${patientName}`); //PatientName
+  populateTag(dataset, "PatientBirthName", `Birth${patientName}`); //PatientName
+  populateTag(dataset, "PatientMotherBirthName", `Mother${patientName}`); //PatientName
+  populateTag(dataset, "ResponsiblePerson", `Responsible${patientName}`); //PatientName
 }
 
 function setStudyAttributes(
@@ -216,7 +217,15 @@ export function populateTag(
 ): void {
   const tagDict = data.DicomMetaDictionary.nameMap[tagName];
   tagDict.tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
-  dataset.upsertTag(tagDict.tag, tagDict.vr, values);
+  if (tagDict.vr == "PN") {
+    const l = [];
+    for (const v of values) {
+      l.push({ Alphabetic: v });
+    }
+    dataset.upsertTag(tagDict.tag, tagDict.vr, l);
+  } else {
+    dataset.upsertTag(tagDict.tag, tagDict.vr, values);
+  }
 }
 
 function populateMetaTag(
