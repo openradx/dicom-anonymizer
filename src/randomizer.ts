@@ -1,5 +1,4 @@
-import * as crypto from "crypto";
-import getRandomValues from "get-random-values";
+
 
 // use only in node env
 
@@ -22,17 +21,20 @@ export class Randomizer {
   // }
 
   private async calculateSHADigestWeb(array: Uint8Array): Promise<Uint8Array> {
-    if (typeof window !== "undefined") {
-      const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
-      return new Uint8Array(hashBuffer);
-    } else {
-      const hash = crypto.createHash("sha256");
-      hash.update(array);
-      const arr = new Uint8Array(hash.digest());
-      return new Promise((resolve) => {
-        resolve(arr);
-      });
-    }
+    // if (typeof window !== "undefined") {
+    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
+    return new Promise((resolve) => {
+      resolve(new Uint8Array(hashBuffer));
+    });
+    // }
+    // else {
+    //   const hash = crypto.createHash("sha256");
+    //   hash.update(array);
+    //   const arr = new Uint8Array(hash.digest());
+    //   return new Promise((resolve) => {
+    //     resolve(arr);
+    //   });
+    // }
   }
 
   private calculateResult(hash: Uint8Array): bigint {
@@ -47,11 +49,11 @@ export class Randomizer {
   private generateRandomSeed(): string {
     const randomValues = new Uint8Array(20);
 
-    if (typeof window !== "undefined") {
-      window.crypto.getRandomValues(randomValues); //-> use in browser env
-    } else {
-      getRandomValues(randomValues);
-    }
+    // if (typeof window !== "undefined") {
+    window.crypto.getRandomValues(randomValues); //-> use in browser env
+    // } else {
+    //   getRandomValues(randomValues);
+    // }
 
     const seed = Array.from(randomValues, (byte) => byte.toString(16).padStart(2, "0")).join("");
 
