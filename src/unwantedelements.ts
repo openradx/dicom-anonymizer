@@ -1,6 +1,6 @@
 import { dataSet } from "dcmjs";
 
-export class UnwantedElementStripper {
+class UnwantedElementStripper {
   private tags: string[];
 
   constructor(keywords: string[]) {
@@ -16,3 +16,5 @@ export class UnwantedElementStripper {
     }
   };
 }
+
+export default UnwantedElementStripper;

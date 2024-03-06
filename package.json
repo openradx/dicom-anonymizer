@@ -1,18 +1,14 @@
 {
-  "name": "dicom-web-anonymizer3",
-  "version": "0.0.8",
+  "name": "dicom-web-anonymizer",
+  "files": [
+    "dist",
+    "types"
+  ],
   "description": "A DICOM web pseudonymization library in JavaScript.",
-  "main": "./dist/dicom-web-anonymizer.umd.cjs",
-  "module": "./dist/dicom-web-anonymizer.js",
-  "exports": {
-    ".": {
-      "import": "./dist/dicom-web-anonymizer.js",
-      "require": "./dist/dicom-web-anonymizer.umd.cjs"
-    }
-  },
   "type": "module",
   "types": "./types/dcm.d.ts",
   "scripts": {
+    "dev": "vite",
     "build": "tsup",
     "bundle": "vite build",
     "build:watch": "tsup --watch",
@@ -50,8 +46,7 @@
     "prettier": "2.8.8",
     "tsup": "^6.7.0",
     "typescript": "^5.0.2",
-    "vite": "^5.0.8",
-    "vite-plugin-dts": "^3.7.3",
+    "vite": "^5.1.4",
     "vitest": "^0.29.7"
   },
   "dependencies": {
