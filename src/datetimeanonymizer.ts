@@ -5,7 +5,7 @@ type returnarg = {
   tag: string;
 };
 
-export class DateTimeAnonymizer {
+class DateTimeAnonymizer {
   private offset: number;
 
   constructor(dateOffsetHours: number) {
@@ -92,7 +92,8 @@ export class DateTimeAnonymizer {
   };
 
   formatDate = (date: Date, format: string): string => {
-    const padZero = (value: number, length: number) => String(value).padStart(length, "0");
+    const padZero = (value: number, length: number) =>
+      String(value).padStart(length, "0");
 
     const year = padZero(date.getFullYear(), 4);
     const month = padZero(date.getMonth() + 1, 2); // Months are zero-indexed, so add 1
@@ -116,13 +117,17 @@ export class DateTimeAnonymizer {
     const maxLength = Math.max(...arr.map((arr: string) => arr.length));
 
     return Array.from({ length: maxLength }, (_, index) => {
-      return arr.map((arr: string[number]) => (arr[index] !== undefined ? arr[index] : fillValue));
+      return arr.map((arr: string[number]) =>
+        arr[index] !== undefined ? arr[index] : fillValue
+      );
     });
   };
 
   checkTag = (dataset: dataSet, dataTag: string): returnarg => {
     const tagName =
-      data.DicomMetaDictionary.dictionary[data.DicomMetaDictionary.punctuateTag(dataTag)].name;
+      data.DicomMetaDictionary.dictionary[
+        data.DicomMetaDictionary.punctuateTag(dataTag)
+      ].name;
     const timeName = tagName.replace("Date", "Time");
 
     if (typeof data.DicomMetaDictionary.nameMap[timeName] !== "undefined") {
@@ -153,3 +158,5 @@ export class DateTimeAnonymizer {
     }
   };
 }
+
+export default DateTimeAnonymizer;

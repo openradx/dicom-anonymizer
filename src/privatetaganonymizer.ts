@@ -1,6 +1,6 @@
 import { data, dataSet } from "dcmjs";
 
-export class PrivatTagAnonymizer {
+class PrivatTagAnonymizer {
   anonymize = (dataset: dataSet, dataTag: string): boolean => {
     const currTag = data.Tag.fromString(dataTag);
     if (currTag.group() % 2 === 1) {
@@ -11,3 +11,5 @@ export class PrivatTagAnonymizer {
     }
   };
 }
+
+export default PrivatTagAnonymizer;

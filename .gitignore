@@ -48,3 +48,4 @@ src/loader.ts
 
 # Build stuff
 dist
+demo/dist

@@ -1,7 +1,7 @@
 import { data, dataSet } from "dcmjs";
-import { Randomizer } from "./randomizer";
+import Randomizer from "./randomizer";
 
-export class UIAnonymizer {
+class UIAnonymizer {
   private randomizer: Randomizer;
 
   constructor(Randomizer: Randomizer) {
@@ -23,9 +23,11 @@ export class UIAnonymizer {
         for (let i = 0; i < dataset[dataTag].Value.length; i++) {
           dataset[dataTag].Value[i] = await this.newUI(dataset[dataTag].Value[i]);
         }
-      } else {
+      } else if (dataset[dataTag].Value.length == 1) {
         const originalUI = dataset[dataTag].Value[0];
         dataset[dataTag].Value[0] = await this.newUI(originalUI);
+      } else {
+        dataset[dataTag].Value[0] = await this.newUI("");
       }
 
       return true;
@@ -38,3 +40,5 @@ export class UIAnonymizer {
     return `2.${BigInt(10 ** 39) + number4String}`;
   }
 }
+
+export default UIAnonymizer;

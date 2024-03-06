@@ -1,7 +1,7 @@
 import { data, dataSet } from "dcmjs";
-import { AddressAnonymizer } from "./addressanonymizer";
+import AddressAnonymizer from "./addressanonymizer";
 
-export class InstitutionAnonymizer {
+class InstitutionAnonymizer {
   private addressAnonymizer: AddressAnonymizer;
 
   institutionName: string = data.DicomMetaDictionary.nameMap["InstitutionName"].tag; //0008,0080
@@ -38,15 +38,13 @@ export class InstitutionAnonymizer {
       for (let i = 0; i < dataset[dataTag].Value.length; i++) {
         dataset[dataTag].Value[i] = await valueFactory(dataset[dataTag].Value[i]);
       }
-      // dataset[dataTag].Value = await dataset[dataTag].Value.map((originalValue: string) => {
-      //   return valueFactory(originalValue);
-      // });
-
       return true;
-    } else {
+    } else if (dataset[dataTag].Value.length == 1) {
       const originalValue: string = dataset[dataTag].Value[0];
       dataset[dataTag].Value[0] = await valueFactory(originalValue);
-
+      return true;
+    } else {
+      dataset[dataTag].Value[0] = await valueFactory("");
       return true;
     }
   };
@@ -72,3 +70,5 @@ export class InstitutionAnonymizer {
     return Promise.resolve("RADIOLOGY");
   };
 }
+
+export default InstitutionAnonymizer;

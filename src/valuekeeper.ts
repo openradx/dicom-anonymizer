@@ -10,7 +10,7 @@ class TagError extends Error {
   }
 }
 
-export class ValueKeeper {
+class ValueKeeper {
   private protectedTags: string[] = [];
 
   constructor(keywords: string[] = []) {
@@ -50,3 +50,5 @@ export class ValueKeeper {
     }
   };
 }
+
+export default ValueKeeper;

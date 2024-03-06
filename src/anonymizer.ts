@@ -1,19 +1,22 @@
 import { data, dataSet } from "dcmjs";
-import { AddressAnonymizer } from "./addressanonymizer";
-import { DateTimeAnonymizer } from "./datetimeanonymizer";
-import { FixedValueAnonymizer } from "./fixedvalueanonymizer";
-import { IDAnonymizer } from "./idanonymizer";
-import { InstitutionAnonymizer } from "./institutionanonymizer";
-import { PNAnonymizer } from "./pnanonymizer";
-import { PrivatTagAnonymizer } from "./privatetaganonymizer";
-import { Randomizer } from "./randomizer";
-import { UIAnonymizer } from "./uianonymizer";
-import { UnwantedElementStripper } from "./unwantedelements";
-import { ValueKeeper } from "./valuekeeper";
+import AddressAnonymizer from "./addressanonymizer";
+import DateTimeAnonymizer from "./datetimeanonymizer";
+import FixedValueAnonymizer from "./fixedvalueanonymizer";
+import IDAnonymizer from "./idanonymizer";
+import InstitutionAnonymizer from "./institutionanonymizer";
+import PNAnonymizer from "./pnanonymizer";
+import PrivatTagAnonymizer from "./privatetaganonymizer";
+import Randomizer from "./randomizer";
+import UIAnonymizer from "./uianonymizer";
+import UnwantedElementStripper from "./unwantedelements";
+import ValueKeeper from "./valuekeeper";
 
-type ElementHandler = (dataset: dataSet, tag: string) => boolean | Promise<boolean>;
+type ElementHandler = (
+  dataset: dataSet,
+  tag: string
+) => boolean | Promise<boolean>;
 
-export class Anonymizer {
+export default class Anonymizer {
   /**
     The main class responsible for anonymizing dcmjs datasets.
     New instances will anonymize instances differently, so when
@@ -93,7 +96,9 @@ export class Anonymizer {
       this.elementHandlers.unshift(new ValueKeeper(protectedTags).keep);
     }
     if (this.patientID) {
-      this.elementHandlers.unshift(new FixedValueAnonymizer("00100020", this.patientID).anonymize);
+      this.elementHandlers.unshift(
+        new FixedValueAnonymizer("00100020", this.patientID).anonymize
+      );
     }
     if (this.anonymizePrivateTags) {
       this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
@@ -103,7 +108,7 @@ export class Anonymizer {
     const res = await this.randomizer.toInt("dateOffset");
     const minimumOffsetHours: number = 62 * 24;
     const maximumOffsetHours: number = 730 * 24;
-    
+
     this.dateOffsetHours = Number(
       -(
         (res % (BigInt(maximumOffsetHours) - BigInt(minimumOffsetHours))) +
@@ -111,7 +116,9 @@ export class Anonymizer {
       )
     );
 
-    this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
+    this.elementHandlers.push(
+      new DateTimeAnonymizer(this.dateOffsetHours).anonymize
+    );
   }
 
   async anonymize(dcmDict: data.DicomDict) {
@@ -139,7 +146,11 @@ export class Anonymizer {
     }
   }
 
-  async anonymizeElement(dataset: dataSet, tag: string, handler: ElementHandler[]) {
+  async anonymizeElement(
+    dataset: dataSet,
+    tag: string,
+    handler: ElementHandler[]
+  ) {
     // Perform operations on the element
 
     for (const callback of handler) {

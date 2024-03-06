@@ -1,9 +1,8 @@
-import { data } from "dcmjs";
-import type { dataSet } from "dcmjs";
+import { data, dataSet } from "dcmjs";
 import { lists } from "./lists";
-import { Randomizer } from "./randomizer";
+import Randomizer from "./randomizer";
 
-export class AddressAnonymizer {
+class AddressAnonymizer {
   private randomizer: Randomizer;
   private lists: lists;
 
@@ -40,9 +39,12 @@ export class AddressAnonymizer {
       }
 
       return true;
-    } else {
+    } else if (dataset[dataTag].Value.length == 1) {
       const originalValue: string = dataset[dataTag].Value[0];
       dataset[dataTag].Value[0] = await valueFactory(originalValue);
+      return true;
+    } else {
+      dataset[dataTag].Value[0] = await valueFactory("");
       return true;
     }
   };
@@ -92,3 +94,5 @@ export class AddressAnonymizer {
     return `${this.lists.countries[countryIndex]}`;
   };
 }
+
+export default AddressAnonymizer;

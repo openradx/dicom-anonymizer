@@ -1,7 +1,7 @@
 import { data, dataSet } from "dcmjs";
-import { Randomizer } from "./randomizer";
+import Randomizer from "./randomizer";
 
-export class IDAnonymizer {
+class IDAnonymizer {
   private keywords: string[];
   private randomizer: Randomizer;
   private idSuffix: string;
@@ -43,9 +43,11 @@ export class IDAnonymizer {
       for (let i = 0; i < dataset[dataTag].Value.length; i++) {
         dataset[dataTag].Value[i] = await this.newID(dataset[dataTag].Value[i]);
       }
-    } else {
+    } else if (dataset[dataTag].Value.length == 1) {
       const originalValue = dataset[dataTag].Value[0];
       dataset[dataTag].Value[0] = await this.newID(originalValue);
+    } else {
+      dataset[dataTag].Value[0] = await this.newID("");
     }
   };
 
@@ -59,3 +61,5 @@ export class IDAnonymizer {
     return this.idPrefix + idRoot + this.idSuffix;
   };
 }
+
+export default IDAnonymizer;

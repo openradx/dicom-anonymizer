@@ -1,8 +1,8 @@
 import { dataSet } from "dcmjs";
 import { lists } from "./lists";
-import { Randomizer } from "./randomizer";
+import Randomizer from "./randomizer";
 
-export class PNAnonymizer {
+class PNAnonymizer {
   private randomizer: Randomizer;
   lists: lists;
 
@@ -28,10 +28,12 @@ export class PNAnonymizer {
           patientSex
         );
       }
-    } else {
+    } else if (dataset[dataTag].Value.length == 1) {
       const originalName = dataset[dataTag].Value[0].Alphabetic;
 
       dataset[dataTag].Value[0].Alphabetic = await this.newPN(originalName, patientSex);
+    } else {
+      dataset[dataTag].Value[0].Alphabetic = await this.newPN("", patientSex);
     }
 
     return true;
@@ -63,3 +65,5 @@ export class PNAnonymizer {
     }`;
   }
 }
+
+export default PNAnonymizer;

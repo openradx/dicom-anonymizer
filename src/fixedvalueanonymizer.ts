@@ -1,6 +1,6 @@
 import { dataSet } from "dcmjs";
 
-export class FixedValueAnonymizer {
+class FixedValueAnonymizer {
   private tag: string;
   private value: string;
 
@@ -19,3 +19,5 @@ export class FixedValueAnonymizer {
     }
   };
 }
+
+export default FixedValueAnonymizer;

@@ -1,8 +1,4 @@
-
-
-// use only in node env
-
-export class Randomizer {
+class Randomizer {
   private seed: string;
 
   constructor(seed = "") {
@@ -55,7 +51,9 @@ export class Randomizer {
     //   getRandomValues(randomValues);
     // }
 
-    const seed = Array.from(randomValues, (byte) => byte.toString(16).padStart(2, "0")).join("");
+    const seed = Array.from(randomValues, (byte) =>
+      byte.toString(16).padStart(2, "0")
+    ).join("");
 
     return seed;
   }
@@ -86,7 +84,10 @@ export class Randomizer {
 
     return result;
   }
-  public async getIntsFromRanges(originalValue: string, ...suprema: number[]): Promise<number[]> {
+  public async getIntsFromRanges(
+    originalValue: string,
+    ...suprema: number[]
+  ): Promise<number[]> {
     let result: bigint | number[] = [];
     let bigNumber = await this.toInt(originalValue);
     const arr: number[] = [];
@@ -101,3 +102,5 @@ export class Randomizer {
     return result;
   }
 }
+
+export default Randomizer;
