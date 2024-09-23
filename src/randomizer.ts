@@ -1,8 +1,11 @@
+// import { getRandomValues } from "crypto";
+// import crypto from "crypto";
+
 class Randomizer {
   private seed: string;
 
-  constructor(seed = "") {
-    if (seed == "") {
+  constructor(seed?) {
+    if (seed == undefined) {
       this.seed = this.generateRandomSeed();
     } else {
       this.seed = seed;
@@ -18,7 +21,7 @@ class Randomizer {
 
   private async calculateSHADigestWeb(array: Uint8Array): Promise<Uint8Array> {
     // if (typeof window !== "undefined") {
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
+    const hashBuffer = await window.crypto.subtle.digest("SHA-1", array);
     return new Promise((resolve) => {
       resolve(new Uint8Array(hashBuffer));
     });
@@ -51,9 +54,7 @@ class Randomizer {
     //   getRandomValues(randomValues);
     // }
 
-    const seed = Array.from(randomValues, (byte) =>
-      byte.toString(16).padStart(2, "0")
-    ).join("");
+    const seed = Array.from(randomValues, (byte) => byte.toString(16).padStart(2, "0")).join("");
 
     return seed;
   }
@@ -84,10 +85,7 @@ class Randomizer {
 
     return result;
   }
-  public async getIntsFromRanges(
-    originalValue: string,
-    ...suprema: number[]
-  ): Promise<number[]> {
+  public async getIntsFromRanges(originalValue: string, ...suprema: number[]): Promise<number[]> {
     let result: bigint | number[] = [];
     let bigNumber = await this.toInt(originalValue);
     const arr: number[] = [];
