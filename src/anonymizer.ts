@@ -11,10 +11,23 @@ import UIAnonymizer from "./uianonymizer";
 import UnwantedElementStripper from "./unwantedelements";
 import ValueKeeper from "./valuekeeper";
 
-type ElementHandler = (
-  dataset: dataSet,
-  tag: string
-) => boolean | Promise<boolean>;
+type ElementHandler = (dataset: dataSet, tag: string) => boolean | Promise<boolean>;
+
+interface AnonymizerOptions {
+  protectedTags?: string[];
+  anonymizePrivateTags?: boolean;
+  idPrefix?: string;
+  idSuffix?: string;
+  seed?: string;
+}
+
+const defaultOptions: AnonymizerOptions = {
+  protectedTags: [],
+  anonymizePrivateTags: true,
+  idPrefix: undefined,
+  idSuffix: undefined,
+  seed: undefined,
+};
 
 export default class Anonymizer {
   /**
@@ -25,29 +38,15 @@ export default class Anonymizer {
     
   */
 
-  private patientID?: string;
-  private anonymizePrivateTags?: boolean = true;
   private dateOffsetHours = 0;
   randomizer: Randomizer;
   addressAnonymizer: AddressAnonymizer;
   elementHandlers: ElementHandler[];
+  private _options: AnonymizerOptions;
+  constructor(options?: AnonymizerOptions) {
+    this._options = Object.assign(defaultOptions, options ?? {});
 
-  constructor(
-    patientID?: string,
-    protectedTags?: string[],
-    anonymizePrivateTags?: boolean,
-    idPrefix?: string,
-    idSuffix?: string,
-    seed?: string
-  ) {
-    if (patientID) {
-      this.patientID = patientID;
-    }
-    if (anonymizePrivateTags) {
-      this.anonymizePrivateTags = anonymizePrivateTags;
-    }
-
-    this.randomizer = new Randomizer(seed);
+    this.randomizer = new Randomizer(this._options.seed);
     this.setOffset();
 
     this.addressAnonymizer = new AddressAnonymizer(this.randomizer);
@@ -84,23 +83,19 @@ export default class Anonymizer {
           "00081010", //"StationName",
           "00200010", //"StudyID"
         ],
-        idPrefix,
-        idSuffix
+        this._options.idPrefix,
+        this._options.idSuffix
       ).anonymize,
       this.addressAnonymizer.anonymize,
       new InstitutionAnonymizer(this.addressAnonymizer).anonymize,
       new FixedValueAnonymizer("00321033", "").anonymize, // RequestingService
       new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
     ];
-    if (protectedTags) {
-      this.elementHandlers.unshift(new ValueKeeper(protectedTags).keep);
+    if (this._options.protectedTags) {
+      this.elementHandlers.unshift(new ValueKeeper(this._options.protectedTags).keep);
     }
-    if (this.patientID) {
-      this.elementHandlers.unshift(
-        new FixedValueAnonymizer("00100020", this.patientID).anonymize
-      );
-    }
-    if (this.anonymizePrivateTags) {
+
+    if (this._options.anonymizePrivateTags) {
       this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
     }
   }
@@ -116,9 +111,7 @@ export default class Anonymizer {
       )
     );
 
-    this.elementHandlers.push(
-      new DateTimeAnonymizer(this.dateOffsetHours).anonymize
-    );
+    this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
   }
 
   async anonymize(dcmDict: data.DicomDict) {
@@ -146,11 +139,7 @@ export default class Anonymizer {
     }
   }
 
-  async anonymizeElement(
-    dataset: dataSet,
-    tag: string,
-    handler: ElementHandler[]
-  ) {
+  async anonymizeElement(dataset: dataSet, tag: string, handler: ElementHandler[]) {
     // Perform operations on the element
 
     for (const callback of handler) {
