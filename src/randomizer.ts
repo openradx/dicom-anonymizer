@@ -4,7 +4,7 @@
 class Randomizer {
   private seed: string;
 
-  constructor(seed?) {
+  constructor(seed?: string) {
     if (seed == undefined) {
       this.seed = this.generateRandomSeed();
     } else {

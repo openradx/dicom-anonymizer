@@ -1,7 +1,7 @@
 import { data } from "dcmjs";
 import { describe, expect, it, test } from "vitest";
 // Import your data_for_tests module
-import { Anonymizer } from "../src/anonymizer";
+import Anonymizer from "../src/anonymizer";
 // Replace with your testing library imports
 import { loadInstance } from "./data_for_tests";
 

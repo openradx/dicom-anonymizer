@@ -1,7 +1,7 @@
 import { data, dictionary } from "dcmjs";
 import { describe, expect, it } from "vitest";
 // Import your data_for_tests module
-import { Anonymizer } from "../src/anonymizer";
+import Anonymizer from "../src/anonymizer";
 import { lists } from "../src/lists";
 // Replace with your testing library imports
 import { loadInstance, populateTag, loadTestInstance } from "./data_for_tests";
@@ -273,7 +273,7 @@ describe("patient", async () => {
   it("should anonymize multiple PatientNames to same number of names", async () => {
     const dataset = loadTestInstance();
     const numberOfNames = 5; // Replace with the desired number of IDs
-    const originalNames = [];
+    const originalNames: string[] = [];
 
     for (let i = 1; i <= numberOfNames; i++) {
       originalNames.push(`NAME${i + 1}`);

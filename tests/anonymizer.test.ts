@@ -1,7 +1,7 @@
 import { data } from "dcmjs";
 import { readFileSync } from "fs";
 import { describe, expect, it } from "vitest";
-import { Anonymizer } from "../src/anonymizer";
+import Anonymizer from "../src/anonymizer";
 
 describe("First case", () => {
   it("should succeed", () => {
