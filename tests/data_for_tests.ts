@@ -1,6 +1,5 @@
 import { data } from "dcmjs";
 
-
 export function loadInstance(
   patientNumber = 1,
   studyNumber = 1,
@@ -13,8 +12,7 @@ export function loadInstance(
   setSeriesAttributes(dataset, patientNumber, studyNumber, seriesNumber);
   setInstanceAttributes(dataset, patientNumber, studyNumber, seriesNumber, instanceNumber);
 
-  // return dataset;
-  return JSON.parse(JSON.stringify(dataset));
+  return dataset;
 }
 
 export function loadMinimalInstance(): data.DicomDict {
@@ -29,16 +27,15 @@ export function loadMinimalInstance(): data.DicomDict {
     ImplementationClassUID: "1.2.826.0.1.3680043.9.3811.1.5.3",
     ImplementationVersionName: "PYNETDICOM_153",
     SourceApplicationEntityTitle: "DicomBrowser",
-
   };
   const metaTagDict = {};
   for (const [key, value] of Object.entries(meta)) {
     const placeholderDict = data.DicomMetaDictionary.nameMap[key];
-    placeholderDict.tag = data.DicomMetaDictionary.unpunctuateTag(placeholderDict.tag);
-    placeholderDict.Value = [value];
-    metaTagDict[placeholderDict.tag] = placeholderDict;
+    const metaTag = data.ValueRepresentation.addTagAccessors({ vr: placeholderDict.vr });
+    metaTag.tag = data.DicomMetaDictionary.unpunctuateTag(placeholderDict.tag);
+    metaTag.Value = [value];
+    metaTagDict[metaTag.tag] = metaTag;
   }
-  console.log
 
   const dicomDict = new data.DicomDict(metaTagDict);
 
@@ -338,11 +335,11 @@ function populateMetaTag(
   const tagDict = data.DicomMetaDictionary.nameMap[tagName];
 
   tagDict.tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
-  const newValues = values;
+
   if (dataset.meta[tagDict.tag]) {
-    dataset.meta[tagDict.tag].Value = newValues;
+    dataset.meta[tagDict.tag].Value = values;
   } else {
-    dataset.meta[tagDict.tag].vr = tagDict.vr;
-    dataset.meta[tagDict.tag].Value = newValues;
+    dataset.meta[tagDict.tag] = data.ValueRepresentation.addTagAccessors({ vr: tagDict.vr });
+    dataset.meta[tagDict.tag].Value = values;
   }
 }

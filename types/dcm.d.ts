@@ -41,6 +41,10 @@ declare module "dcmjs" {
       static readFile(buffer: ArrayBufferLike): DicomDict;
     }
 
+    export class ValueRepresentation{
+      static addTagAccessors(tag);
+    }
+
     export class DicomMetaDictionary {
       static nameMap: nameMap;
       static dictionary: dictionary;
