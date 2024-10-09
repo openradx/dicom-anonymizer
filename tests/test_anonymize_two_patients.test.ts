@@ -9,13 +9,13 @@ import { loadInstance } from "./data_for_tests";
 // Replace with the actual structure of your dataset
 
 describe("patient", () => {
-  it("should anonymize all attributes differently", () => {
+  it("should anonymize all attributes differently", async () => {
     //const diffInstances = new TwoPatients();
     const dataset1 = loadInstance(1);
     const dataset2 = loadInstance(2);
-    const anonymizer = new Anonymizer("");
-    anonymizer.anonymize(dataset1);
-    anonymizer.anonymize(dataset2);
+    const anonymizer = new Anonymizer();
+    await anonymizer.anonymize(dataset1);
+    await anonymizer.anonymize(dataset2);
 
     const elementPaths: string[][] = [
       // patient
@@ -79,7 +79,7 @@ describe("patient", () => {
     const dataset2 = loadInstance(1);
     dataset2.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE^";
 
-    const anonymizer = new Anonymizer("");
+    const anonymizer = new Anonymizer();
     await anonymizer.anonymize(dataset1);
     await anonymizer.anonymize(dataset2);
 

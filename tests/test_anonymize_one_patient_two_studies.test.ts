@@ -15,16 +15,18 @@ class OnePatientTwoStudies {
   constructor() {
     this.dataset1 = loadInstance(1, 1);
     this.dataset2 = loadInstance(1, 2);
-
-    const anonymizer = new Anonymizer("");
-    anonymizer.anonymize(this.dataset1);
-    anonymizer.anonymize(this.dataset2);
+  }
+  async anonymizeData() {
+    const anonymizer = new Anonymizer();
+    await anonymizer.anonymize(this.dataset1);
+    await anonymizer.anonymize(this.dataset2);
   }
 }
 
 describe("patient", () => {
   it("should anonymize patient attributes the same", async () => {
     const diffInstances = new OnePatientTwoStudies();
+    await diffInstances.anonymizeData();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths: string[][] = [
@@ -57,6 +59,7 @@ describe("patient", () => {
 
   it("should anonymize study, series and instance attributes differently", async () => {
     const diffInstances = new OnePatientTwoStudies();
+    await diffInstances.anonymizeData();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths = [
@@ -94,11 +97,11 @@ describe("patient", () => {
       if (elementPath.length == 2) {
         const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0];
         const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0];
-        expect(value1).not.toEqual(value2);
+        expect(value1).not.toBe(value2);
       } else {
         const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
         const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
-        expect(value1).not.toEqual(value2);
+        expect(value1).not.toBe(value2);
       }
     }
   });

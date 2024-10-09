@@ -16,15 +16,20 @@ class OneSeriesTwoInstances {
     this.dataset1 = loadInstance(1, 1, 1, 1);
     this.dataset2 = loadInstance(1, 1, 1, 2);
 
-    const anonymizer = new Anonymizer("");
-    anonymizer.anonymize(this.dataset1);
-    anonymizer.anonymize(this.dataset2);
+  }
+
+  async anonymizeData() {
+    const anonymizer = new Anonymizer();
+    await anonymizer.anonymize(this.dataset1);
+    await anonymizer.anonymize(this.dataset2);
+  
   }
 }
 
 describe("patient", () => {
-  it("should anonymize patient, study and series attributes the same", () => {
+  it("should anonymize patient, study and series attributes the same", async () => {
     const diffInstances = new OneSeriesTwoInstances();
+    await diffInstances.anonymizeData();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths: string[][] = [
@@ -78,8 +83,9 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize instance attributes differently", () => {
+  it("should anonymize instance attributes differently", async () => {
     const diffInstances = new OneSeriesTwoInstances();
+    await diffInstances.anonymizeData();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
     const elementPaths = [
