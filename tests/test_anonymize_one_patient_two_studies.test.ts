@@ -59,6 +59,9 @@ describe("patient", () => {
 
   it("should anonymize study, series and instance attributes differently", async () => {
     const diffInstances = new OnePatientTwoStudies();
+    console.log(diffInstances.dataset1.meta["00020003"].Value[0]);
+    console.log(diffInstances.dataset2.meta["00020003"].Value[0]);
+
     await diffInstances.anonymizeData();
     const dataset1 = diffInstances.dataset1;
     const dataset2 = diffInstances.dataset2;
