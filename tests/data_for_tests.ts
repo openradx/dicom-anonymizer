@@ -1,5 +1,5 @@
 import { data } from "dcmjs";
-import * as fs from "fs";
+
 
 export function loadInstance(
   patientNumber = 1,
@@ -12,14 +12,115 @@ export function loadInstance(
   setStudyAttributes(dataset, patientNumber, studyNumber);
   setSeriesAttributes(dataset, patientNumber, studyNumber, seriesNumber);
   setInstanceAttributes(dataset, patientNumber, studyNumber, seriesNumber, instanceNumber);
-  return dataset;
+
+  // return dataset;
+  return JSON.parse(JSON.stringify(dataset));
 }
 
 export function loadMinimalInstance(): data.DicomDict {
-  const filePathDicom = "./samples";
-  const files: string[] = fs.readdirSync(filePathDicom);
-  const fileBuffer = fs.readFileSync(filePathDicom + "/" + files[0]).buffer;
-  return data.DicomMessage.readFile(fileBuffer);
+  // File Meta Information
+
+  const meta = {
+    FileMetaInformationGroupLength: "222",
+    // FileMetaInformationVersion: new Uint8Array([0x00, 0x01]),
+    MediaStorageSOPClassUID: "1.2.840.10008.5.1.4.1.1.2", // CT Image Storage
+    MediaStorageSOPInstanceUID: "1.3.12.2.1107.5.1.4.66002.30000020070513455668000000610",
+    TransferSyntaxUID: "1.2.840.10008.1.2.1", // Explicit VR Little Endian
+    ImplementationClassUID: "1.2.826.0.1.3680043.9.3811.1.5.3",
+    ImplementationVersionName: "PYNETDICOM_153",
+    SourceApplicationEntityTitle: "DicomBrowser",
+
+  };
+  const metaTagDict = {};
+  for (const [key, value] of Object.entries(meta)) {
+    const placeholderDict = data.DicomMetaDictionary.nameMap[key];
+    placeholderDict.tag = data.DicomMetaDictionary.unpunctuateTag(placeholderDict.tag);
+    placeholderDict.Value = [value];
+    metaTagDict[placeholderDict.tag] = placeholderDict;
+  }
+  console.log
+
+  const dicomDict = new data.DicomDict(metaTagDict);
+
+  // Main dataset
+  const dataset = {
+    SpecificCharacterSet: "ISO_IR 100",
+    // ImageType: ["ORIGINAL", "PRIMARY", "LOCALIZER", "CT_SOM5 TOP"],
+    SOPClassUID: "1.2.840.10008.5.1.4.1.1.2", // CT Image Storage
+    SOPInstanceUID: "1.3.12.2.1107.5.1.4.66002.30000020070513455668000000610",
+    StudyDate: "20190604",
+    SeriesDate: "20200705",
+    AcquisitionDate: "20200705",
+    ContentDate: "20200705",
+    AcquisitionDateTime: "20200705182848.235000",
+    StudyTime: "182823",
+    SeriesTime: "182837.905000",
+    AcquisitionTime: "182848.235000",
+    ContentTime: "182848.235000",
+    AccessionNumber: "0062115936",
+    Modality: "CT",
+    Manufacturer: "SIEMENS",
+    InstitutionName: "Thoraxklinik Heidelberg",
+    InstitutionAddress: "Amalienstrasse\r\nHeidelberg\r\nMitte\r\nDE",
+    ReferringPhysicianName: "UNKNOWN^UNKNOWN",
+    StationName: "CTAWP66002",
+    StudyDescription: "CT des Schädels",
+    SeriesDescription: "Topogramm  0.6  T20f",
+    PhysiciansOfRecord: "UNKNOWN^UNKNOWN",
+    ManufacturerModelName: "SOMATOM Definition AS",
+    IrradiationEventUID: "1.3.12.2.1107.5.1.4.66002.30000020070514362901900000047",
+    PatientName: "Apple^Annie",
+    PatientID: "1001",
+    PatientBirthDate: "19450427",
+    PatientSex: "F",
+    PatientAge: "050Y",
+    BodyPartExamined: "HEAD",
+    KVP: "120.0",
+    DataCollectionDiameter: "500.0",
+    DeviceSerialNumber: "66002",
+    SoftwareVersions: "syngo CT VA48A",
+    ProtocolName: "Schaedel_nativ_1",
+    ReconstructionDiameter: "512.0",
+    DistanceSourceToDetector: "1085.6",
+    DistanceSourceToPatient: "595.0",
+    GantryDetectorTilt: "0.0",
+    TableHeight: "100.0",
+    RotationDirection: "CW",
+    ExposureTime: "2672",
+    XRayTubeCurrent: "35",
+    Exposure: "93",
+    FilterType: "FLAT",
+    GeneratorPower: "4",
+    FocalSpots: "0.7",
+    DateOfLastCalibration: "20200705",
+    TimeOfLastCalibration: "153226.000000",
+    ConvolutionKernel: "T20f",
+    PatientPosition: "HFS",
+    ExposureModulationType: "NONE",
+    StudyInstanceUID: "1.2.840.113845.11.1000000001951524609.20200705182951.2689481",
+    SeriesInstanceUID: "1.3.12.2.1107.5.1.4.66002.30000020070513455668000000609",
+    StudyID: "RCTS",
+    SeriesNumber: "1",
+    AcquisitionNumber: "1",
+    InstanceNumber: "1",
+    FrameOfReferenceUID: "1.3.12.2.1107.5.1.4.66002.30000020070514362901900000046",
+    PositionReferenceIndicator: "",
+    SliceLocation: "-122.0",
+    ImageComments: "",
+    PhotometricInterpretation: "MONOCHROME2",
+    RescaleIntercept: "-1024.0",
+    RescaleSlope: "1.0",
+    RescaleType: "HU",
+    RequestingPhysician: "UNKNOWN^UNKNOWN",
+    RequestingService: "CT",
+  };
+
+  // Add the dataset to the DicomDict
+  Object.entries(dataset).forEach(([key, value]) => {
+    populateTag(dicomDict, key, value);
+  });
+
+  return dicomDict;
 }
 
 export function loadTestInstance(): data.DicomDict {
@@ -217,6 +318,7 @@ export function populateTag(
 ): void {
   const tagDict = data.DicomMetaDictionary.nameMap[tagName];
   tagDict.tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
+
   if (tagDict.vr == "PN") {
     const l = [];
     for (const v of values) {
@@ -234,15 +336,13 @@ function populateMetaTag(
   ...values: string[] | object[]
 ): void {
   const tagDict = data.DicomMetaDictionary.nameMap[tagName];
-  tagDict.tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
 
+  tagDict.tag = data.DicomMetaDictionary.unpunctuateTag(tagDict.tag);
+  const newValues = values;
   if (dataset.meta[tagDict.tag]) {
-    dataset.meta[tagDict.tag].Value = values;
+    dataset.meta[tagDict.tag].Value = newValues;
   } else {
-    dataset.meta[tagDict.tag] = { vr: tagDict.vr, Value: values };
+    dataset.meta[tagDict.tag].vr = tagDict.vr;
+    dataset.meta[tagDict.tag].Value = newValues;
   }
 }
-
-// // Usage example
-// const instance = loadInstance(1, 1, 1, 1);
-// console.log(instance);

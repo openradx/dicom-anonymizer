@@ -28,7 +28,6 @@ class IDAnonymizer {
   anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
     if (this.keywords.includes(dataTag)) {
       await this.replaceID(dataset, dataTag);
-
       return true;
     } else if (dataTag == this.issuerTag && dataset[dataTag].Value[0] != "") {
       dataset[dataTag].Value[0] = "DICOM_ANONYMIZER";
