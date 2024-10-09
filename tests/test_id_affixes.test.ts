@@ -20,7 +20,7 @@ const elementPaths: string[][] = [
 describe("patient", async () => {
   it("should prepend idPrefix to IDs", async () => {
     const dataset = loadInstance();
-    const anonymizer = new Anonymizer(undefined, undefined, true, "A1");
+    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idPrefix: "A1" });
     await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
@@ -39,7 +39,7 @@ describe("patient", async () => {
   it("should prepend idPrefix to each OtherPatientIDs", async () => {
     const dataset = loadInstance();
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
-    const anonymizer = new Anonymizer(undefined, undefined, true, "B2");
+    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idPrefix: "B2" });
     await anonymizer.anonymize(dataset);
 
     const value0 = dataset.dict["00101000"].Value[0];
@@ -53,7 +53,7 @@ describe("patient", async () => {
 
   it("should append idSuffix to IDs", async () => {
     const dataset = loadInstance();
-    const anonymizer = new Anonymizer(undefined, undefined, true, undefined, "1A");
+    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idSuffix: "1A" });
     await anonymizer.anonymize(dataset);
 
     for (const elementPath of elementPaths) {
@@ -72,7 +72,7 @@ describe("patient", async () => {
   it("should append idSuffix to each OtherPatientIDs", async () => {
     const dataset = loadInstance();
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
-    const anonymizer = new Anonymizer(undefined, undefined, true, undefined, "2B");
+    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idSuffix: "2B" });
     await anonymizer.anonymize(dataset);
 
     const value0 = dataset.dict["00101000"].Value[0];
@@ -86,7 +86,11 @@ describe("patient", async () => {
 
   it("should append and prepend idPrefix and idSuffix to ID", async () => {
     const dataset = loadInstance();
-    const anonymizer = new Anonymizer(undefined, undefined, true, "C3", "3C");
+    const anonymizer = new Anonymizer({
+      anonymizePrivateTags: true,
+      idPrefix: "C3",
+      idSuffix: "3C",
+    });
     await anonymizer.anonymize(dataset);
 
     const value = dataset.dict["00100020"].Value[0];

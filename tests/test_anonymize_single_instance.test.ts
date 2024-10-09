@@ -112,6 +112,7 @@ describe("patient", async () => {
     ];
 
     const dataset = loadTestInstance();
+
     const before: string[] = [];
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -571,9 +572,9 @@ describe("patient", async () => {
     populateTag(dataset2, "DateOfLastCalibration", originalDate[0], originalDate[1]);
     populateTag(dataset2, "TimeOfLastCalibration", originalTime[0], originalTime[1]);
 
-    const anonymizer1 = new Anonymizer(undefined, undefined, true, undefined, undefined, "123");
+    const anonymizer1 = new Anonymizer({ seed: "123" });
     anonymizer1.anonymize(dataset1);
-    const anonymizer2 = new Anonymizer(undefined, undefined, true, undefined, undefined, "123");
+    const anonymizer2 = new Anonymizer({ seed: "123" });
     anonymizer2.anonymize(dataset2);
 
     const newDate1 = dataset1.dict["00181200"].Value;
