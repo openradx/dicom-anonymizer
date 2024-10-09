@@ -124,7 +124,6 @@ export default class Anonymizer {
 
     for (const tag of tagList) {
       const element = dataset[tag];
-
       await this.anonymizeElement(dataset, tag, handler);
 
       // If the element is a sequence, recursively walk through its items
@@ -132,7 +131,7 @@ export default class Anonymizer {
         for (let i = 0; i < element.Value.length; i++) {
           const sequence = element.Value;
           for (const item of sequence) {
-            this.walk(item, handler);
+            await this.walk(item, handler);
           }
         }
       }
