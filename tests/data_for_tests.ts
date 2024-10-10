@@ -17,7 +17,7 @@ export function loadInstance(
 
 export function loadMinimalInstance(): data.DicomDict {
   // File Meta Information
-
+  console.log("test");
   const meta = {
     FileMetaInformationGroupLength: "222",
     // FileMetaInformationVersion: new Uint8Array([0x00, 0x01]),
