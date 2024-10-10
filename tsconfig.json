@@ -9,7 +9,7 @@
     "incremental": true,
     "inlineSources": false,
     "isolatedModules": true,
-    "lib": ["ES2021.String", "dom"],
+    "lib": ["ES2021", "dom"],
     "module": "ES2015",
     "moduleResolution": "node",
     "noEmit": true,
@@ -26,5 +26,5 @@
     "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": ["types/**/*"],
-  "exclude": ["node_modules", "public", "src/loader.ts", "**/demo/**"]
+  "exclude": ["node_modules", "public", "samples", "src/loader.ts"]
 }

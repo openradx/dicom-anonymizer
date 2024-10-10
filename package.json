@@ -1,5 +1,6 @@
 {
   "name": "dicom-web-anonymizer",
+  "version": "0.2.0",
   "description": "A DICOM web pseudonymization library in JavaScript.",
   "type": "module",
   "types": "./types/dcm.d.ts",
