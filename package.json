@@ -3,6 +3,9 @@
   "description": "A DICOM web pseudonymization library in JavaScript.",
   "type": "module",
   "types": "./types/dcm.d.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsup",
