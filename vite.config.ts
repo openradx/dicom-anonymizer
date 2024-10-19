@@ -34,7 +34,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    exclude: ["tests/anonymizer.test.ts", "**/node_modules/**", "**/src/**"],
+    exclude: ["tests/anonymizer.test.ts", "**/node_modules/**", "./src/**"],
   },
   publicDir: false,
   plugins: [dts()],

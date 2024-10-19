@@ -36,7 +36,6 @@ node_modules
 
 lib/*.js
 test/*.js
-*.map
 src/loader.ts
 
 # Misc
@@ -47,5 +46,5 @@ src/loader.ts
 
 
 # Build stuff
-dist
+
 demo/dist
