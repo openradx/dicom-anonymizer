@@ -33,7 +33,7 @@ class PNAnonymizer {
 
       dataset[dataTag].Value[0].Alphabetic = await this.newPN(originalName, patientSex);
     } else {
-      dataset[dataTag].Value[0].Alphabetic = await this.newPN("", patientSex);
+      dataset[dataTag].Value = [{ Alphabetic: await this.newPN("", patientSex) }];
     }
 
     return true;

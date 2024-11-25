@@ -44,7 +44,7 @@ class InstitutionAnonymizer {
       dataset[dataTag].Value[0] = await valueFactory(originalValue);
       return true;
     } else {
-      dataset[dataTag].Value[0] = await valueFactory("");
+      dataset[dataTag].Value = [await valueFactory("")];
       return true;
     }
   };

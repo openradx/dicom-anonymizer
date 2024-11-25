@@ -46,7 +46,7 @@ class IDAnonymizer {
       const originalValue = dataset[dataTag].Value[0];
       dataset[dataTag].Value[0] = await this.newID(originalValue);
     } else {
-      dataset[dataTag].Value[0] = await this.newID("");
+      dataset[dataTag].Value = [await this.newID("")];
     }
   };
 

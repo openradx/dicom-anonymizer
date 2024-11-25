@@ -27,7 +27,7 @@ class UIAnonymizer {
         const originalUI = dataset[dataTag].Value[0];
         dataset[dataTag].Value[0] = await this.newUI(originalUI);
       } else {
-        dataset[dataTag].Value[0] = await this.newUI("");
+        dataset[dataTag].Value = [await this.newUI("")];
       }
 
       return true;
