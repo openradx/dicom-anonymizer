@@ -1,5 +1,5 @@
 import { data } from "dcmjs";
-import { describe, expect, it, test } from "vitest";
+import { beforeEach, describe, expect, it, test } from "vitest";
 // Import your data_for_tests module
 import Anonymizer from "../src/anonymizer";
 // Replace with your testing library imports
@@ -18,87 +18,75 @@ const elementPaths: string[][] = [
 ];
 
 describe("patient", async () => {
-  it("should prepend idPrefix to IDs", async () => {
-    const dataset = loadInstance();
-    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idPrefix: "A1" });
-    await anonymizer.anonymize(dataset);
+  let dataset: data.DicomDIct;
 
+  beforeEach(() => {
+    dataset = loadInstance();
+  });
+
+  it.sequential("should prepend idPrefix to IDs", async () => {
+    const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idPrefix: "A1" });
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
         const value: string = dataset[elementPath[0]][elementPath[1]].Value[0];
         const startsWithA1 = value.startsWith("A1");
-        expect(startsWithA1).toBe(true);
+        expect(startsWithA1).toEqual(true);
       } else {
         const value = dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
         const startsWithA1 = value.startsWith("A1");
-        expect(startsWithA1).toBe(true);
+        expect(startsWithA1).toEqual(true);
       }
     }
   });
-
-  it("should prepend idPrefix to each OtherPatientIDs", async () => {
-    const dataset = loadInstance();
+  it.sequential("should prepend idPrefix to each OtherPatientIDs", async () => {
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
     const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idPrefix: "B2" });
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const value0 = dataset.dict["00101000"].Value[0];
-    const firstStartsWithA1 = value0.startsWith("B2");
-    expect(firstStartsWithA1).toBe(true);
-
+    const firstStartsWithB2 = value0.startsWith("B2");
+    expect(firstStartsWithB2).toEqual(true);
     const value1 = dataset.dict["00101000"].Value[1];
-    const secondStartsWithA1 = value1.startsWith("B2");
-    expect(secondStartsWithA1).toBe(true);
+    const secondStartsWithB2 = value1.startsWith("B2");
+    expect(secondStartsWithB2).toEqual(true);
   });
-
-  it("should append idSuffix to IDs", async () => {
-    const dataset = loadInstance();
+  it.sequential("should append idSuffix to IDs", async () => {
     const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idSuffix: "1A" });
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
         const value: string = dataset[elementPath[0]][elementPath[1]].Value[0];
         const startsWithA1 = value.endsWith("1A");
-        expect(startsWithA1).toBe(true);
+        expect(startsWithA1).toEqual(true);
       } else {
         const value = dataset[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
         const startsWithA1 = value.endsWith("1A");
-        expect(startsWithA1).toBe(true);
+        expect(startsWithA1).toEqual(true);
       }
     }
   });
-
-  it("should append idSuffix to each OtherPatientIDs", async () => {
-    const dataset = loadInstance();
+  it.sequential("should append idSuffix to each OtherPatientIDs", async () => {
     dataset.dict["00101000"].Value = ["ID1", "ID2"];
     const anonymizer = new Anonymizer({ anonymizePrivateTags: true, idSuffix: "2B" });
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const value0 = dataset.dict["00101000"].Value[0];
     const firstStartsWithA1 = value0.endsWith("2B");
-    expect(firstStartsWithA1).toBe(true);
-
+    expect(firstStartsWithA1).toEqual(true);
     const value1 = dataset.dict["00101000"].Value[1];
     const secondStartsWithA1 = value1.endsWith("2B");
-    expect(secondStartsWithA1).toBe(true);
+    expect(secondStartsWithA1).toEqual(true);
   });
-
-  it("should append and prepend idPrefix and idSuffix to ID", async () => {
-    const dataset = loadInstance();
+  it.sequential("should append and prepend idPrefix and idSuffix to ID", async () => {
     const anonymizer = new Anonymizer({
       anonymizePrivateTags: true,
       idPrefix: "C3",
       idSuffix: "3C",
     });
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const value = dataset.dict["00100020"].Value[0];
-
     const startsWithC3 = value.startsWith("C3");
-    expect(startsWithC3).toBe(true);
-
+    expect(startsWithC3).toEqual(true);
     const endsWithC3 = value.endsWith("3C");
-    expect(endsWithC3).toBe(true);
+    expect(endsWithC3).toEqual(true);
   });
 });

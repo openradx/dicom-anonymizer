@@ -1,5 +1,6 @@
-import { defineConfig } from "vite";
+import { resolve } from "path";
 import dts from "vite-plugin-dts";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   build: {
@@ -31,10 +32,12 @@ export default defineConfig({
       external: ["dcmjs", "fs", "get-random-values", "./public/*"],
     },
   },
-  test: {
-    environment: "jsdom",
-    exclude: ["tests/anonymizer.test.ts", "**/node_modules/**", "./src/**"],
-  },
   publicDir: false,
   plugins: [dts()],
+  test: {
+    environment: "jsdom",
+    exclude: ["**/node_modules/**", "./src/**"],
+    globals: true,
+    fileParallelism: true,
+  },
 });

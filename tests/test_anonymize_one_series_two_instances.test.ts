@@ -1,37 +1,18 @@
-// Import your Anonymizer class
 import { data } from "dcmjs";
-import { describe, expect, it, test } from "vitest";
-// Import your data_for_tests module
+import { describe, expect, it, beforeEach } from "vitest";
 import Anonymizer from "../src/anonymizer";
-// Replace with your testing library imports
 import { loadInstance } from "./data_for_tests";
 
-// Replace with the actual structure of your dataset
-
-class OneSeriesTwoInstances {
-  dataset1: data.DicomDict;
-  dataset2: data.DicomDict;
-
-  constructor() {
-    this.dataset1 = loadInstance(1, 1, 1, 1);
-    this.dataset2 = loadInstance(1, 1, 1, 2);
-
-  }
-
-  async anonymizeData() {
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(this.dataset1);
-    await anonymizer.anonymize(this.dataset2);
-  
-  }
-}
-
 describe("patient", () => {
-  it("should anonymize patient, study and series attributes the same", async () => {
-    const diffInstances = new OneSeriesTwoInstances();
-    await diffInstances.anonymizeData();
-    const dataset1 = diffInstances.dataset1;
-    const dataset2 = diffInstances.dataset2;
+  let dataset1: data.DicomDict;
+  let dataset2: data.DicomDict;
+  let anonymizer: Anonymizer;
+  beforeEach(() => {
+    dataset1 = loadInstance(1, 1, 1, 1);
+    dataset2 = loadInstance(1, 1, 1, 2);
+    anonymizer = new Anonymizer();
+  });
+  it.sequential("should anonymize patient, study and series attributes the same", async () => {
     const elementPaths: string[][] = [
       // patient
       ["dict", "00100020"], // PatientID
@@ -70,6 +51,9 @@ describe("patient", () => {
       ["dict", "00080031"], // SeriesTime
     ];
 
+    await expect(anonymizer.anonymize(dataset1)).resolves.not.toThrow();
+    await expect(anonymizer.anonymize(dataset2)).resolves.not.toThrow();
+
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
         const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0];
@@ -83,11 +67,7 @@ describe("patient", () => {
     }
   });
 
-  it("should anonymize instance attributes differently", async () => {
-    const diffInstances = new OneSeriesTwoInstances();
-    await diffInstances.anonymizeData();
-    const dataset1 = diffInstances.dataset1;
-    const dataset2 = diffInstances.dataset2;
+  it.sequential("should anonymize instance attributes differently", async () => {
     const elementPaths = [
       // instance
       ["dict", "00080018"], //SOPInstanceUID
@@ -95,6 +75,9 @@ describe("patient", () => {
       //["dict", "00080012"], //InstanceCreationDate
       ["dict", "00080013"], //InstanceCreationTime
     ];
+
+    await expect(anonymizer.anonymize(dataset1)).resolves.not.toThrow();
+    await expect(anonymizer.anonymize(dataset2)).resolves.not.toThrow();
 
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {

@@ -1,13 +1,21 @@
-import { data, dictionary } from "dcmjs";
-import { describe, expect, it } from "vitest";
+import { data } from "dcmjs";
+import { describe, expect, it, beforeEach } from "vitest";
 // Import your data_for_tests module
 import Anonymizer from "../src/anonymizer";
 import { lists } from "../src/lists";
 // Replace with your testing library imports
-import { loadInstance, populateTag, loadTestInstance } from "./data_for_tests";
+import { populateTag, loadTestInstance } from "./data_for_tests";
 
-describe("patient", async () => {
-  it("should not alter nonidentifying UIs", async () => {
+describe("patient", () => {
+  let anonymizer: Anonymizer;
+  let dataset: data.DicomDict;
+
+  beforeEach(() => {
+    anonymizer = new Anonymizer();
+    dataset = loadTestInstance();
+  });
+
+  it.sequential("should not alter nonidentifying UIs", async () => {
     const elementPaths: (string | number)[][] = [
       ["meta", "00020002"], //"MediaStorageSOPClassUID"
       ["meta", "00020010"], // TransferSyntaxUID
@@ -16,7 +24,6 @@ describe("patient", async () => {
       ["dict", "00082112", 0, "00081150"], // "SourceImageSequence[0].ReferencedSOPClassUID"
     ];
 
-    const dataset = loadTestInstance();
     const expected: string[] = [];
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -28,8 +35,7 @@ describe("patient", async () => {
       }
     }
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -47,7 +53,7 @@ describe("patient", async () => {
     }
   });
 
-  it("should anonymize identifying UIs", async () => {
+  it.sequential("should anonymize identifying UIs", async () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080018"], //SOPInstanceUID
       ["meta", "00020003"], //MediaStorageSOPInstanceUID
@@ -57,7 +63,6 @@ describe("patient", async () => {
       ["dict", "0020000E"], // SeriesInstanceUID
     ];
 
-    const dataset = loadTestInstance();
     const before: string[] = [];
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -69,8 +74,7 @@ describe("patient", async () => {
       }
     }
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -88,9 +92,7 @@ describe("patient", async () => {
     }
   });
 
-  //test_repeatedIDentifyingUIs_get_same_values???
-
-  it("should anonymize IDs", async () => {
+  it.sequential("should anonymize IDs", async () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080050"], //"AccessionNumber"
       ["dict", "00100021"], // IssuerOfPatientID
@@ -111,8 +113,6 @@ describe("patient", async () => {
       ["dict", "00200010"], //"StudyID"]
     ];
 
-    const dataset = loadTestInstance();
-
     const before: string[] = [];
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
@@ -126,8 +126,7 @@ describe("patient", async () => {
       }
     }
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -147,18 +146,15 @@ describe("patient", async () => {
     }
   });
 
-  it("should anonymize single OtherPatientIDs to single ID", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize single OtherPatientIDs to single ID", async () => {
     dataset.dict["00101000"].Value = ["ID1"];
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
-    const actual = dataset.dict["00101000"].Value[0];
 
-    expect(actual).not.toBe("ID1");
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
+
+    expect(dataset.dict["00101000"].Value[0]).not.toEqual("ID1");
   });
 
-  it("should anonymize multiple OtherPatientIDs to same number of IDs", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize multiple OtherPatientIDs to same number of IDs", async () => {
     const numberOfIDs = 5; // Replace with the desired number of IDs
     const originalIDs: string[] = [];
 
@@ -174,53 +170,46 @@ describe("patient", async () => {
       originalIDs[3]
     );
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const actual = dataset.dict["00101000"].Value;
 
     for (let i = 0; i < originalIDs.length; i++) {
-      expect(typeof actual[i]).toBe("string");
+      expect(typeof actual[i]).toEqual("string");
       expect(originalIDs[i]).not.toEqual(actual[i]);
     }
   });
 
-  it("should anonymize issuer of patientID if not empty", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize issuer of patientID if not empty", async () => {
     dataset.dict["00100021"].Value[0] = "NOTEMPTY";
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual = dataset.dict["00100021"].Value[0];
 
-    expect(actual).toBe("DICOM_ANONYMIZER");
+    expect(actual).toEqual("DICOM_ANONYMIZER");
   });
 
-  it("should not add issuer of patientID if empty", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should not add issuer of patientID if empty", async () => {
     dataset.dict["00100021"].Value[0] = "";
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual = dataset.dict["00100021"].Value[0];
 
-    expect(actual).toBe("");
+    expect(actual).toEqual("");
   });
 
-  it("should anonymize female patient name", async () => {
-    const dataset = loadTestInstance();
-
+  it.sequential("should anonymize female patient name", async () => {
     populateTag(dataset, "PatientSex", "F");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
     const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
-    expect(newName).not.toBe(originalName);
+    expect(newName).not.toEqual(originalName);
     const firstName = newName.split("^")[1];
     const middleName = newName.split("^")[2];
     const lastName = newName.split("^")[0];
@@ -229,19 +218,17 @@ describe("patient", async () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize male patient name", async () => {
-    const dataset = loadTestInstance();
-
+  it.sequential("should anonymize male patient name", async () => {
     populateTag(dataset, "PatientSex", "M");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
     const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
-    expect(newName).not.toBe(originalName);
+    expect(newName).not.toEqual(originalName);
     const firstName = newName.split("^")[1];
     const middleName = newName.split("^")[2];
     const lastName = newName.split("^")[0];
@@ -250,19 +237,17 @@ describe("patient", async () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize sex other patient name", async () => {
-    const dataset = loadTestInstance();
-
+  it.sequential("should anonymize sex other patient name", async () => {
     populateTag(dataset, "PatientSex", "O");
     populateTag(dataset, "PatientName", "LAST^FIRST^MIDDLE");
 
     const originalName = dataset.dict["00100010"].Value[0].Alphabetic;
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const newName = dataset.dict["00100010"].Value[0].Alphabetic;
     const list = new lists();
 
-    expect(newName).not.toBe(originalName);
+    expect(newName).not.toEqual(originalName);
     const firstName = newName.split("^")[1];
     const middleName = newName.split("^")[2];
     const lastName = newName.split("^")[0];
@@ -271,8 +256,7 @@ describe("patient", async () => {
     expect(list.lastNames).toContain(lastName);
   });
 
-  it("should anonymize multiple PatientNames to same number of names", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize multiple PatientNames to same number of names", async () => {
     const numberOfNames = 5; // Replace with the desired number of IDs
     const originalNames: string[] = [];
 
@@ -288,19 +272,18 @@ describe("patient", async () => {
       originalNames[3],
       originalNames[4]
     );
-    //dataset.dict["00100010"].Value = originalNames;
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const actual = dataset.dict["00100010"].Value;
 
     for (let i = 0; i < originalNames.length; i++) {
-      expect(typeof actual[i].Alphabetic).toBe("string");
+      expect(typeof actual[i].Alphabetic).toEqual("string");
       expect(actual.length).toEqual(numberOfNames);
       expect(originalNames[i]).not.toEqual(actual[i].Alphabetic);
     }
   });
 
-  it("should anonymize non patient names", async () => {
+  it.sequential("should anonymize non patient names", async () => {
     const elementPaths: (string | number)[][] = [
       ["dict", "00080090"], // ReferringPhysicianName
       ["dict", "00081050"], // PerformingPhysicianName
@@ -311,15 +294,13 @@ describe("patient", async () => {
       ["dict", "00321032"], // RequestingPhysician
     ];
 
-    const dataset = loadTestInstance();
     const before: string[] = [];
     for (const elementPath of elementPaths) {
       const x = dataset[elementPath[0]][elementPath[1]].Value[0].Alphabetic;
       before.push(x);
     }
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual: string[] = [];
     for (const elementPath of elementPaths) {
@@ -331,15 +312,12 @@ describe("patient", async () => {
     }
   });
 
-  it("should anonymize non patient names", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize patient address", async () => {
     const originalAddress = dataset.dict["00101040"].Value[0]; //PatientAddress
     const originalRegion = dataset.dict["00102152"].Value[0]; //RegionOfResidence
     const originalCountry = dataset.dict["00102150"].Value[0]; //CountryOfResidence
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     const newAddress = dataset.dict["00101040"].Value[0];
     const newRegion = dataset.dict["00102152"].Value[0];
     const newCountry = dataset.dict["00102150"].Value[0];
@@ -349,7 +327,7 @@ describe("patient", async () => {
     expect(originalCountry).not.toEqual(newCountry);
   });
 
-  it("should remove extra patient attributes", async () => {
+  it.sequential("should remove extra patient attributes", async () => {
     const elementPaths: string[] = [
       "00101081", //"BranchOfService",
       "00102180", //"Occupation",
@@ -363,25 +341,20 @@ describe("patient", async () => {
       "00102299", //"ResponsibleOrganization"
     ];
 
-    const dataset = loadTestInstance();
-
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     for (const elementPath of elementPaths) {
       expect(Object.keys(dataset.dict)).not.toContain(elementPath);
     }
   });
 
-  it("should anonymize non patient names", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize non patient names", async () => {
     const originalInstitutionName = dataset.dict["00080080"].Value[0]; //InstitutionName
     const originalInstitutionAddress = dataset.dict["00080081"].Value[0]; //InstitutionAddress
     const originalInstitutionalDepartmentName = dataset.dict["00081040"].Value[0]; //InstitutionalDepartmentName
     const originalStationName = dataset.dict["00081010"].Value[0]; //StationName
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newInstitutionName = dataset.dict["00080080"].Value[0]; //InstitutionName
     const newInstitutionAddress = dataset.dict["00080081"].Value[0]; //InstitutionAddress
@@ -394,35 +367,29 @@ describe("patient", async () => {
     expect(originalStationName).not.toEqual(newStationName);
   });
 
-  // test_station_gets_anonymized_when_no_modality???
-
-  it("should anonymize requesiting service", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize requesiting service", async () => {
     dataset.dict["00321033"].Value[0] = "ANY_SERVICE";
     const original = dataset.dict["00321033"].Value[0]; //RequestingService
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual = dataset.dict["00321033"].Value[0];
 
-    expect(original).not.toBe(actual);
+    expect(original).not.toEqual(actual);
   });
 
-  it("should anonymize current patient location", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize current patient location", async () => {
     dataset.dict["00380300"].Value[0] = "ANY_LOCATION";
     const original = dataset.dict["00380300"].Value[0]; //CurrentPatientLocation
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const actual = dataset.dict["00380300"].Value[0];
 
-    expect(original).not.toBe(actual);
+    expect(original).not.toEqual(actual);
   });
 
-  it("should anonymize date and times when both are present", async () => {
+  it.sequential("should anonymize date and times when both are present", async () => {
     const elementPaths: string[] = [
       "AcquisitionDate",
       "ContentDate",
@@ -438,62 +405,55 @@ describe("patient", async () => {
     const originalTimeString =
       originalDatetime.toISOString().slice(11, -1).replaceAll(":", "") + "000";
 
-    const dataset = loadTestInstance();
-
     for (const elementPath of elementPaths) {
       populateTag(dataset, elementPath, originalDateString);
       populateTag(dataset, elementPath.slice(0, -4) + "Time", originalTimeString);
     }
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
-
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
     for (const elementPath of elementPaths) {
       const tagDictDate = data.DicomMetaDictionary.nameMap[elementPath];
       tagDictDate.tag = data.DicomMetaDictionary.unpunctuateTag(tagDictDate.tag);
       const newDateString = dataset.dict[tagDictDate.tag].Value[0];
+
       const tagDictTime = data.DicomMetaDictionary.nameMap[elementPath.slice(0, -4) + "Time"];
       tagDictTime.tag = data.DicomMetaDictionary.unpunctuateTag(tagDictTime.tag);
       const newTimeString = dataset.dict[tagDictTime.tag].Value[0];
-      expect(newDateString).not.toBe(originalDateString);
-      expect(newTimeString).not.toBe(originalTimeString);
+      expect(newDateString).not.toEqual(originalDateString);
+      expect(newTimeString, elementPath).not.toEqual(originalTimeString);
     }
   });
 
-  it("should anonymize date when there is no time", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize date when there is no time", async () => {
     const originalBirthDate = "19830213";
     populateTag(dataset, "PatientBirthDate", originalBirthDate);
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newBirthDate = dataset.dict["00100030"].Value[0];
 
-    expect(newBirthDate).not.toBe(originalBirthDate);
+    expect(newBirthDate).not.toEqual(originalBirthDate);
     expect(Object.keys(dataset.dict)).not.toContain("PatientBirthTime");
   });
 
-  it("should anonymize date when there is time", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize date when there is time", async () => {
     const originalBirthDate = "19830213";
     const originalBirthTime = "123456";
     populateTag(dataset, "PatientBirthDate", originalBirthDate);
     populateTag(dataset, "PatientBirthTime", originalBirthTime);
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newDateString = dataset.dict["00100030"].Value[0];
     const newTimeString = dataset.dict["00100032"].Value[0];
 
     expect(newDateString).not.toEqual(originalBirthDate);
-    expect(newDateString.length).toBe(originalBirthDate.length);
+    expect(newDateString.length).toEqual(originalBirthDate.length);
     expect(newTimeString.slice(2)).toEqual(originalBirthTime.slice(2));
-    expect(newTimeString.length).toBe(originalBirthTime.length);
+    expect(newTimeString.length).toEqual(originalBirthTime.length);
   });
 
-  it("should anonymize date when time has various lengths", async () => {
+  it.sequential("should anonymize date when time has various lengths", async () => {
     const elementPaths: string[] = [
       "",
       "07",
@@ -507,60 +467,55 @@ describe("patient", async () => {
       "192123.123456",
     ];
 
-    const dataset = loadTestInstance();
-    const originalBirthDate = "19830213";
-
     for (const elementPath of elementPaths) {
+      const originalBirthDate = "19830213";
       populateTag(dataset, "PatientBirthDate", originalBirthDate);
       populateTag(dataset, "PatientBirthTime", elementPath);
-      const anonymizer = new Anonymizer();
-      await anonymizer.anonymize(dataset);
+
+      await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
       const newDateString = dataset.dict["00100030"].Value[0];
       const newTimeString = dataset.dict["00100032"].Value[0];
 
-      expect(newDateString).not.toBe(originalBirthDate);
-      expect(newDateString.length).toBe(originalBirthDate.length);
-      expect(newTimeString.slice(2)).toBe(elementPath.slice(2));
-      expect(newTimeString.length).toBe(elementPath.length);
+      expect(newDateString).not.toEqual(originalBirthDate);
+      expect(newDateString.length).toEqual(originalBirthDate.length);
+      expect(newTimeString.slice(2)).toEqual(elementPath.slice(2));
+      expect(newTimeString.length).toEqual(elementPath.length);
     }
   });
 
-  it("should anonymize multivalue date when there is no time", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize multivalue date when there is no time", async () => {
     const originalBirthDate = ["20010401", "20010402"];
 
     populateTag(dataset, "DateOfLastCalibration", "20010401", "20010402");
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newDateString = dataset.dict["00181200"].Value;
 
-    expect(newDateString).not.toBe(originalBirthDate);
-    expect(newDateString.length).toBe(originalBirthDate.length);
+    expect(newDateString).not.toEqual(originalBirthDate);
+    expect(newDateString.length).toEqual(originalBirthDate.length);
   });
 
-  it("should anonymize multivalue date with time pair", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize multivalue date with time pair", async () => {
     const originalDate = ["20010401", "20010402"];
     const originalTime = ["120000", "135959"];
+    const dataset = loadTestInstance();
+    populateTag(dataset, "DateOfLastCalibration", ...originalDate);
+    populateTag(dataset, "TimeOfLastCalibration", ...originalTime);
 
-    populateTag(dataset, "DateOfLastCalibration", originalDate[0], originalDate[1]);
-    populateTag(dataset, "TimeOfLastCalibration", originalTime[0], originalTime[1]);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
-
+    // Assert
     const newDateString = dataset.dict["00181200"].Value;
     const newTimeString = dataset.dict["00181201"].Value;
 
-    expect(newDateString).not.toBe(originalDate);
-    expect(newDateString.length).toBe(originalDate.length);
-    expect(newTimeString).not.toBe(originalTime);
-    expect(newTimeString.length).toBe(originalTime.length);
+    expect(newDateString).not.toEqual(originalDate);
+    expect(newDateString.length).toEqual(originalDate.length);
+    expect(newTimeString).not.toEqual(originalTime);
+    expect(newTimeString.length).toEqual(originalTime.length);
   });
 
-  it("should anonymize multivalue date and time pair same with same seed", async () => {
+  it.sequential("should anonymize multivalue date and time pair same with same seed", async () => {
     const dataset1 = loadTestInstance();
     const dataset2 = loadTestInstance();
     const originalDate = ["20010401", "20010402"];
@@ -573,9 +528,10 @@ describe("patient", async () => {
     populateTag(dataset2, "TimeOfLastCalibration", originalTime[0], originalTime[1]);
 
     const anonymizer1 = new Anonymizer({ seed: "123" });
-    anonymizer1.anonymize(dataset1);
     const anonymizer2 = new Anonymizer({ seed: "123" });
-    anonymizer2.anonymize(dataset2);
+
+    await expect(anonymizer1.anonymize(dataset1)).resolves.not.toThrow();
+    await expect(anonymizer2.anonymize(dataset2)).resolves.not.toThrow();
 
     const newDate1 = dataset1.dict["00181200"].Value;
     const newTime1 = dataset1.dict["00181201"].Value;
@@ -587,7 +543,7 @@ describe("patient", async () => {
     expect(newTime1).toEqual(newTime2);
   });
 
-  it("should anonymize datetime", async () => {
+  it.sequential("should anonymize datetime", async () => {
     const elementPaths: string[] = [
       "AcquisitionDateTime",
       "FrameReferenceDateTime",
@@ -598,16 +554,14 @@ describe("patient", async () => {
       "PerformedProcedureStepEndDateTime",
     ];
 
-    const dataset = loadTestInstance();
-
     const originalDatetime = new Date(1974, 11, 3, 12, 15, 58);
     const originalDatetimeString = originalDatetime.toISOString().replace(/[:TZ-]/g, "");
-
+    const dataset = loadTestInstance();
     for (const elementPath of elementPaths) {
       populateTag(dataset, elementPath, originalDatetimeString);
     }
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     for (const elmentPath of elementPaths) {
       const tagDict = data.DicomMetaDictionary.nameMap[elmentPath];
@@ -617,7 +571,7 @@ describe("patient", async () => {
     }
   });
 
-  it("should anonymize datetime with various lenghts", async () => {
+  it.sequential("should anonymize datetime with various lenghts", async () => {
     const elementPaths: string[] = [
       "1947",
       "194711",
@@ -632,41 +586,33 @@ describe("patient", async () => {
       "19471103192123.12345",
       "19471103192123.123456",
     ];
-
-    const dataset = loadTestInstance();
-    const anonymizer = new Anonymizer();
-
     for (const elementPath of elementPaths) {
       populateTag(dataset, "AcquisitionDateTime", elementPath);
-      await anonymizer.anonymize(dataset);
+      await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
       const newDatetime = dataset.dict["0008002A"].Value[0];
       expect(newDatetime).not.toEqual(elementPath);
-      expect(newDatetime.length).toBe(elementPath.length);
+      expect(newDatetime.length).toEqual(elementPath.length);
     }
   });
 
-  it("should anonymize mulitvalue datetime", async () => {
+  it.sequential("should anonymize mulitvalue datetime", async () => {
     const originalDatetime: string[] = ["19741103121558", "19721004161558"];
 
-    const dataset = loadTestInstance();
     populateTag(dataset, "AcquisitionDateTime", "19741103121558", "19721004161558");
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newDatetime = dataset.dict["0008002A"].Value;
 
     expect(newDatetime).not.toEqual(originalDatetime);
-    expect(newDatetime.length).toBe(originalDatetime.length);
+    expect(newDatetime.length).toEqual(originalDatetime.length);
   });
 
-  it("should anonymize PatientName also without sex", async () => {
-    const dataset = loadTestInstance();
+  it.sequential("should anonymize PatientName also without sex", async () => {
     delete dataset.dict["00100040"];
     const oldName = dataset.dict["00100010"].Value[0].Alphabetic;
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset);
+    await expect(anonymizer.anonymize(dataset)).resolves.not.toThrow();
 
     const newName = dataset.dict["00100010"].Value[0].Alphabetic;
 

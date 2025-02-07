@@ -1,22 +1,20 @@
-// Import your Anonymizer class
 import { data } from "dcmjs";
-import { describe, expect, it, test } from "vitest";
-// Import your data_for_tests module
+import { describe, expect, it, beforeEach } from "vitest";
 import Anonymizer from "../src/anonymizer";
-// Replace with your testing library imports
 import { loadInstance } from "./data_for_tests";
 
 // Replace with the actual structure of your dataset
 
 describe("patient", () => {
-  it("should anonymize all attributes differently", async () => {
-    //const diffInstances = new TwoPatients();
-    const dataset1 = loadInstance(1);
-    const dataset2 = loadInstance(2);
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset1);
-    await anonymizer.anonymize(dataset2);
-
+  let anonymizer: Anonymizer;
+  let dataset1: data.DicomDict;
+  let dataset2: data.DicomDict;
+  beforeEach(async () => {
+    dataset1 = loadInstance(1);
+    dataset2 = loadInstance(2);
+    anonymizer = new Anonymizer();
+  });
+  it.sequential("should anonymize all attributes differently", async () => {
     const elementPaths: string[][] = [
       // patient
       ["dict", "00100020"], // PatientID
@@ -60,31 +58,36 @@ describe("patient", () => {
       ["dict", "00080013"], //InstanceCreationTime
     ];
 
+    await expect(anonymizer.anonymize(dataset1)).resolves.not.toThrow();
+    await expect(anonymizer.anonymize(dataset2)).resolves.not.toThrow();
+
     for (const elementPath of elementPaths) {
       if (elementPath.length == 2) {
         const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0];
         const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0];
+
         expect(value1).not.toEqual(value2);
       } else {
         const value1 = dataset1[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
         const value2 = dataset2[elementPath[0]][elementPath[1]].Value[0][elementPath[2]].Value[0];
+
         expect(value1).not.toEqual(value2);
       }
     }
   });
 
-  it("should anonymize same patient with different formatted name the same way", async () => {
-    const dataset1 = loadInstance(1);
-    dataset1.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE";
-    const dataset2 = loadInstance(1);
-    dataset2.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE^";
+  it.sequential(
+    "should anonymize same patient with different formatted name the same way",
+    async () => {
+      dataset1.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE";
+      dataset2.dict["00100010"].Value[0].Alphabetic = "LAST^FIRST^MIDDLE^";
 
-    const anonymizer = new Anonymizer();
-    await anonymizer.anonymize(dataset1);
-    await anonymizer.anonymize(dataset2);
+      await expect(anonymizer.anonymize(dataset1)).resolves.not.toThrow();
+      await expect(anonymizer.anonymize(dataset2)).resolves.not.toThrow();
 
-    const value1 = dataset1.dict["00100010"].Value[0].Alphabetic;
-    const value2 = dataset2.dict["00100010"].Value[0].Alphabetic;
-    expect(value1).toEqual(value2);
-  });
+      const value1 = dataset1.dict["00100010"].Value[0].Alphabetic;
+      const value2 = dataset2.dict["00100010"].Value[0].Alphabetic;
+      expect(value1).toEqual(value2);
+    }
+  );
 });

@@ -11,7 +11,6 @@ export function loadInstance(
   setStudyAttributes(dataset, patientNumber, studyNumber);
   setSeriesAttributes(dataset, patientNumber, studyNumber, seriesNumber);
   setInstanceAttributes(dataset, patientNumber, studyNumber, seriesNumber, instanceNumber);
-
   return dataset;
 }
 
@@ -136,9 +135,9 @@ export function loadTestInstance(): data.DicomDict {
   populateTag(dataset, "PatientBirthName", "PBN");
   populateTag(dataset, "PatientMotherBirthName", "PMBN");
 
-  populateTag(dataset, "PatientAddress", "10 REAL STREET");
-  populateTag(dataset, "RegionOfResidence", "BROAD COVE");
-  populateTag(dataset, "CountryOfResidence", "GERMANY");
+  populateTag(dataset, "PatientAddress", "10 TEST STREET");
+  populateTag(dataset, "RegionOfResidence", "TEST COVE");
+  populateTag(dataset, "CountryOfResidence", "TESTSTATE");
 
   populateTag(dataset, "IssuerOfPatientID", "ISSUEROFPATIENTID");
   populateTag(dataset, "OtherPatientIDs", "OTHERPATIENTID");
