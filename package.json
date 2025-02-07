@@ -1,6 +1,6 @@
 {
   "name": "dicom-web-anonymizer",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A DICOM web pseudonymization library in JavaScript.",
   "type": "module",
   "types": "./types/dcm.d.ts",
@@ -51,7 +51,7 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vite-plugin-dts": "^4.2.2",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.9"
   },
   "dependencies": {
     "dcmjs": "^0.30.1",
