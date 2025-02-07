@@ -52,18 +52,15 @@ class InstitutionAnonymizer {
   anonymizeInstitutionName = async (originalValue: string): Promise<string> => {
     const region = await this.addressAnonymizer.getRegion(originalValue);
     const streetAddress = await this.addressAnonymizer.getStreetAddress(originalValue);
-    const returnString = `${region}'S ${streetAddress} CLINIC`;
 
-    return returnString;
+    return `${region}'S ${streetAddress} CLINIC`;
   };
 
   anonymizeInstitutionAddress = async (originalValue: string): Promise<string> => {
     const fullAddress = await this.addressAnonymizer.getLegalAddress(originalValue);
     const country = await this.addressAnonymizer.getCountry(originalValue);
 
-    const returnString = `${fullAddress}, ${country}`;
-
-    return returnString;
+    return `${fullAddress}, ${country}`;
   };
 
   anonymizeDepartmentName = (): Promise<string> => {

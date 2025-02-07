@@ -43,14 +43,19 @@ export default class Anonymizer {
   addressAnonymizer: AddressAnonymizer;
   elementHandlers: ElementHandler[];
   private _options: AnonymizerOptions;
+  private initPromise: Promise<void>;
 
   constructor(options?: AnonymizerOptions) {
     this._options = Object.assign({}, defaultOptions, options ?? {});
-
+    this.elementHandlers = [];
     this.randomizer = new Randomizer(this._options.seed);
-    this.setOffset();
-
     this.addressAnonymizer = new AddressAnonymizer(this.randomizer);
+    this.initPromise = this._create();
+  }
+
+  private async _create() {
+    await this.setOffset();
+
     this.elementHandlers = [
       new UnwantedElementStripper([
         "00101081", //"BranchOfService",
@@ -99,6 +104,8 @@ export default class Anonymizer {
     if (this._options.anonymizePrivateTags) {
       this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
     }
+
+    await this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
   }
   async setOffset() {
     const res = await this.randomizer.toInt("dateOffset");
@@ -111,11 +118,10 @@ export default class Anonymizer {
         BigInt(minimumOffsetHours)
       )
     );
-
-    this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
   }
 
   async anonymize(dcmDict: data.DicomDict) {
+    await this.initPromise;
     await this.walk(dcmDict.meta, this.elementHandlers);
     await this.walk(dcmDict.dict, this.elementHandlers);
   }

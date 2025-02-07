@@ -9,7 +9,9 @@ class DateTimeAnonymizer {
   private offset: number;
 
   constructor(dateOffsetHours: number) {
-    this.offset = dateOffsetHours * 60 * 60 * 1000;
+    // if we keep 60 * 60 * 1000 here, we get a problem where Datetimes are created.
+    // This way Datetimes dont get shifted by only full days
+    this.offset = dateOffsetHours * 60 * 59 * 1000;
   }
 
   anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
@@ -29,7 +31,7 @@ class DateTimeAnonymizer {
     return true;
   };
 
-  anonymizeDateAndTime = (dataset: dataSet, dataTag: string): void => {
+  async anonymizeDateAndTime(dataset: dataSet, dataTag: string) {
     const dates = dataset[dataTag].Value;
     const result: returnarg = this.checkTag(dataset, dataTag);
 
@@ -50,12 +52,12 @@ class DateTimeAnonymizer {
       try {
         dataset[result.tag].Value = newTimes;
       } catch {
-        console.log();
+        console.log("Time tag does not exist: " + result.tag);
       }
     }
-  };
+  }
 
-  anonymizeDatetime = (dataset: dataSet, dataTag: string): void => {
+  async anonymizeDatetime(dataset: dataSet, dataTag: string) {
     const dateTimes = dataset[dataTag].Value;
     const newDateTimes: string[] = [];
 
@@ -64,11 +66,10 @@ class DateTimeAnonymizer {
       newDateTimes.push(newDateTimeString);
     }
     dataset[dataTag].Value = newDateTimes;
-  };
+  }
 
   shiftDateTime = (dateTimeValue: string): string => {
     const dateTimeFormat = "%Y%m%d%H".slice(0, dateTimeValue.length - 2);
-
     const oldDateTime = this.parseDateTime(dateTimeValue);
     const newDateTime = new Date(oldDateTime.getTime() + this.offset);
     let newDateTimeString = this.formatDate(newDateTime, dateTimeFormat);

@@ -3116,6 +3116,7 @@ export class lists {
       "PEARL STREET",
       "11TH STREET",
       "ROUTE 1",
+      "HAUPTSTRASSE",
     ];
     this.cities = [
       "MADRID",
@@ -3170,6 +3171,7 @@ export class lists {
       "HEFEI",
     ];
     this.countries = [
+      "TOGO",
       "UKRAINE",
       "DJIBOUTI",
       "COLOMBIA",
@@ -3216,6 +3218,37 @@ export class lists {
       "LATVIA",
       "ITALY",
       "YEMEN",
+      "BRAZIL",
+      "INDIA",
+      "JAPAN",
+      "FRANCE",
+      "UNITED KINGDOM",
+      "SOUTH AFRICA",
+      "MEXICO",
+      "ARGENTINA",
+      "EGYPT",
+      "TURKEY",
+      "THAILAND",
+      "SPAIN",
+      "AUSTRALIA",
+      "NETHERLANDS",
+      "SWITZERLAND",
+      "NORWAY",
+      "DENMARK",
+      "FINLAND",
+      "GREECE",
+      "PORTUGAL",
+      "AUSTRIA",
+      "NEW ZEALAND",
+      "SINGAPORE",
+      "IRELAND",
+      "BELGIUM",
+      "CZECH REPUBLIC",
+      "PHILIPPINES",
+      "VIETNAM",
+      "INDONESIA",
+      "MALAYSIA",
+      "SAUDI ARABIA",
     ];
   }
 }

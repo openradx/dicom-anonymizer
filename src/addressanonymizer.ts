@@ -34,17 +34,13 @@ class AddressAnonymizer {
     }
 
     if (dataset[dataTag].Value.length > 1) {
-      for (let i = 0; i < dataset[dataTag].Value.length; i++) {
-        dataset[dataTag].Value[i] = await valueFactory(dataset[dataTag].Value[i]);
-      }
-
-      return true;
-    } else if (dataset[dataTag].Value.length == 1) {
-      const originalValue: string = dataset[dataTag].Value[0];
-      dataset[dataTag].Value[0] = await valueFactory(originalValue);
+      dataset[dataTag].Value = await Promise.all(
+        dataset[dataTag].Value.map((value: string) => valueFactory(value))
+      );
       return true;
     } else {
-      dataset[dataTag].Value = [await valueFactory("")];
+      const originalValue = dataset[dataTag].Value[0] || "";
+      dataset[dataTag].Value = [await valueFactory(originalValue)];
       return true;
     }
   };
