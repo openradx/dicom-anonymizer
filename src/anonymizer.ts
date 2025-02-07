@@ -43,8 +43,9 @@ export default class Anonymizer {
   addressAnonymizer: AddressAnonymizer;
   elementHandlers: ElementHandler[];
   private _options: AnonymizerOptions;
+
   constructor(options?: AnonymizerOptions) {
-    this._options = Object.assign(defaultOptions, options ?? {});
+    this._options = Object.assign({}, defaultOptions, options ?? {});
 
     this.randomizer = new Randomizer(this._options.seed);
     this.setOffset();
