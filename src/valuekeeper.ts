@@ -28,7 +28,8 @@ class ValueKeeper {
           if (!tempTag) {
             throw new TagError("invalidTag");
           } else {
-            this.protectedTags.push(tempTag.tag);
+            const cleanStringTag = data.Tag.fromPString(tempTag.tag).toCleanString();
+            this.protectedTags.push(cleanStringTag);
           }
         } catch (error) {
           if (error instanceof TagError) {
