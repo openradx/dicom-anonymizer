@@ -37,7 +37,9 @@ class UIAnonymizer {
   async newUI(origUI: string) {
     const result = await this.randomizer.toInt(origUI);
     const number4String = BigInt(result);
-    return `2.${BigInt(10 ** 39) + number4String}`;
+    const max = BigInt("1" + "0".repeat(61));
+
+    return `2.${number4String % max}`;
   }
 }
 
