@@ -1,5 +1,6 @@
 import { data, dataSet } from "dcmjs";
 import Randomizer from "./randomizer";
+import { isPrivateTag, getTagName } from "./utils";
 
 class UIAnonymizer {
   private randomizer: Randomizer;
@@ -9,13 +10,19 @@ class UIAnonymizer {
   }
 
   anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
-    const tag = data.DicomMetaDictionary.punctuateTag(dataTag);
+    // Skip private tags as they are not in the standard dictionary
+    if (isPrivateTag(dataTag)) {
+      return false;
+    }
 
+    const tag = data.DicomMetaDictionary.punctuateTag(dataTag);
+    const tagName = getTagName(tag);
+    
     if (
       dataset[dataTag].vr != "UI" ||
       dataset[dataTag].Value[0] == undefined ||
-      data.DicomMetaDictionary.dictionary[tag].name.endsWith("ClassUID") ||
-      data.DicomMetaDictionary.dictionary[tag].name == "TransferSyntaxUID"
+      tagName.endsWith("ClassUID") ||
+      tagName == "TransferSyntaxUID"
     ) {
       return false;
     } else {

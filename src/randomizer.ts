@@ -6,7 +6,7 @@ class Randomizer {
   }
 
   private async calculateSHADigestWeb(array: Uint8Array): Promise<Uint8Array> {
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array);
+    const hashBuffer = await window.crypto.subtle.digest("SHA-256", array as BufferSource);
     return new Promise((resolve) => {
       resolve(new Uint8Array(hashBuffer));
     });

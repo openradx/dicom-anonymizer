@@ -1,4 +1,5 @@
 import { data, dataSet } from "dcmjs";
+import { isPrivateTag } from "./utils";
 
 type returnarg = {
   value: string;
@@ -15,6 +16,11 @@ class DateTimeAnonymizer {
   }
 
   anonymize = async (dataset: dataSet, dataTag: string): Promise<boolean> => {
+    // Skip private tags as they are not in the standard dictionary
+    if (isPrivateTag(dataTag)) {
+      return false;
+    }
+
     if (dataset[dataTag].vr != "DA" && dataset[dataTag].vr != "DT") {
       return false;
     }

@@ -97,12 +97,13 @@ export default class Anonymizer {
       new FixedValueAnonymizer("00321033", "").anonymize, // RequestingService
       new FixedValueAnonymizer("00380300", "").anonymize, // CurrentPatientLocation
     ];
+
+    // Always add PrivateTagAnonymizer at the beginning to handle private tags first
+    // If anonymizePrivateTags is true, it will delete them; if false, it will skip processing them
+    this.elementHandlers.unshift(new PrivatTagAnonymizer(this._options.anonymizePrivateTags ?? true).anonymize);
+
     if (this._options.protectedTags) {
       this.elementHandlers.unshift(new ValueKeeper(this._options.protectedTags).keep);
-    }
-
-    if (this._options.anonymizePrivateTags) {
-      this.elementHandlers.push(new PrivatTagAnonymizer().anonymize);
     }
 
     await this.elementHandlers.push(new DateTimeAnonymizer(this.dateOffsetHours).anonymize);
